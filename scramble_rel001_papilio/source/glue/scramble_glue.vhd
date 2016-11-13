@@ -56,8 +56,6 @@ architecture struct of scramble_glue is
  signal S_osd_green: std_logic_vector(3 downto 0) := (others => '0');
  signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(3 downto 0);
 
- signal coin         : std_logic;
- signal player_start : std_logic_vector(1 downto 0);
  signal buttons      : std_logic_vector(3 downto 0);
  signal R_autofire   : std_logic_vector(21 downto 0);
  
@@ -66,7 +64,6 @@ architecture struct of scramble_glue is
   -- this MUST be set false for scramble, the_end, amidar
   constant I_HWSEL_FROGGER  : boolean := false;
 
-  signal I_RESET_L        : std_logic;
   signal clk              : std_logic;
   signal ena_12           : std_logic;
   signal ena_6            : std_logic;
@@ -115,19 +112,12 @@ architecture struct of scramble_glue is
   -- audio
   signal audio            : std_logic_vector(9 downto 0);
   signal audio_pwm        : std_logic;
-  signal dbl_scan        : std_logic;
+  signal dbl_scan         : std_logic;
+  -- CPU debugging
+  signal cpu_addr       : std_logic_vector(15 downto 0);
+  signal cpu_data_out   : std_logic_vector(7 downto 0);
+  signal cpu_data_in    : std_logic_vector(7 downto 0);
 begin
-
--- game core uses inverted control logic
-coin <= not btn_coin; -- insert coin
-player_start <= not btn_player_start; -- select 1 or 2 players
-buttons(1) <= not btn_right; -- Right
-buttons(2) <= not btn_left; -- Left
-buttons(3) <= not btn_barrier; -- Protection 
-
-G_not_autofire: if not C_autofire generate
-  buttons(0) <= not btn_fire; -- Fire
-end generate;
 
 G_yes_autofire: if C_autofire generate
   process(clk_pixel)
@@ -154,11 +144,12 @@ G_vga: if C_vga generate
       O_ENA_6B   => ena_6b,   -- 6.25 (inverted)
       O_ENA_6    => ena_6,    -- 6.25
       O_ENA_1_79 => ena_1_79, -- 1.786
-      O_CLK      => clk,
+      O_CLK      => open,
       O_RESET    => open
     );
+  clk <= clk_pixel;
 
-  u_scramble : entity work.SCRAMBLE
+  u_scramble : entity work.scramble
     generic map (
       C_external_video_timing => false
     )
@@ -183,6 +174,12 @@ G_vga: if C_vga generate
       O_IOPC7               => audio_iopc7,
       O_RESET_WD_L          => audio_reset_l,
       --
+      -- debugging
+      --
+      O_CPU_ADDR            => cpu_addr,
+      O_CPU_DATA_IN         => cpu_data_in,
+      O_CPU_DATA_OUT        => cpu_data_out,
+
       ENA                   => ena_6,
       ENAB                  => ena_6b,
       ENA_12                => ena_12,
@@ -263,12 +260,89 @@ G_vga: if C_vga generate
     )
     port  map(
       clk_i   => clk_pixel,
-      res_n_i => I_RESET_L,
+      res_n_i => reset_n,
       dac_i   => audio,
       dac_o   => audio_pwm
     );
   O_AUDIO_L <= audio_pwm;
   O_AUDIO_R <= audio_pwm;
+
+  button_debounced(0) <= '0'; -- Joystick Up
+  button_debounced(1) <= '0'; -- Joystick Down
+  button_debounced(2) <= btn_left; -- Joystick Left
+  button_debounced(3) <= btn_right; -- Joystick Left
+  button_debounced(4) <= btn_player_start(0); -- Start 1 player
+  button_debounced(7) <= btn_player_start(1); -- Start 2 player
+  button_debounced(5) <= btn_coin; -- Joystick Fire
+  button_debounced(6) <= btn_fire; -- Joystick Fire
+
+  -- assign inputs
+  -- start, shoot1, shoot2, left,right,up,down
+  ip_1p(6) <= not button_debounced(4); -- start 1
+  ip_1p(5) <= button_debounced(6); -- shoot1
+  ip_1p(4) <= button_debounced(6); -- shoot2
+  ip_1p(3) <= button_debounced(2); -- p1 left
+  ip_1p(2) <= button_debounced(3); -- p1 right
+  ip_1p(1) <= button_debounced(0); -- p1 up
+  ip_1p(0) <= button_debounced(1); -- p1 down
+  --
+  ip_2p(6) <= not button_debounced(7); -- start 2
+  ip_2p(5) <= '1';
+  ip_2p(4) <= '1';
+  ip_2p(3) <= button_debounced(2); -- p2 left
+  ip_2p(2) <= button_debounced(3); -- p2 right
+  ip_2p(1) <= button_debounced(0); -- p2 up
+  ip_2p(0) <= button_debounced(1); -- p2 down
+  --
+  ip_service <= '1';
+  ip_coin1   <= not button_debounced(5); -- credit
+  ip_coin2   <= '1';
+
+  -- dip switch settings
+  scramble_dips : if not I_HWSEL_FROGGER generate
+  begin
+    --SW #1   SW #2       Rockets              SW #3       Cabinet
+    -------   -----      ---------             -----       --------
+     --OFF     OFF       Unlimited              OFF        Table
+     --OFF     ON            5                  ON         Up Right
+     --ON      OFF           4
+     --ON      ON            3
+
+
+    --SW #4   SW #5      Coins/Play
+    -------   -----      ----------
+     --OFF     OFF           4
+     --OFF     ON            3
+     --ON      OFF           2
+     --ON      ON            1
+
+    ip_dip_switch(5 downto 4)  <= not "11"; -- 1 play/coin.
+    ip_dip_switch(3)           <= not '1';
+    ip_dip_switch(2 downto 1)  <= not "10";
+  end generate;
+
+  frogger_dips : if I_HWSEL_FROGGER generate
+  begin
+  --1   2   3   4   5       Meaning
+  -------------------------------------------------------
+  --On  On                  3 Frogs
+  --On  Off                 5 Frogs
+  --Off On                  7 Frogs
+  --Off Off                 256 Frogs (!)
+  --
+  --        On              Upright unit
+  --        Off             Cocktail unit
+  --
+  --            On  On      1 coin 1 play
+  --            On  Off     2 coins 1 play
+  --            Off On      3 coins 1 play
+  --            Off Off     1 coin 2 plays
+
+    ip_dip_switch(5 downto 4)  <= not "11";
+    ip_dip_switch(3)           <= not '1';
+    ip_dip_switch(2 downto 1)  <= not "01";
+  end generate;
+
 
   reset_n <= not reset;
 
@@ -313,16 +387,19 @@ G_vga: if C_vga generate
   -- OSD overlay for the green channel
   G_osd: if C_osd generate
   I_osd: entity work.osd
-  --generic map -- workaround for wrong video size
-  --(
-  --  C_resolution_x => C_resolution_x
-  --)
+  generic map -- workaround for wrong video size
+  (
+    C_digits => 16+8, -- 16 digits for joystick, 8 digits for the bus status
+    C_resolution_x => 1058 - 2 -- 1058 reported by monitor, 2 is correction for audio_hdmi
+  )
   port map
   (
     clk_pixel => clk_pixel,
-    vsync => S_vga_vsync,
-    fetch_next => S_vga_fetch_next,
-    probe_in(63 downto 0) => osd_hex(63 downto 0),
+    vsync => vsync_x2,
+    fetch_next => not blank, -- S_vga_fetch_next,
+    probe_in(63+32 downto 32) => osd_hex(63 downto 0),
+    --probe_in(63 downto 32) => (others => '0'),
+    probe_in(31 downto 0) => cpu_data_out & cpu_data_in & cpu_addr,
     osd_out => S_osd_pixel
   );
   S_osd_green <= (others => S_osd_pixel);
@@ -341,7 +418,7 @@ G_vga: if C_vga generate
   G_no_test_picture: if not C_test_picture generate
     -- normal game picture
     vga_r      <= R_VIDEO_R;
-    vga_g      <= R_VIDEO_G;
+    vga_g      <= R_VIDEO_G or S_osd_green;
     vga_b      <= R_VIDEO_B;
     vga_hsync  <= R_HSYNC;
     vga_vsync  <= R_VSYNC;
