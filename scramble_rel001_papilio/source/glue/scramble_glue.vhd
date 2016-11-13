@@ -32,7 +32,7 @@ port
  btn_player_start: in std_logic_vector(1 downto 0);
  btn_fire, btn_left, btn_right, btn_barrier: in std_logic;
 
- vga_r, vga_g, vga_b: out std_logic_vector(1 downto 0);
+ vga_r, vga_g, vga_b: out std_logic_vector(3 downto 0);
  vga_hsync, vga_vsync, vga_blank, vga_vblank: out std_logic;
 
  o_audio_l, o_audio_r: out std_logic; -- audio PWM outputs
@@ -46,16 +46,15 @@ architecture struct of scramble_glue is
  signal hclk   : std_logic;
  signal hclk_n : std_logic;
  signal hclk_div: std_logic;
- signal hcnt, S_hcnt   : std_logic_vector(9 downto 1);
- signal vcnt   : std_logic_vector(8 downto 1);
- signal S_vcnt: std_logic_vector(9 downto 1);
+ signal hcnt: std_logic_vector(9 downto 1);
+ signal vcnt: std_logic_vector(8 downto 1);
  signal sync   : std_logic;
  signal S_vga_blank, S_vga_vblank: std_logic;
  signal S_vga_vsync, S_vga_hsync: std_logic;
  signal S_vga_fetch_next: std_logic;
  signal S_osd_pixel: std_logic;
- signal S_osd_green: std_logic_vector(1 downto 0) := (others => '0');
- signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(1 downto 0);
+ signal S_osd_green: std_logic_vector(3 downto 0) := (others => '0');
+ signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(3 downto 0);
 
  signal coin         : std_logic;
  signal player_start : std_logic_vector(1 downto 0);
@@ -160,6 +159,9 @@ G_vga: if C_vga generate
     );
 
   u_scramble : entity work.SCRAMBLE
+    generic map (
+      C_external_video_timing => false
+    )
     port map (
       I_HWSEL_FROGGER       => I_HWSEL_FROGGER,
       --
@@ -168,6 +170,7 @@ G_vga: if C_vga generate
       O_VIDEO_B             => video_b,
       O_HSYNC               => hsync,
       O_VSYNC               => vsync,
+      O_BLANK               => blank,
       --
       -- to audio board
       --
@@ -215,6 +218,7 @@ G_vga: if C_vga generate
       R_VIDEO_B(3 downto 0) <= video_b_x2;
       R_HSYNC   <= hsync_x2;
       R_VSYNC   <= vsync_x2;
+      R_BLANK   <= blank; -- may need fixing
   end process;
   --
   --
@@ -295,18 +299,16 @@ G_vga: if C_vga generate
       beam_x(9 downto 1) => hcnt,
       beam_x(0 downto 0) => open,
       beam_y(9 downto 9) => open,
-      beam_y(8 downto 0) => S_vcnt,
-      vga_r(7 downto 6) => S_vga_r, vga_r(5 downto 0) => open,
-      vga_g(7 downto 6) => S_vga_g, vga_g(5 downto 0) => open,
-      vga_b(7 downto 6) => S_vga_b, vga_b(5 downto 0) => open,
+      beam_y(8 downto 1) => vcnt,
+      beam_y(0 downto 0) => open,
+      vga_r(7 downto 4) => S_vga_r, vga_r(3 downto 0) => open,
+      vga_g(7 downto 4) => S_vga_g, vga_g(3 downto 0) => open,
+      vga_b(7 downto 4) => S_vga_b, vga_b(3 downto 0) => open,
       vga_hsync => S_vga_hsync,
       vga_vsync => S_vga_vsync,
       vga_blank => S_vga_blank, -- '1' when outside of horizontal or vertical graphics area
       vga_vblank => S_vga_vblank -- '1' when outside of vertical graphics area (used for vblank interrupt)
   );
-  vga_hsync <= S_vga_hsync;
-  vga_vsync <= S_vga_vsync;
-  vcnt <= S_vcnt(8 downto 1);
 
   -- OSD overlay for the green channel
   G_osd: if C_osd generate
@@ -328,18 +330,24 @@ G_vga: if C_vga generate
 
   G_yes_test_picture: if C_test_picture generate
     -- only test picture, no game
-    vga_r     <= S_vga_r;
-    vga_g     <= S_vga_g or S_osd_green;
-    vga_b     <= S_vga_b;
+    vga_r      <= S_vga_r;
+    vga_g      <= S_vga_g or S_osd_green;
+    vga_b      <= S_vga_b;
+    vga_hsync  <= S_vga_hsync;
+    vga_vsync  <= S_vga_vsync;
+    vga_blank  <= S_vga_blank;
+    vga_vblank <= S_vga_vblank;
   end generate;
   G_no_test_picture: if not C_test_picture generate
     -- normal game picture
-    --vga_r     <= rgb_1(0) & rgb_0(0);
-    --vga_g     <= (rgb_1(2) & rgb_0(2)) or S_osd_green;
-    --vga_b     <= rgb_1(1) & rgb_0(1);
+    vga_r      <= R_VIDEO_R;
+    vga_g      <= R_VIDEO_G;
+    vga_b      <= R_VIDEO_B;
+    vga_hsync  <= R_HSYNC;
+    vga_vsync  <= R_VSYNC;
+    vga_blank  <= R_BLANK;
+    --vga_vblank <= S_vga_vblank;
   end generate;
-  vga_blank <= S_vga_blank;
-  vga_vblank <= S_vga_vblank;
 end generate;
 
 end struct;

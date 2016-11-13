@@ -46,8 +46,13 @@ library ieee;
   use ieee.std_logic_unsigned.all;
 
 entity SCRAMBLE is
+  generic (
+    C_external_video_timing: boolean := false
+  );
   port (
     I_HWSEL_FROGGER       : in    boolean;
+    I_HCNT                : in    std_logic_vector(8 downto 0) := (others => '0'); -- external video horizontal counter
+    I_VCNT                : in    std_logic_vector(8 downto 0) := (others => '0'); -- external video vertical counter
     --
     O_VIDEO_R             : out   std_logic_vector(3 downto 0);
     O_VIDEO_G             : out   std_logic_vector(3 downto 0);
@@ -149,6 +154,14 @@ begin
   --
   -- video timing
   --
+  G_external_video_timing:
+  if C_external_video_timing generate
+    hcnt <= i_hcnt;
+    vcnt <= i_vcnt;
+  end generate;
+
+  G_not_external_video_timing:
+  if not C_external_video_timing generate
   p_hvcnt : process
     variable hcarry,vcarry : boolean;
   begin
@@ -171,6 +184,7 @@ begin
       end if;
     end if;
   end process;
+  end generate;
 
   p_sync_comb : process(hcnt, vcnt)
   begin

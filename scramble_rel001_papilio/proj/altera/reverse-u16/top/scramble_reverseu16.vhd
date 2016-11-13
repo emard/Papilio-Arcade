@@ -51,7 +51,7 @@ architecture struct of scramble_reverseu16 is
   signal tmds_d: std_logic_vector(3 downto 0);
   signal tx_in: std_logic_vector(29 downto 0);
 
-  signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(1 downto 0);
+  signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(3 downto 0);
   signal S_vga_r8, S_vga_g8, S_vga_b8: std_logic_vector(7 downto 0);
   signal S_vga_vsync, S_vga_hsync: std_logic;
   signal S_vga_vblank, S_vga_blank: std_logic;
@@ -120,7 +120,7 @@ begin
   scramble : entity work.scramble_glue
   generic map
   (
-    C_test_picture => true,
+    C_test_picture => false,
     C_autofire => true,
     C_audio => true,
     C_osd => true,
@@ -152,7 +152,7 @@ begin
   generic map
   (
     C_ddr     => false,
-    C_depth   => 2 -- 2bpp (2 bit per pixel)
+    C_depth   => 4 -- 4bpp (4 bit per pixel)
   )
   port map
   (
@@ -191,9 +191,9 @@ begin
   end generate;
 
   G_hdmi_video_audio: if C_hdmi_audio generate
-    S_vga_r8 <= S_vga_r & S_vga_r(0) & S_vga_r(0) & S_vga_r(0) & S_vga_r(0) & S_vga_r(0) & S_vga_r(0);
-    S_vga_g8 <= S_vga_g & S_vga_g(0) & S_vga_g(0) & S_vga_g(0) & S_vga_g(0) & S_vga_g(0) & S_vga_g(0);
-    S_vga_b8 <= S_vga_b & S_vga_b(0) & S_vga_b(0) & S_vga_b(0) & S_vga_b(0) & S_vga_b(0) & S_vga_b(0);
+    S_vga_r8 <= S_vga_r & S_vga_r(0) & S_vga_r(0) & S_vga_r(0) & S_vga_r(0);
+    S_vga_g8 <= S_vga_g & S_vga_g(0) & S_vga_g(0) & S_vga_g(0) & S_vga_g(0);
+    S_vga_b8 <= S_vga_b & S_vga_b(0) & S_vga_b(0) & S_vga_b(0) & S_vga_b(0);
 
     av_hdmi_out: entity work.av_hdmi
     generic map
