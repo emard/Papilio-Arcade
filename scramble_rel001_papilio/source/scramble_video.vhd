@@ -45,9 +45,6 @@ library ieee;
   use ieee.std_logic_arith.all;
   use ieee.std_logic_unsigned.all;
 
-library UNISIM;
-  use UNISIM.Vcomponents.all;
-
 entity SCRAMBLE_VIDEO is
   port (
     I_HWSEL_FROGGER       : in    boolean;
@@ -577,32 +574,26 @@ begin
     end if;
   end process;
 
-  u_sprite_ram : RAMB16_S9_S9
-    generic map (
-      SIM_COLLISION_CHECK => "GENERATE_X_ONLY"
-      )
-    port map (
+  u_sprite_ram : work.bram_true2p_1clk
+    generic map
+    (
+      data_width => sprite_ram_ip'length,
+      addr_width => sprite_ram_waddr'length
+    )
+    port map
+    (
+      clk         => CLK,
       -- write side, (delayed 1 clock)
-      DOA   => open,
-      DOPA  => open,
-      DIA   => sprite_ram_ip,
-      DIPA  => "0",
-      ADDRA => sprite_ram_waddr, -- 10..0
-      WEA   => '1',
-      ENA   => ENA,
-      SSRA  => '0',
-      CLKA  => CLK,
+      data_in_a   => sprite_ram_ip,
+      data_out_a  => open,
+      addr_a      => sprite_ram_waddr, -- 10..0
+      we_a        => ENA,
       -- read side
-      DOB   => sprite_ram_op,
-      DOPB  => open,
-      DIB   => "00000000",
-      DIPB  => "0",
-      ADDRB => cntr_addr_xor,
-      WEB   => '0',
-      ENB   => '1', -- no clock enable, we need this result fast
-      SSRB  => '0',
-      CLKB  => CLK
-      );
+      data_in_b   => (others => '0'),
+      data_out_b  => sprite_ram_op,
+      addr_b      => cntr_addr_xor,
+      we_b        => '0'
+    );
 
   gc(2 downto 0) <= sprite_ram_op(4 downto 2);
   gr(1 downto 0) <= sprite_ram_op(1 downto 0);
@@ -642,21 +633,23 @@ begin
     end if;
   end process;
 
--- Non BRAM (LUT) Version
---  col_rom : entity work.ROM_LUT
---    port map(
---      ADDR        => obj_video_out_reg(4 downto 0),
---      DATA        => obj_lut_out
---      );
-
--- BRAM Version
+-- Generic (LUT) Version
   col_rom : entity work.ROM_LUT
     port map(
-		CLK => CLK, 
-		ENA => '1',
+      CLK         => CLK,
+      ENA         => '1',
       ADDR        => obj_video_out_reg(4 downto 0),
       DATA        => obj_lut_out
       );
+
+-- BRAM Version
+--   col_rom : entity work.ROM_LUT
+--    port map(
+--		CLK => CLK, 
+--		ENA => '1',
+--      ADDR        => obj_video_out_reg(4 downto 0),
+--      DATA        => obj_lut_out
+--      );
 
   p_col_rom_ce : process
     variable video : array_3x5;

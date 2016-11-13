@@ -45,9 +45,6 @@ library ieee;
   use ieee.std_logic_arith.all;
   use ieee.std_logic_unsigned.all;
 
-library UNISIM;
-  use UNISIM.Vcomponents.all;
-
 entity SCRAMBLE is
   port (
     I_HWSEL_FROGGER       : in    boolean;
@@ -57,6 +54,7 @@ entity SCRAMBLE is
     O_VIDEO_B             : out   std_logic_vector(3 downto 0);
     O_HSYNC               : out   std_logic;
     O_VSYNC               : out   std_logic;
+    O_BLANK               : out   std_logic;
     --
     -- to audio board
     --
@@ -221,6 +219,7 @@ begin
     if (ENA = '1') then
       O_HSYNC     <= HSYNC;
       O_VSYNC     <= VSYNC;
+      O_BLANK     <= VBLANK or HBLANK;
     end if;
   end process;
 

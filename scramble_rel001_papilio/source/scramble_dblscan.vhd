@@ -46,9 +46,6 @@ library ieee;
   use ieee.std_logic_unsigned.all;
   use ieee.numeric_std.all;
 
-library UNISIM;
-  use UNISIM.Vcomponents.all;
-
 entity SCRAMBLE_DBLSCAN is
   port (
 	I_R               : in    std_logic_vector( 3 downto 0);
@@ -124,35 +121,28 @@ begin
 
   rgb_in <= "0000" & I_B & I_G & I_R;
 
-  u_ram : RAMB16_S18_S18
-	generic map (
-	  SIM_COLLISION_CHECK => "generate_x_only"
-	  )
-	port map (
-	  -- output
-	  DOPB  => open,
-	  DOB   => rgb_out,
-	  DIPB  => "00",
-	  DIB   => x"0000",
-	  ADDRB(9)          => bank_o,
-	  ADDRB(8 downto 0) => hpos_o(8 downto 0),
-	  WEB   => '0',
-	  ENB   => ENA_X2,
-	  SSRB  => '0',
-	  CLKB  => CLK,
-
-	  -- input
-	  DOPA  => open,
-	  DOA   => open,
-	  DIPA   => "00",
-	  DIA   => rgb_in,
-	  ADDRA(9)          => bank_i,
-	  ADDRA(8 downto 0) => hpos_i(8 downto 0),
-	  WEA   => '1',
-	  ENA   => ENA,
-	  SSRA  => '0',
-	  CLKA  => CLK
-	  );
+  u_ram : work.bram_true2p_1clk
+    generic map
+    (
+      data_width => rgb_in'length,
+      addr_width => 10
+    )
+    port map
+    (
+      clk                => CLK,
+      -- write side, (delayed 1 clock)
+      data_in_a          => rgb_in,
+      data_out_a         => open,
+      addr_a(9)          => bank_i,
+      addr_a(8 downto 0) => hpos_i(8 downto 0),
+      we_a               => ENA,
+      -- read side
+      data_in_b          => (others => '0'),
+      data_out_b         => rgb_out,
+      addr_b(9)          => bank_o,
+      addr_b(8 downto 0) => hpos_o(8 downto 0),
+      we_b               => '0'
+    );
 
   p_output_timing : process
 	variable rising_h : boolean;

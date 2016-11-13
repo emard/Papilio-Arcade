@@ -45,9 +45,6 @@ library ieee;
   use ieee.std_logic_arith.all;
   use ieee.std_logic_unsigned.all;
 
-library UNISIM;
-  use UNISIM.Vcomponents.all;
-
 entity SCRAMBLE_AUDIO is
   port (
     I_HWSEL_FROGGER    : in    boolean;
@@ -728,23 +725,27 @@ begin
     audio_in_m_out_3D <= (('0' & ym2149_3D_audio & "000000000"))- ym2149_3D_audio_pipe(3); -- signed
   end process;
 
-  mult_3C : MULT18X18
-      port map
-      (
-        P => audio_mult_3C,-- 35..0 -- audio 8bit on 32..25 33 sign bit,
-        A => audio_in_m_out_3C, --17..0
-        B(17)           => '0',
-        B(16 downto  0) => ym2149_3C_k
-      );
+  --mult_3C : MULT18X18
+  --    port map
+  --    (
+  --      P => audio_mult_3C,-- 35..0 -- audio 8bit on 32..25 33 sign bit,
+  --      A => audio_in_m_out_3C, --17..0
+  --      B(17)           => '0',
+  --      B(16 downto  0) => ym2149_3C_k
+  --    );
 
-  mult_3D : MULT18X18
-      port map
-      (
-        P => audio_mult_3D,-- 35..0 -- audio 8bit on 32..25 33 sign bit,
-        A => audio_in_m_out_3D, --17..0
-        B(17)           => '0',
-        B(16 downto  0) => ym2149_3D_k
-      );
+  audio_mult_3C <= audio_in_m_out_3C * ('0' & ym2149_3C_k);
+
+  --mult_3D : MULT18X18
+  --    port map
+  --    (
+  --      P => audio_mult_3D,-- 35..0 -- audio 8bit on 32..25 33 sign bit,
+  --      A => audio_in_m_out_3D, --17..0
+  --      B(17)           => '0',
+  --      B(16 downto  0) => ym2149_3D_k
+  --    );
+
+  audio_mult_3D <= audio_in_m_out_3D * ('0' & ym2149_3D_k);
 
   p_ym2149_audio_pipe : process(I_RESET_L, CLK)
   begin

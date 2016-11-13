@@ -117,7 +117,7 @@ begin
     fire => S_joy_fire
   );
 
-  scramble : entity work.scramble
+  scramble : entity work.scramble_glue
   generic map
   (
     C_test_picture => true,
@@ -144,7 +144,7 @@ begin
     vga_hsync    => S_vga_hsync,
     vga_vsync    => S_vga_vsync,
     vga_blank    => S_vga_blank,
-    audio        => S_audio
+    audio_pcm    => S_audio
   );
 
   G_hdmi_video_only: if not C_hdmi_audio generate
