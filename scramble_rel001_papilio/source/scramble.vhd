@@ -60,6 +60,11 @@ entity SCRAMBLE is
     O_HSYNC               : out   std_logic;
     O_VSYNC               : out   std_logic;
     O_BLANK               : out   std_logic;
+    -- debug CPU bus
+    O_CPU_ADDR            : out   std_logic_vector(15 downto 0);
+    O_CPU_DATA_IN         : out   std_logic_vector(7 downto 0); -- CPU reads
+    O_CPU_DATA_OUT        : out   std_logic_vector(7 downto 0); -- CPU writes
+
     --
     -- to audio board
     --
@@ -609,5 +614,10 @@ begin
   O_WR_L                <= cpu_wr_l;
   O_IOPC7               <= iopc7;
   O_RESET_WD_L          <= reset_wd_l;
+
+  -- to debugging
+  O_CPU_ADDR <= cpu_addr;
+  O_CPU_DATA_IN <= cpu_data_in;
+  O_CPU_DATA_OUT <= cpu_data_out;
 
 end RTL;
