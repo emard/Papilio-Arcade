@@ -14,6 +14,7 @@ port
   -- HID report input from VNC2 (joystick)
   hid_report: in std_logic_vector(71 downto 0);
   audio_enable: out std_logic;
+  reset: out std_logic;
   coin: out std_logic;
   player: out std_logic_vector(1 downto 0);
   left, right, barrier, fire: out std_logic
@@ -28,6 +29,7 @@ architecture struct of joystick is
   signal R_joy_player: std_logic_vector(1 downto 0);
   signal S_joy_left, S_joy_right: std_logic;
   signal R_joy_left, R_joy_right, R_joy_barrier, R_joy_fire: std_logic;
+  signal R_reset: std_logic;
 begin
   -- either HAT left/right or left/right paddle X
   S_joy_hat <= hid_report(17*4+3 downto 17*4);
@@ -54,6 +56,8 @@ begin
       R_joy_barrier <= hid_report(13*4+2) or hid_report(13*4+3) or hid_report(14*4+0) or hid_report(14*4+1);
       -- fire: left or right trigger
       R_joy_fire <= hid_report(15*4+0) or hid_report(15*4+1);
+      -- reset CPU
+      R_reset <= hid_report(16*4+1); -- push right paddle
     end if;
   end process;
   audio_enable <= R_audio_enable;
@@ -63,4 +67,5 @@ begin
   right <= R_joy_right;
   barrier <= R_joy_barrier;
   fire <= R_joy_fire;
+  reset <= R_reset;
 end struct;
