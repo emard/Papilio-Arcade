@@ -45,9 +45,6 @@ library ieee;
   use ieee.std_logic_unsigned.all;
   use ieee.numeric_std.all;
 
---library UNISIM;
---  use UNISIM.Vcomponents.all;
-
 entity SCRAMBLE_RAM is
   port (
     I_ADDR            : in    std_logic_vector(10 downto 0);
@@ -61,22 +58,34 @@ entity SCRAMBLE_RAM is
 end;
 
 architecture RTL of SCRAMBLE_RAM is
-
   signal we       : std_logic;
-
 begin
+  --vram : work.gen_ram
+  --  generic map (
+  --    dWidth => I_DATA'length,
+  --    aWidth => I_ADDR'length
+  --  )
+  --  port map (
+  --    clk  => CLK,
+  --    addr => I_ADDR,
+  --    d    => I_DATA,
+  --    q    => O_DATA,
+  --    we   => we
+  --    );
 
-  vram : work.gen_ram
+  vram : work.bram_true2p_1clk
     generic map (
-      dWidth => I_DATA'length,
-      aWidth => I_ADDR'length
+      dual_port => false,
+      pass_thru_a => true,
+      data_Width => I_DATA'length,
+      addr_width => I_ADDR'length
     )
     port map (
-      clk  => CLK,
-      addr => I_ADDR,
-      d    => I_DATA,
-      q    => O_DATA,
-      we   => we
+      clk        => CLK,
+      addr_a     => I_ADDR,
+      data_in_a  => I_DATA,
+      data_out_a => O_DATA,
+      we_a       => we
       );
 
   p_we_comb  : process(I_RW_L, I_CS, ENA)
