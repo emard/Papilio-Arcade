@@ -238,7 +238,7 @@ begin
     if (ENA = '1') then
       O_HSYNC     <= HSYNC;
       O_VSYNC     <= VSYNC;
-      O_BLANK     <= VBLANK or HBLANK;
+      O_BLANK     <= VBLANK or not HBLANK;
     end if;
   end process;
 
