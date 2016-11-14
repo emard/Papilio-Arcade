@@ -11,21 +11,21 @@ GENERIC
 (
   C_channel_bits: integer := 10; -- number of bits per channel
   C_output_bits: integer := 1; -- output bits per channel
-  C_channels: integer := 3 -- number of channels to serialize
+  C_channels: integer := 4 -- number of channels to serialize
 );
 PORT
 (
   tx_in	       : IN STD_LOGIC_VECTOR(C_channel_bits*C_channels-1 DOWNTO 0);
   tx_inclock   : IN STD_LOGIC; -- 10x tx_syncclock
   tx_syncclock : IN STD_LOGIC;
-  tx_out       : OUT STD_LOGIC_VECTOR((C_channels+1)*C_output_bits-1 DOWNTO 0) -- one more channel for clock
+  tx_out       : OUT STD_LOGIC_VECTOR(C_channels*C_output_bits-1 DOWNTO 0) -- one more channel for clock
 );
 END;
 
 ARCHITECTURE SYN OF serializer_generic IS
   signal R_tx_latch: std_logic_vector(C_channel_bits*C_channels-1 downto 0);
   signal S_tx_clock: std_logic_vector(C_channel_bits-1 downto 0);
-  type T_channel_shift is array(0 to C_channels) of std_logic_vector(C_channel_bits-1 downto 0); -- -- one channel more for clock
+  type T_channel_shift is array(0 to C_channels-1) of std_logic_vector(C_channel_bits-1 downto 0); -- -- one channel more for clock
   signal S_channel_latch, R_channel_shift: T_channel_shift;
   signal R_pixel_clock_toggle, R_prev_pixel_clock_toggle: std_logic;
   signal R_clock_edge: std_logic;
@@ -47,7 +47,7 @@ BEGIN
     end generate;
   end generate;
 
-  S_channel_latch(3) <= "1111100000"; -- the clock pattern
+  -- S_channel_latch(3) <= "1111100000"; -- the clock pattern
 
   process(tx_syncclock)
   begin
