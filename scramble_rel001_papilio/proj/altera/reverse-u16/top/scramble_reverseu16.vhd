@@ -42,6 +42,7 @@ architecture struct of scramble_reverseu16 is
   signal S_joy_coin: std_logic;
   signal S_joy_player: std_logic_vector(1 downto 0);
   signal S_joy_left, S_joy_right, S_joy_barrier, S_joy_fire: std_logic;
+  signal S_joy_reset: std_logic;
 
   signal S_audio: std_logic_vector(11 downto 0);
   signal S_audio_enable: std_logic;
@@ -83,7 +84,7 @@ begin
     );
   end generate;
 
-  reset <= not clock_stable;
+  reset <= S_joy_reset or not clock_stable;
 
   -- the user input device
   hid: entity work.vnc2hid
@@ -109,6 +110,7 @@ begin
     clk => clk_pixel,
     hid_report => hid_report,
     audio_enable => S_audio_enable,
+    reset => S_joy_reset,
     coin => S_joy_coin,
     player => S_joy_player,
     left => S_joy_left,
