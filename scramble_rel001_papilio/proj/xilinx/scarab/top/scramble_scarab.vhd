@@ -82,7 +82,7 @@ begin
   scramble : entity work.scramble_glue
   generic map
   (
-    C_test_picture => true,
+    C_test_picture => false,
     C_autofire => true,
     C_audio => true,
     C_osd => true,
