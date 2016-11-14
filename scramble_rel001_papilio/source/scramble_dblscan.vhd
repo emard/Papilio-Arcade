@@ -121,7 +121,7 @@ begin
 
   rgb_in <= "0000" & I_B & I_G & I_R;
 
-  u_ram : work.bram_true2p_1clk
+  u_ram: entity work.bram_true2p_1clk
     generic map
     (
       data_width => rgb_in'length,

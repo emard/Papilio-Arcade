@@ -134,7 +134,7 @@ G_yes_autofire: if C_autofire generate
 end generate;
 
 G_vga: if C_vga generate
-  u_clocks : entity work.scramble_clocks
+  u_clocks: entity work.scramble_clocks
     port map
     (
       I_CLK_25   => clk_pixel, -- 25 MHz

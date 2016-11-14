@@ -574,7 +574,7 @@ begin
     end if;
   end process;
 
-  u_sprite_ram : work.bram_true2p_1clk
+  u_sprite_ram: entity work.bram_true2p_1clk
     generic map
     (
       data_width => sprite_ram_ip'length,

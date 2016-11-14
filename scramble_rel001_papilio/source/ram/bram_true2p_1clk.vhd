@@ -32,7 +32,7 @@ entity bram_true2p_1clk is
 		data_out_a: out std_logic_vector((data_width -1) downto 0);
 		data_out_b: out std_logic_vector((data_width -1) downto 0)
 	);
-end bram_true2p_1clk;
+end;
 
 architecture rtl of bram_true2p_1clk is
 	-- Build a 2-D array type for the RAM
