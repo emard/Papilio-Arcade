@@ -17,24 +17,29 @@ port
   reset: out std_logic;
   coin: out std_logic;
   player: out std_logic_vector(1 downto 0);
-  left, right, barrier, fire: out std_logic
+  up, down, left, right, barrier, fire: out std_logic
 );
 end;
 
 architecture struct of joystick is
   signal S_joy_hat: std_logic_vector(3 downto 0);
   signal S_joy_left_pad_x, S_joy_right_pad_x: std_logic_vector(7 downto 0);
+  signal S_joy_left_pad_y, S_joy_right_pad_y: std_logic_vector(7 downto 0);
   signal R_audio_enable: std_logic := '0';
   signal R_joy_coin: std_logic;
   signal R_joy_player: std_logic_vector(1 downto 0);
-  signal S_joy_left, S_joy_right: std_logic;
-  signal R_joy_left, R_joy_right, R_joy_barrier, R_joy_fire: std_logic;
+  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right: std_logic;
+  signal R_joy_up, R_joy_down, R_joy_left, R_joy_right, R_joy_barrier, R_joy_fire: std_logic;
   signal R_reset: std_logic;
 begin
   -- either HAT left/right or left/right paddle X
   S_joy_hat <= hid_report(17*4+3 downto 17*4);
   S_joy_left_pad_x <= hid_report(4*4+7 downto 4*4);
+  S_joy_left_pad_y <= hid_report(6*4+7 downto 6*4);
   S_joy_right_pad_x <= hid_report(8*4+7 downto 8*4);
+  S_joy_right_pad_y <= hid_report(10*4+7 downto 10*4);
+  S_joy_up  <= '1' when S_joy_hat=7 or S_joy_hat=0 or S_joy_hat=1 or S_joy_left_pad_y < 126 or S_joy_right_pad_y < 126 else '0';
+  S_joy_down <= '1' when S_joy_hat=3 or S_joy_hat=4 or S_joy_hat=5 or S_joy_left_pad_y > 130 or S_joy_right_pad_y > 130 else '0';
   S_joy_left  <= '1' when S_joy_hat=5 or S_joy_hat=6 or S_joy_hat=7 or S_joy_left_pad_x < 126 or S_joy_right_pad_x < 126 else '0';
   S_joy_right <= '1' when S_joy_hat=1 or S_joy_hat=2 or S_joy_hat=3 or S_joy_left_pad_x > 130 or S_joy_right_pad_x > 130 else '0';
   process(clk)
@@ -50,6 +55,8 @@ begin
       R_joy_coin <= hid_report(16*4+2); -- "FPS" button inserts coin
       R_joy_player(0) <= hid_report(15*4+2); -- "BACK" button 1-player
       R_joy_player(1) <= hid_report(15*4+3); -- "START" button 2-player
+      R_joy_up  <= S_joy_up;
+      R_joy_down <= S_joy_down;
       R_joy_left  <= S_joy_left;
       R_joy_right <= S_joy_right;
       -- barrier: any A,B,X,Y button
@@ -63,6 +70,8 @@ begin
   audio_enable <= R_audio_enable;
   coin <= R_joy_coin;
   player <= R_joy_player;
+  up <= R_joy_up;
+  down <= R_joy_down;
   left <= R_joy_left;
   right <= R_joy_right;
   barrier <= R_joy_barrier;

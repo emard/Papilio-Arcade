@@ -41,7 +41,7 @@ architecture struct of scramble_reverseu16 is
   signal hid_report: std_logic_vector(71 downto 0);
   signal S_joy_coin: std_logic;
   signal S_joy_player: std_logic_vector(1 downto 0);
-  signal S_joy_left, S_joy_right, S_joy_barrier, S_joy_fire: std_logic;
+  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right, S_joy_barrier, S_joy_fire: std_logic;
   signal S_joy_reset: std_logic;
 
   signal S_audio: std_logic_vector(11 downto 0);
@@ -113,6 +113,8 @@ begin
     reset => S_joy_reset,
     coin => S_joy_coin,
     player => S_joy_player,
+    up => S_joy_up,
+    down => S_joy_down,
     left => S_joy_left,
     right => S_joy_right,
     barrier => S_joy_barrier,
@@ -136,6 +138,8 @@ begin
     dip_switch   => dip_switch,
     btn_coin     => S_joy_coin,
     btn_player_start => S_joy_player,
+    btn_up       => S_joy_up,
+    btn_down     => S_joy_down,
     btn_left     => S_joy_left,
     btn_right    => S_joy_right,
     btn_barrier  => S_joy_barrier,
