@@ -79,24 +79,7 @@ architecture RTL of SCRAMBLE_CLOCKS is
   signal ena_6b                 : std_logic;
   signal ena_1_79               : std_logic;
 
-  --
-  attribute DLL_FREQUENCY_MODE    : string;
-  attribute DUTY_CYCLE_CORRECTION : string;
-  attribute CLKOUT_PHASE_SHIFT    : string;
-  attribute PHASE_SHIFT           : integer;
-  attribute CLKFX_MULTIPLY        : integer;
-  attribute CLKFX_DIVIDE          : integer;
-  attribute CLKDV_DIVIDE          : real;
-  attribute STARTUP_WAIT          : string;
-  attribute CLKIN_PERIOD          : real;
-
   -- The original uses a 6.144 MHz clock
-  --
-  -- Here we are taking in 32MHz clock, and using the CLKFX 32*(10/13) we get 24.6154MHz
-  -- We are then clock enabling the whole design at /4 and /2
-  --
-  -- This runs the game at 6.15 MHz which is only 0.16% faster.
-  --
   -- (The scan doubler requires a x2 freq clock)
 begin
 
@@ -145,7 +128,6 @@ begin
         div_cnt_14 <= "1101"; -- 14-1
         ena_1_79 <= '1';
       end if;
-
     end if;
   end process;
   -- match delta delay on clock
