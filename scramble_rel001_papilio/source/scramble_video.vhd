@@ -206,7 +206,8 @@ begin
   begin
     wait until rising_edge(CLK);
     -- no need to use this 'late' pulse but it makes the simulator look like the original hw :)
-    if (ENAB = '1') then -- falling edge
+    --if (ENAB = '1') then -- falling edge
+    if (ENA = '0') then -- falling edge
       h1_late <= I_HCNT(0);
     end if;
 
