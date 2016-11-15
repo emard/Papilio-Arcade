@@ -60,10 +60,11 @@ end;
 architecture RTL of SCRAMBLE_RAM is
   signal we       : std_logic;
 begin
+  we <= I_CS and (not I_RW_L) and ENA;
   vram: entity work.bram_true2p_1clk
     generic map (
       dual_port => false,
-      pass_thru_a => false,
+      pass_thru_a => true,
       data_Width => I_DATA'length,
       addr_width => I_ADDR'length
     )
@@ -74,8 +75,4 @@ begin
       data_out_a => O_DATA,
       we_a       => we
     );
-  p_we_comb: process(I_RW_L, I_CS, ENA)
-  begin
-    we <= I_CS and (not I_RW_L) and ENA;
-  end process;
 end architecture RTL;
