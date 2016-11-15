@@ -41,7 +41,7 @@ port
 end;
 
 architecture struct of scramble_glue is
- signal reset_n: std_logic;
+ signal reset_n, reset_p, external_reset_n: std_logic;
 
  signal hclk   : std_logic;
  signal hclk_n : std_logic;
@@ -134,21 +134,23 @@ G_yes_autofire: if C_autofire generate
   buttons(0) <= not R_autofire(R_autofire'high);
 end generate;
 
+external_reset_n <= not reset;
 G_vga: if C_vga generate
   u_clocks: entity work.scramble_clocks
     port map
     (
       I_CLK_25   => clk_pixel, -- 25 MHz
-      I_RESET_L  => reset_n,
+      I_RESET_L  => external_reset_n,
       --
       O_ENA_12   => ena_12,   -- 6.25 x 2
       O_ENA_6B   => ena_6b,   -- 6.25 (inverted)
       O_ENA_6    => ena_6,    -- 6.25
       O_ENA_1_79 => ena_1_79, -- 1.786
       O_CLK      => open,
-      O_RESET    => open
+      O_RESET    => reset_p
     );
   clk <= clk_pixel;
+  reset_n <= not reset_p;
 
   u_scramble : entity work.scramble
     generic map (
@@ -186,7 +188,7 @@ G_vga: if C_vga generate
       ENAB                  => ena_6b,
       ENA_12                => ena_12,
       --
-      RESET                 => reset,
+      RESET                 => reset_p,
       CLK                   => clk
       );
 
@@ -346,7 +348,6 @@ G_vga: if C_vga generate
   end generate;
 
 
-  reset_n <= not reset;
 
   process(clk_pixel)
   begin
