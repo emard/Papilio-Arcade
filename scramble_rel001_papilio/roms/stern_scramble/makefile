@@ -3,7 +3,7 @@ SOURCE1=scramble.zip
 
 all: $(IMAGE)
 
-CONVERTER=make_vhdl_prom
+CONVERTER=../converter/make_vhdl_prom
 
 clean:
 	rm -rf extract $(IMAGE) $(CONVERTER) *~
@@ -18,8 +18,8 @@ $(IMAGE): $(SOURCE1) $(CONVERTER)
 	#rm -f extract/readme.html
 	#cd extract; unzip ../$(SOURCE2)
 	# game program rom
-	cd extract; cat s1.2d s2.2e s3.2f s4.2h s5.2j s6.2l s7.2m s8.2p > rom_pgm.bin
-	./$(CONVERTER) extract/rom_pgm.bin rom_pgm.vhd
+	cd extract; cat s1.2d s2.2e s3.2f s4.2h s5.2j s6.2l s7.2m s8.2p > $(IMAGE)
+	./$(CONVERTER) extract/$(IMAGE) rom_pgm.vhd
 	# place 2K char rom  at offset 0xD000..0xD7FF (dec 13*4   = 52K)
 	#cd extract; dd if=c1.5h of=../$(IMAGE) bs=1K seek=52 count=2 conv=sync
 	./$(CONVERTER) extract/c1.5h rom_obj_0.vhd
