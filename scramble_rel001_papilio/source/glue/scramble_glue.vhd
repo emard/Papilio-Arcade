@@ -117,6 +117,7 @@ architecture struct of scramble_glue is
   signal cpu_addr       : std_logic_vector(15 downto 0);
   signal cpu_data_out   : std_logic_vector(7 downto 0);
   signal cpu_data_in    : std_logic_vector(7 downto 0);
+  signal cpu_wram       : std_logic;
 begin
 
 G_yes_autofire: if C_autofire generate
@@ -179,6 +180,7 @@ G_vga: if C_vga generate
       O_CPU_ADDR            => cpu_addr,
       O_CPU_DATA_IN         => cpu_data_in,
       O_CPU_DATA_OUT        => cpu_data_out,
+      O_CPU_WRAM            => cpu_wram,
 
       ENA                   => ena_6,
       ENAB                  => ena_6b,
@@ -267,14 +269,14 @@ G_vga: if C_vga generate
   O_AUDIO_L <= audio_pwm;
   O_AUDIO_R <= audio_pwm;
 
-  button_debounced(0) <= '0'; -- Joystick Up
-  button_debounced(1) <= '0'; -- Joystick Down
-  button_debounced(2) <= btn_left; -- Joystick Left
-  button_debounced(3) <= btn_right; -- Joystick Left
+  button_debounced(0) <= '1'; -- Joystick Up
+  button_debounced(1) <= '1'; -- Joystick Down
+  button_debounced(2) <= not btn_left; -- Joystick Left
+  button_debounced(3) <= not btn_right; -- Joystick Left
   button_debounced(4) <= btn_player_start(0); -- Start 1 player
   button_debounced(7) <= btn_player_start(1); -- Start 2 player
-  button_debounced(5) <= btn_coin; -- Joystick Fire
-  button_debounced(6) <= btn_fire; -- Joystick Fire
+  button_debounced(5) <= btn_coin; -- insert coin
+  button_debounced(6) <= not btn_fire; -- Joystick Fire
 
   -- assign inputs
   -- start, shoot1, shoot2, left,right,up,down
@@ -390,15 +392,16 @@ G_vga: if C_vga generate
   generic map -- workaround for wrong video size
   (
     C_digits => 16+8, -- 16 digits for joystick, 8 digits for the bus status
-    C_resolution_x => 1058 - 2 -- 1058 reported by monitor, 2 is correction for audio_hdmi
+    C_resolution_x => 482 - 2 -- 482 reported by monitor, 2 is correction for audio_hdmi
   )
   port map
   (
     clk_pixel => clk_pixel,
     vsync => vsync_x2,
     fetch_next => not blank, -- S_vga_fetch_next,
-    probe_in(63+32 downto 32) => osd_hex(63 downto 0),
-    --probe_in(63 downto 32) => (others => '0'),
+    --probe_in(63+32 downto 32) => osd_hex(63 downto 0),
+    probe_in(63+32 downto 33) => (others => '0'),
+    probe_in(32) => cpu_wram,
     probe_in(31 downto 0) => cpu_data_out & cpu_data_in & cpu_addr,
     osd_out => S_osd_pixel
   );
