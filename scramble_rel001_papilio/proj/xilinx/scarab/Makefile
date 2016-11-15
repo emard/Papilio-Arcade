@@ -42,13 +42,6 @@ clocks/scramble_clocks.vhd \
 ../../../source/T80/T80_MCode.vhd \
 ../../../source/T80/T80_Pack.vhd \
 ../../../source/T80/T80_Reg.vhd \
-../../../roms/stern_scramble/rom_pgm.vhd \
-../../../roms/stern_scramble/rom_obj_0.vhd \
-../../../roms/stern_scramble/rom_obj_1.vhd \
-../../../roms/stern_scramble/rom_lut.vhd \
-../../../roms/stern_scramble/rom_snd_0.vhd \
-../../../roms/stern_scramble/rom_snd_1.vhd \
-../../../roms/stern_scramble/rom_snd_2.vhd \
 ../../../source/osd/osd.vhd \
 ../../../source/osd/char_rom.vhd \
 ../../../source/vga/vga.vhd \
@@ -61,4 +54,10 @@ clocks/scramble_clocks.vhd \
 ../../../source/vga/hdmi-audio/serializer_generic.vhd \
 ../../../source/vga/xilinx/xc6/ddr_out.vhd \
 ../../../source/vga/xilinx/xc6/hdmi_out_xc6.vhd \
-
+../../../roms/stern_scramble/rom_pgm.vhd \
+../../../roms/stern_scramble/rom_obj_0.vhd \
+../../../roms/stern_scramble/rom_obj_1.vhd \
+../../../roms/stern_scramble/rom_lut.vhd \
+../../../roms/stern_scramble/rom_snd_0.vhd \
+../../../roms/stern_scramble/rom_snd_1.vhd \
+../../../roms/stern_scramble/rom_snd_2.vhd \

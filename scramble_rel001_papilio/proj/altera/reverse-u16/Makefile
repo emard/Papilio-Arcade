@@ -45,13 +45,6 @@ joystick/joystick_saitek_cyborg_rumble.vhd \
 ../../../source/ram/scramble_ram_generic.vhd \
 ../../../source/ram/gen_ram.vhd \
 ../../../source/ram/bram_true2p_1clk.vhd \
-../../../roms/stern_scramble/rom_pgm.vhd \
-../../../roms/stern_scramble/rom_obj_0.vhd \
-../../../roms/stern_scramble/rom_obj_1.vhd \
-../../../roms/stern_scramble/rom_lut.vhd \
-../../../roms/stern_scramble/rom_snd_0.vhd \
-../../../roms/stern_scramble/rom_snd_1.vhd \
-../../../roms/stern_scramble/rom_snd_2.vhd \
 ../../../source/scramble_video.vhd \
 ../../../source/scramble_dblscan.vhd \
 ../../../source/scramble_debounce.vhd \
@@ -79,3 +72,10 @@ joystick/joystick_saitek_cyborg_rumble.vhd \
 ../../../source/vnc2hid/vnc2hid.vhd \
 ../../../source/osd/osd.vhd \
 ../../../source/osd/char_rom.vhd \
+../../../roms/stern_scramble/rom_pgm.vhd \
+../../../roms/stern_scramble/rom_obj_0.vhd \
+../../../roms/stern_scramble/rom_obj_1.vhd \
+../../../roms/stern_scramble/rom_lut.vhd \
+../../../roms/stern_scramble/rom_snd_0.vhd \
+../../../roms/stern_scramble/rom_snd_1.vhd \
+../../../roms/stern_scramble/rom_snd_2.vhd \
