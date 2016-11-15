@@ -64,6 +64,7 @@ entity SCRAMBLE is
     O_CPU_ADDR            : out   std_logic_vector(15 downto 0);
     O_CPU_DATA_IN         : out   std_logic_vector(7 downto 0); -- CPU reads
     O_CPU_DATA_OUT        : out   std_logic_vector(7 downto 0); -- CPU writes
+    O_CPU_WRAM            : out   std_logic; -- '1' when writing to RAM
 
     --
     -- to audio board
@@ -155,6 +156,10 @@ architecture RTL of SCRAMBLE is
 
     signal vram_data        : std_logic_vector(7 downto 0);
 
+    -- debugging super slow CPU clock
+    signal R_superslow      : std_logic_vector(10 downto 0);
+    signal R_superslow_ena  : std_logic;
+    signal S_cpu_wram       : std_logic;
 begin
   --
   -- video timing
@@ -323,11 +328,24 @@ begin
     end if;
   end process;
 
+  slow_clock: process(clk)
+  begin
+    if rising_edge(clk) then
+      R_superslow <= R_superslow + 1;
+      if R_superslow = 0 then
+        R_superslow_ena <= '1';
+      else
+        R_superslow_ena <= '0';
+      end if;
+    end if;
+  end process;
+
   u_cpu : entity work.T80sed
           port map (
               RESET_n => reset_wd_l,
               CLK_n   => clk,
               CLKEN   => cpu_ena,
+              --CLKEN   => R_superslow_ena,
               WAIT_n  => cpu_wait_l,
               INT_n   => cpu_int_l,
               NMI_n   => cpu_nmi_l,
@@ -533,26 +551,6 @@ begin
   --  roms / rams
   pgm_rom : entity work.ROM_PGM
     port map (CLK => CLK, ENA => ENA, ADDR => cpu_addr(13 downto 0), DATA => rom_dout);
---  pgm_rom01 : entity work.ROM_PGM_01
---    port map (CLK => CLK, ENA => ENA, ADDR => cpu_addr(11 downto 0), DATA => pgm_rom_dout(0));
---  pgm_rom23 : entity work.ROM_PGM_23
---    port map (CLK => CLK, ENA => ENA, ADDR => cpu_addr(11 downto 0), DATA => pgm_rom_dout(1));
---  pgm_rom45 : entity work.ROM_PGM_45
---    port map (CLK => CLK, ENA => ENA, ADDR => cpu_addr(11 downto 0), DATA => pgm_rom_dout(2));
---  pgm_rom56 : entity work.ROM_PGM_67
---    port map (CLK => CLK, ENA => ENA, ADDR => cpu_addr(11 downto 0), DATA => pgm_rom_dout(3));
-
---  p_rom_mux : process(cpu_addr, pgm_rom_dout)
---   begin
---    rom_dout <= (others => '0');
---    case cpu_addr(13 downto 12) is
---      when "00" => rom_dout <= pgm_rom_dout(0);
---      when "01" => rom_dout <= pgm_rom_dout(1);
---      when "10" => rom_dout <= pgm_rom_dout(2);
---      when "11" => rom_dout <= pgm_rom_dout(3);
---      when others => null;
---    end case;
---  end process;
 
   u_cpu_ram : entity work.SCRAMBLE_RAM
     port map (
@@ -567,9 +565,10 @@ begin
 
   p_ram_ctrl : process(cpu_addr, page_4to7_l)
   begin
-    ram_ena <= '0';
     if (page_4to7_l = '0') and (cpu_addr(13 downto 11) = "000") then
       ram_ena <= '1';
+    else
+      ram_ena <= '0';
     end if;
   end process;
 
@@ -616,8 +615,10 @@ begin
   O_RESET_WD_L          <= reset_wd_l;
 
   -- to debugging
+  S_CPU_WRAM <= ram_ena and not cpu_wr_l;
+  O_CPU_WRAM <= S_CPU_WRAM;
   O_CPU_ADDR <= cpu_addr;
-  O_CPU_DATA_IN <= cpu_data_in;
+  O_CPU_DATA_IN <= cpu_data_in when S_CPU_WRAM='0' else ram_dout;
   O_CPU_DATA_OUT <= cpu_data_out;
 
 end RTL;
