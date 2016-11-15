@@ -75,8 +75,8 @@ begin
   dip_switch(3 downto 0) <= sw;
   S_joy_left <= porta(0);
   S_joy_right <= porta(1);
-  S_joy_coin <= porta(2);
-  S_joy_player(1 downto 0) <= porta(1 downto 0);
+  S_joy_coin <= not porta(2);
+  S_joy_player(1 downto 0) <= not porta(1 downto 0);
   S_joy_fire <= porta(3);
 
   scramble : entity work.scramble_glue
