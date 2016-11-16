@@ -73,13 +73,13 @@ begin
   reset <= S_joy_reset or not clock_stable;
 
   dip_switch(3 downto 0) <= sw;
-  S_joy_coin <= porta(0);
-  S_joy_player(1 downto 0) <= porta(2 downto 1);
-  S_joy_up <= porta(3);
-  S_joy_down <= porta(4);
-  S_joy_left <= porta(5);
-  S_joy_right <= porta(6);
-  S_joy_fire <= porta(7);
+  S_joy_coin <= not porta(0);
+  S_joy_player(1 downto 0) <= not porta(2 downto 1);
+  S_joy_up <= not porta(3);
+  S_joy_down <= not porta(4);
+  S_joy_left <= not porta(5);
+  S_joy_right <= not porta(6);
+  S_joy_fire <= not porta(7);
 
   scramble : entity work.scramble_glue
   generic map
