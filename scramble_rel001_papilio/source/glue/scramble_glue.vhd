@@ -30,7 +30,7 @@ port
  -- game controls, normal logic '1':pressed, '0':released
  btn_coin: in std_logic;
  btn_player_start: in std_logic_vector(1 downto 0);
- btn_fire, btn_left, btn_right, btn_barrier: in std_logic;
+ btn_up, btn_down, btn_left, btn_right, btn_barrier, btn_fire: in std_logic;
 
  vga_r, vga_g, vga_b: out std_logic_vector(3 downto 0);
  vga_hsync, vga_vsync, vga_blank, vga_vblank: out std_logic;
@@ -70,8 +70,7 @@ architecture struct of scramble_glue is
   signal ena_6b           : std_logic;
   signal ena_1_79         : std_logic;
   -- ip registers
-  signal button_in        : std_logic_vector(7 downto 0);
-  signal button_debounced : std_logic_vector(7 downto 0);
+  signal button_debounced : std_logic_vector(8 downto 0);
   signal ip_1p            : std_logic_vector(6 downto 0);
   signal ip_2p            : std_logic_vector(6 downto 0);
   signal ip_service       : std_logic;
@@ -271,35 +270,36 @@ G_vga: if C_vga generate
   O_AUDIO_L <= audio_pwm;
   O_AUDIO_R <= audio_pwm;
 
-  button_debounced(0) <= '1'; -- Joystick Up
-  button_debounced(1) <= '1'; -- Joystick Down
-  button_debounced(2) <= not btn_left; -- Joystick Left
-  button_debounced(3) <= not btn_right; -- Joystick Left
-  button_debounced(4) <= btn_player_start(0); -- Start 1 player
-  button_debounced(7) <= btn_player_start(1); -- Start 2 player
-  button_debounced(5) <= btn_coin; -- insert coin
-  button_debounced(6) <= not btn_fire; -- Joystick Fire
+  button_debounced(0) <= not btn_coin; -- insert coin
+  button_debounced(1) <= not btn_player_start(0); -- Start 1 player
+  button_debounced(2) <= not btn_player_start(1); -- Start 2 player
+  button_debounced(3) <= not btn_up; -- Joystick Up
+  button_debounced(4) <= not btn_down; -- Joystick Down
+  button_debounced(5) <= not btn_left; -- Joystick Left
+  button_debounced(6) <= not btn_right; -- Joystick Left
+  button_debounced(7) <= not btn_barrier; -- Joystick Fire left (bombs)
+  button_debounced(8) <= not btn_fire; -- Joystick Fire right (shells)
 
   -- assign inputs
   -- start, shoot1, shoot2, left,right,up,down
-  ip_1p(6) <= not button_debounced(4); -- start 1
-  ip_1p(5) <= button_debounced(6); -- shoot1
-  ip_1p(4) <= button_debounced(6); -- shoot2
-  ip_1p(3) <= button_debounced(2); -- p1 left
-  ip_1p(2) <= button_debounced(3); -- p1 right
-  ip_1p(1) <= button_debounced(0); -- p1 up
-  ip_1p(0) <= button_debounced(1); -- p1 down
+  ip_1p(6) <= button_debounced(1); -- start 1
+  ip_1p(5) <= button_debounced(7); -- shoot1
+  ip_1p(4) <= button_debounced(8); -- shoot2
+  ip_1p(3) <= button_debounced(5); -- p1 left
+  ip_1p(2) <= button_debounced(6); -- p1 right
+  ip_1p(1) <= button_debounced(3); -- p1 up
+  ip_1p(0) <= button_debounced(4); -- p1 down
   --
-  ip_2p(6) <= not button_debounced(7); -- start 2
-  ip_2p(5) <= '1';
-  ip_2p(4) <= '1';
+  ip_2p(6) <= button_debounced(2); -- start 2
+  ip_2p(5) <= button_debounced(7);
+  ip_2p(4) <= button_debounced(8);
   ip_2p(3) <= button_debounced(2); -- p2 left
-  ip_2p(2) <= button_debounced(3); -- p2 right
-  ip_2p(1) <= button_debounced(0); -- p2 up
-  ip_2p(0) <= button_debounced(1); -- p2 down
+  ip_2p(2) <= button_debounced(6); -- p2 right
+  ip_2p(1) <= button_debounced(3); -- p2 up
+  ip_2p(0) <= button_debounced(4); -- p2 down
   --
   ip_service <= '1';
-  ip_coin1   <= not button_debounced(5); -- credit
+  ip_coin1   <= button_debounced(0); -- credit
   ip_coin2   <= '1';
 
   -- dip switch settings
@@ -392,7 +392,7 @@ G_vga: if C_vga generate
   I_osd: entity work.osd
   generic map -- workaround for wrong video size
   (
-    C_digits => 16+8, -- 16 digits for joystick, 8 digits for the bus status
+    C_digits => 16, -- 16 digits for joystick, (add +8 digits to show the bus status)
     C_resolution_x => 482 - 2 -- 482 reported by monitor, 2 is correction for audio_hdmi
   )
   port map
@@ -400,10 +400,10 @@ G_vga: if C_vga generate
     clk_pixel => clk_pixel,
     vsync => vsync_x2,
     fetch_next => not blank, -- S_vga_fetch_next,
-    --probe_in(63+32 downto 32) => osd_hex(63 downto 0),
-    probe_in(63+32 downto 33) => (others => '0'),
-    probe_in(32) => cpu_wram,
-    probe_in(31 downto 0) => cpu_data_out & cpu_data_in & cpu_addr,
+    probe_in(63 downto 0) => osd_hex(63 downto 0),
+    --probe_in(63+32 downto 33) => (others => '0'),
+    --probe_in(32) => cpu_wram,
+    --probe_in(31 downto 0) => cpu_data_out & cpu_data_in & cpu_addr,
     osd_out => S_osd_pixel
   );
   S_osd_green <= (others => S_osd_pixel);
