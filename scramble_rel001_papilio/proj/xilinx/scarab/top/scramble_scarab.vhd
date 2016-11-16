@@ -22,7 +22,7 @@ generic
 port
 (
   clk_50MHz: in std_logic;
-  porta: in std_logic_vector(6 downto 0);
+  porta: in std_logic_vector(7 downto 0);
   sw: in std_logic_vector(4 downto 1);
   AUDIO_L, AUDIO_R: out std_logic := '0';
   leds: out std_logic_vector(7 downto 0) := (others => '0');
@@ -37,7 +37,7 @@ architecture struct of scramble_scarab is
 
   signal S_joy_coin: std_logic;
   signal S_joy_player: std_logic_vector(1 downto 0);
-  signal S_joy_left, S_joy_right, S_joy_barrier, S_joy_fire: std_logic;
+  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right, S_joy_bomb, S_joy_fire: std_logic;
   signal S_joy_reset: std_logic;
 
   signal S_audio: std_logic_vector(11 downto 0);
@@ -73,11 +73,13 @@ begin
   reset <= S_joy_reset or not clock_stable;
 
   dip_switch(3 downto 0) <= sw;
-  S_joy_left <= porta(0);
-  S_joy_right <= porta(1);
-  S_joy_coin <= not porta(2);
-  S_joy_player(1 downto 0) <= not porta(1 downto 0);
-  S_joy_fire <= porta(3);
+  S_joy_coin <= porta(0);
+  S_joy_player(1 downto 0) <= porta(2 downto 1);
+  S_joy_up <= porta(3);
+  S_joy_down <= porta(4);
+  S_joy_left <= porta(5);
+  S_joy_right <= porta(6);
+  S_joy_fire <= porta(7);
 
   scramble : entity work.scramble_glue
   generic map
@@ -96,9 +98,11 @@ begin
     dip_switch   => dip_switch,
     btn_coin     => S_joy_coin,
     btn_player_start => S_joy_player,
+    btn_up       => S_joy_up,
+    btn_down     => S_joy_down,
     btn_left     => S_joy_left,
     btn_right    => S_joy_right,
-    btn_barrier  => S_joy_barrier,
+    btn_barrier  => S_joy_bomb,
     btn_fire     => S_joy_fire,
     vga_r        => S_vga_r,
     vga_g        => S_vga_g,
