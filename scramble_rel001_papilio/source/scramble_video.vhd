@@ -375,16 +375,14 @@ begin
     end if;
   end process;
 
-  u_object_ram : entity work.SCRAMBLE_RAM--_debug
+  u_object_ram : entity work.SCRAMBLE_RAM
     port map (
       I_ADDR(10 downto 8) => "000",
       I_ADDR( 7 downto 0) => obj_addr,
       I_DATA              => I_CPU_DATA,
       O_DATA              => hpla,
       I_RW_L              => I_OBJRAMWR_L,
-      --I_CS                => ENA, -- cs only affects write
-      --ENA                 => '1', -- note no clock enable, we need a fast read
-      I_CS                => '1', -- cs only affects write
+      I_CS                => '1',
       ENA                 => ENA,
       CLK                 => CLK
       );
@@ -634,7 +632,7 @@ begin
     end if;
   end process;
 
--- Generic (LUT) Version
+  -- Generic (LUT) Version
   col_rom : entity work.ROM_LUT
     port map(
       CLK         => CLK,
@@ -642,15 +640,6 @@ begin
       ADDR        => obj_video_out_reg(4 downto 0),
       DATA        => obj_lut_out
       );
-
--- BRAM Version
---   col_rom : entity work.ROM_LUT
---    port map(
---		CLK => CLK, 
---		ENA => '1',
---      ADDR        => obj_video_out_reg(4 downto 0),
---      DATA        => obj_lut_out
---      );
 
   p_col_rom_ce : process
     variable video : array_3x5;
