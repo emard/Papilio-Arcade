@@ -393,7 +393,7 @@ G_vga: if C_vga generate
   generic map -- workaround for wrong video size
   (
     C_digits => 16, -- 16 digits for joystick, (add +8 digits to show the bus status)
-    C_resolution_x => 482 - 2 -- 482 reported by monitor, 2 is correction for audio_hdmi
+    C_resolution_x => 512 -- 514 reported by monitor with HDMI muted, 2 is correction for audio_hdmi
   )
   port map
   (

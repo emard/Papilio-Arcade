@@ -104,7 +104,8 @@ architecture RTL of SCRAMBLE is
     signal comp_sync_l      : std_logic;
     signal vblank           : std_logic;
     signal hblank           : std_logic;
-    signal hblank2          : std_logic; -- hblank for x2 HDMI output
+    signal R_vblank         : std_logic; -- vblank for HDMI output
+    signal R_blank          : std_logic; -- blank for HDMI blank
     --
     -- cpu
     signal cpu_ena          : std_logic;
@@ -216,14 +217,6 @@ begin
         hblank <= '0';
       end if;
 
-      -- hblank2 for O_BLANK
-      -- O_BLANK is connected directly to HDMI encoder
-      -- Adjust to H-center the HDMI picture
-      if (hcnt = conv_std_logic_vector(229,9)) then
-        hblank2 <= '1';
-      elsif (hcnt = conv_std_logic_vector(349,9)) then
-        hblank2 <= '0';
-      end if;
 
       if do_hsync then
         hsync <= '1';
@@ -238,8 +231,27 @@ begin
           vblank <= '0';
         end if;
       end if;
+
+      -- *** O_BLANK for HDMI ***
+      -- different timing than VGA and CPU blank
+      -- O_BLANK is connected directly to HDMI encoder
+      -- must match with dblscan output
+      -- can adjust H-center of the HDMI picture
+      if vcnt = conv_std_logic_vector(495,9) then
+        R_vblank <= '1';
+      elsif vcnt = conv_std_logic_vector(271,9) then
+        R_vblank <= '0';
+      end if;
+      if hcnt = conv_std_logic_vector(221,9) then
+        if R_vblank = '0' then
+          R_blank <= '0';
+        end if;
+      elsif hcnt = conv_std_logic_vector(349,9) then
+        R_blank <= '1';
+      end if;
     end if;
   end process;
+  O_BLANK <= R_blank;
 
   p_timing_decode : process(hsync, vsync)
   begin
@@ -253,7 +265,6 @@ begin
     if (ENA = '1') then
       O_HSYNC     <= HSYNC;
       O_VSYNC     <= VSYNC;
-      O_BLANK     <= VBLANK or not HBLANK2;
     end if;
   end process;
 
