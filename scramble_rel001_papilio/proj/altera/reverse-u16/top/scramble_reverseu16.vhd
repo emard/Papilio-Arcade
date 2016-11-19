@@ -142,7 +142,7 @@ begin
     C_test_picture => false,
     C_autofire => true,
     C_audio => true,
-    C_osd => true,
+    C_osd => false, -- debug joystick controls (green HEX on-screen display)
     C_vga => true
   )
   port map
