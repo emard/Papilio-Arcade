@@ -17,7 +17,7 @@ port
   reset: out std_logic;
   coin: out std_logic;
   player: out std_logic_vector(1 downto 0);
-  up, down, left, right, barrier, fire: out std_logic
+  up, down, left, right, bomb, fire: out std_logic
 );
 end;
 
@@ -29,7 +29,7 @@ architecture struct of joystick is
   signal R_joy_coin: std_logic;
   signal R_joy_player: std_logic_vector(1 downto 0);
   signal S_joy_up, S_joy_down, S_joy_left, S_joy_right: std_logic;
-  signal R_joy_up, R_joy_down, R_joy_left, R_joy_right, R_joy_barrier, R_joy_fire: std_logic;
+  signal R_joy_up, R_joy_down, R_joy_left, R_joy_right, R_joy_bomb, R_joy_fire: std_logic;
   signal R_reset: std_logic;
 begin
   -- either HAT left/right or left/right paddle X
@@ -59,8 +59,8 @@ begin
       R_joy_down <= S_joy_down;
       R_joy_left  <= S_joy_left;
       R_joy_right <= S_joy_right;
-      -- barrier: any A,B,X,Y button
-      R_joy_barrier <= hid_report(13*4+2) or hid_report(13*4+3) or hid_report(14*4+0) or hid_report(14*4+1);
+      -- bomb: any A,B,X,Y button
+      R_joy_bomb <= hid_report(13*4+2) or hid_report(13*4+3) or hid_report(14*4+0) or hid_report(14*4+1);
       -- fire: left or right trigger
       R_joy_fire <= hid_report(15*4+0) or hid_report(15*4+1);
       -- reset CPU
@@ -74,7 +74,7 @@ begin
   down <= R_joy_down;
   left <= R_joy_left;
   right <= R_joy_right;
-  barrier <= R_joy_barrier;
+  bomb <= R_joy_bomb;
   fire <= R_joy_fire;
   reset <= R_reset;
 end struct;

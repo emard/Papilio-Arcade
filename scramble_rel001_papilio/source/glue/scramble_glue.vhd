@@ -30,7 +30,7 @@ port
  -- game controls, normal logic '1':pressed, '0':released
  btn_coin: in std_logic;
  btn_player_start: in std_logic_vector(1 downto 0);
- btn_up, btn_down, btn_left, btn_right, btn_barrier, btn_fire: in std_logic;
+ btn_up, btn_down, btn_left, btn_right, btn_bomb, btn_fire: in std_logic;
 
  vga_r, vga_g, vga_b: out std_logic_vector(3 downto 0);
  vga_hsync, vga_vsync, vga_blank, vga_vblank: out std_logic;
@@ -277,7 +277,7 @@ G_vga: if C_vga generate
   button_debounced(4) <= not btn_down; -- Joystick Down
   button_debounced(5) <= not btn_left; -- Joystick Left
   button_debounced(6) <= not btn_right; -- Joystick Left
-  button_debounced(7) <= not btn_barrier; -- Joystick Fire left (bombs)
+  button_debounced(7) <= not btn_bomb; -- Joystick Fire left (bombs)
   button_debounced(8) <= not btn_fire; -- Joystick Fire right (shells)
 
   -- assign inputs

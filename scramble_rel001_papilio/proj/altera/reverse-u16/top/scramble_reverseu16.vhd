@@ -41,8 +41,9 @@ architecture struct of scramble_reverseu16 is
   signal hid_report: std_logic_vector(71 downto 0);
   signal S_joy_coin: std_logic;
   signal S_joy_player: std_logic_vector(1 downto 0);
-  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right, S_joy_barrier, S_joy_fire: std_logic;
+  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right, S_joy_bomb, S_joy_fire: std_logic;
   signal S_joy_reset: std_logic;
+  signal S_auto_bomb, S_auto_fire: std_logic;
 
   signal S_audio: std_logic_vector(11 downto 0);
   signal S_audio_enable: std_logic;
@@ -117,8 +118,22 @@ begin
     down => S_joy_down,
     left => S_joy_left,
     right => S_joy_right,
-    barrier => S_joy_barrier,
+    bomb => S_joy_bomb,
     fire => S_joy_fire
+  );
+  
+  I_autofire : entity work.autofire
+  generic map
+  (
+    C_autofire => true
+  )
+  port map
+  (
+    clk => clk_pixel,
+    btn_fire => S_joy_fire,
+    auto_fire => S_auto_fire,
+    btn_bomb => S_joy_bomb,
+    auto_bomb => S_auto_bomb
   );
 
   scramble : entity work.scramble_glue
@@ -142,8 +157,8 @@ begin
     btn_down     => S_joy_down,
     btn_left     => S_joy_left,
     btn_right    => S_joy_right,
-    btn_barrier  => S_joy_barrier,
-    btn_fire     => S_joy_fire,
+    btn_bomb     => S_auto_bomb,
+    btn_fire     => S_auto_fire,
     vga_r        => S_vga_r,
     vga_g        => S_vga_g,
     vga_b        => S_vga_b,

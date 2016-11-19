@@ -72,6 +72,7 @@ joystick/joystick_saitek_cyborg_rumble.vhd \
 ../../../source/vnc2hid/vnc2hid.vhd \
 ../../../source/osd/osd.vhd \
 ../../../source/osd/char_rom.vhd \
+../../../source/autofire/autofire.vhd \
 ../../../roms/stern_scramble/rom_pgm.vhd \
 ../../../roms/stern_scramble/rom_obj_0.vhd \
 ../../../roms/stern_scramble/rom_obj_1.vhd \

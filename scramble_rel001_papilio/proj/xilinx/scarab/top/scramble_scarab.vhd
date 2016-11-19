@@ -102,7 +102,7 @@ begin
     btn_down     => S_joy_down,
     btn_left     => S_joy_left,
     btn_right    => S_joy_right,
-    btn_barrier  => S_joy_bomb,
+    btn_bomb     => S_joy_bomb,
     btn_fire     => S_joy_fire,
     vga_r        => S_vga_r,
     vga_g        => S_vga_g,
