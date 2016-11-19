@@ -104,6 +104,7 @@ architecture RTL of SCRAMBLE is
     signal comp_sync_l      : std_logic;
     signal vblank           : std_logic;
     signal hblank           : std_logic;
+    signal hblank2          : std_logic; -- hblank for x2 HDMI output
     --
     -- cpu
     signal cpu_ena          : std_logic;
@@ -215,6 +216,15 @@ begin
         hblank <= '0';
       end if;
 
+      -- hblank2 for O_BLANK
+      -- O_BLANK is connected directly to HDMI encoder
+      -- Adjust to H-center the HDMI picture
+      if (hcnt = conv_std_logic_vector(229,9)) then
+        hblank2 <= '1';
+      elsif (hcnt = conv_std_logic_vector(349,9)) then
+        hblank2 <= '0';
+      end if;
+
       if do_hsync then
         hsync <= '1';
       elsif (hcnt = conv_std_logic_vector(207,9)) then -- 0CF
@@ -243,7 +253,7 @@ begin
     if (ENA = '1') then
       O_HSYNC     <= HSYNC;
       O_VSYNC     <= VSYNC;
-      O_BLANK     <= VBLANK or not HBLANK;
+      O_BLANK     <= VBLANK or not HBLANK2;
     end if;
   end process;
 
