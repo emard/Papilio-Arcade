@@ -179,7 +179,7 @@ begin
     if (ENA = '1') then
       hcarry := (hcnt = "111111111");
       if hcarry then
-        hcnt <= "010000000"; -- 080
+        hcnt <= conv_std_logic_vector(128,9); -- 080
       else
         hcnt <= hcnt +"1";
       end if;
@@ -187,7 +187,7 @@ begin
       vcarry := (vcnt = "111111111");
       if do_hsync then
         if vcarry then
-          vcnt <= "011111000"; -- 0F8
+          vcnt <= conv_std_logic_vector(248,9); -- 0F8
         else
           vcnt <= vcnt +"1";
         end if;
@@ -199,8 +199,8 @@ begin
   p_sync_comb : process(hcnt, vcnt)
   begin
     vsync <= not vcnt(8);
-    do_hsync <= (hcnt = "010101111"); -- 0AF
-    set_vblank <= (vcnt = "111101111"); -- 1EF
+    do_hsync <= (hcnt = conv_std_logic_vector(175,9)); -- 0AF
+    set_vblank <= (vcnt = conv_std_logic_vector(495,9)); -- 1EF
   end process;
 
   p_sync : process
@@ -209,22 +209,22 @@ begin
     -- Timing hardware is coded differently to the real hw
     -- to avoid the use of multiple clocks. Result is identical.
     if (ENA = '1') then
-      if (hcnt = "010000001") then -- 081
+      if (hcnt = conv_std_logic_vector(129,9)) then -- 081
         hblank <= '1';
-      elsif (hcnt = "011111001") then -- 0f9
+      elsif (hcnt = conv_std_logic_vector(249,9)) then -- 0f9
         hblank <= '0';
       end if;
 
       if do_hsync then
         hsync <= '1';
-      elsif (hcnt = "011001111") then -- 0CF
+      elsif (hcnt = conv_std_logic_vector(207,9)) then -- 0CF
         hsync <= '0';
       end if;
 
       if do_hsync then
         if set_vblank then -- 1EF
           vblank <= '1';
-        elsif (vcnt = "100001111") then -- 10F
+        elsif (vcnt = conv_std_logic_vector(271,9)) then -- 10F
           vblank <= '0';
         end if;
       end if;
