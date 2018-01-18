@@ -12,6 +12,7 @@ entity scramble_glue is
 generic
 (
   C_test_picture: boolean := false;
+  C_frogger: boolean := false;
   -- reduce ROMs: 14 is normal game, 13 will draw initial screen, 12 will repeatedly blink 1 line of garbage
   C_autofire: boolean := false;
   C_audio: boolean := true;
@@ -62,7 +63,7 @@ architecture struct of scramble_glue is
  -- signals for the game itself
   -- this MUST be set true for frogger
   -- this MUST be set false for scramble, the_end, amidar
-  constant I_HWSEL_FROGGER  : boolean := false;
+  constant I_HWSEL_FROGGER: boolean := C_frogger;
 
   signal clk              : std_logic;
   signal ena_12           : std_logic;

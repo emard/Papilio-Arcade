@@ -140,6 +140,7 @@ begin
   scramble : entity work.scramble_glue
   generic map
   (
+    C_frogger => false,
     C_test_picture => false,
     C_autofire => true,
     C_audio => true,
