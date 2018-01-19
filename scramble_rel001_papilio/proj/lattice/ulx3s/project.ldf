@@ -108,6 +108,9 @@
         <Source name="../../../source/autofire/autofire.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
+        <Source name="../../../source/spdif/spdif_tx.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
         <Source name="../../../roms/stern_scramble/rom_pgm.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>

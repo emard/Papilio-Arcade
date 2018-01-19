@@ -270,6 +270,7 @@ G_vga: if C_vga generate
     );
   O_AUDIO_L <= audio_pwm;
   O_AUDIO_R <= audio_pwm;
+  audio_pcm(11 downto 2) <= audio;
 
   button_debounced(0) <= not btn_coin; -- insert coin
   button_debounced(1) <= not btn_player_start(0); -- Start 1 player

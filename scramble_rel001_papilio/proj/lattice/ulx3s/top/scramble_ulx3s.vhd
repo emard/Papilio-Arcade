@@ -71,9 +71,9 @@ architecture struct of scramble_ulx3s is
   
   signal S_osd_hex: std_logic_vector(63 downto 0);
 
-  signal S_audio: std_logic_vector(11 downto 0);
   signal S_audio_enable: std_logic;
-  signal S_audio_pcm: std_logic_vector(15 downto 0) := (others => '0');
+  signal S_audio_pcm: std_logic_vector(23 downto 0) := (others => '0');
+  signal S_audio_pwm_l, S_audio_pwm_r, S_spdif_out: std_logic;
   
   signal dvid_red, dvid_green, dvid_blue, dvid_clock: std_logic_vector(1 downto 0);
   signal S_hdmi_pd0, S_hdmi_pd1, S_hdmi_pd2: std_logic_vector(9 downto 0);
@@ -167,8 +167,28 @@ begin
     vga_hsync    => S_vga_hsync,
     vga_vsync    => S_vga_vsync,
     vga_blank    => S_vga_blank,
-    audio_pcm    => S_audio
+    o_audio_l    => S_audio_pwm_l,
+    o_audio_r    => S_audio_pwm_r,
+    audio_pcm    => S_audio_pcm(23 downto 12)
   );
+
+  G_spdif_out: entity work.spdif_tx
+  generic map
+  (
+    C_clk_freq => 25000000,  -- Hz
+    C_sample_freq => 48000   -- Hz
+  )
+  port map
+  (
+    clk => clk_pixel,
+    data_in => S_audio_pcm,
+    spdif_out => S_spdif_out
+  );
+  --audio_l(1 downto 0) <= (others => S_audio_pwm_l);
+  --audio_r(1 downto 0) <= (others => S_audio_pwm_r);
+  audio_l(3 downto 0) <= S_audio_pcm(23 downto 20);
+  audio_r(3 downto 0) <= S_audio_pcm(23 downto 20);
+  audio_v(1 downto 0) <= (others => S_spdif_out);
 
   G_hdmi_video_only: if not C_hdmi_audio generate
   vga2dvi_converter: entity work.vga2dvid
@@ -228,7 +248,6 @@ begin
     S_vga_g8 <= S_vga_g & S_vga_g(0) & S_vga_g(0) & S_vga_g(0) & S_vga_g(0);
     S_vga_b8 <= S_vga_b & S_vga_b(0) & S_vga_b(0) & S_vga_b(0) & S_vga_b(0);
     
-    S_audio_pcm <= S_audio & "0000";
 
     av_hdmi_out: entity work.av_hdmi
     generic map
