@@ -189,7 +189,7 @@ begin
       vcarry := (vcnt = "111111111");
       if do_hsync then
         if vcarry then
-          vcnt <= conv_std_logic_vector(248,9); -- 0F8
+          vcnt <= conv_std_logic_vector(242,9); -- 242 to get 60Hz refresh, was 248
         else
           vcnt <= vcnt +"1";
         end if;
