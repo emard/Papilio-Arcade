@@ -14,9 +14,14 @@ use ieee.numeric_std.all;
 library ecp5u;
 use ecp5u.components.all;
 
+-- package for usb joystick report decoded structure
+use work.report_decoded_pack.all;
+
 entity scramble_ulx3s is
 generic
 (
+  C_usbhid_joystick: boolean := true;
+  C_onboard_buttons: boolean := false;
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
 );
@@ -45,6 +50,8 @@ port
 
   -- Audio jack 3.5mm
   audio_l, audio_r, audio_v: inout std_logic_vector(3 downto 0) := (others => 'Z');
+  
+  usb_fpga_dp, usb_fpga_dn: inout std_logic;
 
   -- for vendor-specific serializer
   --hdmi_d0, hdmi_d1, hdmi_d2: out std_logic;
@@ -61,7 +68,7 @@ port
 end;
 
 architecture struct of scramble_ulx3s is
-  signal clk_pixel, clk_pixel_shift, clkn_pixel_shift: std_logic;
+  signal clk_pixel, clk_pixel_shift, clkn_pixel_shift, clk_usb: std_logic;
 
   signal S_joy_coin: std_logic;
   signal S_joy_player: std_logic_vector(1 downto 0);
@@ -88,19 +95,25 @@ architecture struct of scramble_ulx3s is
   signal S_vga_vsync, S_vga_hsync: std_logic;
   signal S_vga_vblank, S_vga_blank: std_logic;
 
+  -- emard usb hid joystick
+  signal S_hid_reset: std_logic;
+  signal S_hid_report: std_logic_vector(63 downto 0);
+  signal S_report_decoded: T_report_decoded;
+  -- end emard usb hid joystick
+
   signal reset        : std_logic;
   signal clock_stable : std_logic := '1';
   signal dip_switch   : std_logic_vector(7 downto 0) := (others => '0');
 begin
   G_ddr: if true generate
-    clkgen_125_25: entity work.clk_25_100_125_25
+    clkgen_125_25_7M5: entity work.clk_25M_125Mpn_25M_7M5
     port map
     (
       clki => clk_25MHz,         --  25 MHz input from board
       clkop => clk_pixel_shift,  -- 125 MHz
       clkos => clkn_pixel_shift, -- 125 MHz inverted
       clkos2 => clk_pixel,       --  25 MHz
-      clkos3 => open             -- 100 MHz
+      clkos3 => clk_usb          --   7.5 MHz
     );
   end generate;
 
@@ -108,20 +121,63 @@ begin
 
   wifi_gpio0 <= btn(0); -- pressing BTN0 will escape to ESP32 file select menu
 
-  S_joy_reset <= '0';
-  S_audio_enable <= '0';
+  G_hid_joystick: if C_usbhid_joystick generate
+  usbhid_host_inst: entity usbhid_host
+  port map
+  (
+    clk => clk_usb, -- 7.5 MHz for low-speed USB1.0 device or 60 MHz for full-speed USB1.1 device
+    reset => S_hid_reset,
+    usb_data(1) => usb_fpga_dp,
+    usb_data(0) => usb_fpga_dn,
+    hid_report => S_hid_report,
+    leds => open -- debug
+  );
+
+  usbhid_report_decoder_inst: entity usbhid_report_decoder
+  port map
+  (
+    clk => clk_usb,
+    hid_report => S_hid_report,
+    decoded => S_report_decoded
+  );
   
-  S_joy_coin <= btn(1);
-  S_joy_player <= btn(6 downto 5);
-  
-  S_joy_bomb <= btn(1);
-  S_joy_fire <= btn(2);
-  S_joy_up <= btn(3);
-  S_joy_down <= btn(4);
-  S_joy_left <= btn(5);
-  S_joy_right <= btn(6);
-  
-  S_osd_hex(6 downto 0) <= btn;
+  process(clk_pixel)
+  begin
+    if rising_edge(clk_pixel) then
+      S_joy_coin            <= S_report_decoded.btn_fps;       -- fps button: insert coin
+      S_joy_player(0)       <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
+      S_joy_player(1)       <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
+      S_joy_up              <= S_report_decoded.lstick_up;     -- left stick move up
+      S_joy_down            <= S_report_decoded.lstick_down;   -- left stick move down
+      S_joy_left            <= S_report_decoded.lstick_left;   -- left stick move left
+      S_joy_right           <= S_report_decoded.lstick_right;  -- left stick move right
+      S_joy_fire            <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
+      S_joy_bomb            <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
+    end if;
+  end process;
+  end generate;
+
+  G_onboard_buttons: if C_onboard_buttons generate
+    process(clk_pixel)
+    begin
+      if rising_edge(clk_pixel) then
+        S_joy_reset <= '0';
+        S_audio_enable <= '0';
+
+        S_joy_coin <= btn(1);
+        S_joy_player <= btn(6 downto 5);
+
+        S_joy_bomb <= btn(1);
+        S_joy_fire <= btn(2);
+        S_joy_up <= btn(3);
+        S_joy_down <= btn(4);
+        S_joy_left <= btn(5);
+        S_joy_right <= btn(6);
+
+        S_osd_hex(6 downto 0) <= btn;
+      end if;
+    end process;
+  end generate;
   
   I_autofire : entity work.autofire
   generic map
