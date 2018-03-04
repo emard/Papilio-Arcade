@@ -157,10 +157,10 @@ begin
       R_usb_joy_coin      <= S_report_decoded.btn_fps;       -- fps button: insert coin
       R_usb_joy_player(0) <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
       R_usb_joy_player(1) <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
-      R_usb_joy_up        <= S_report_decoded.lstick_up;     -- left stick move up
-      R_usb_joy_down      <= S_report_decoded.lstick_down;   -- left stick move down
-      R_usb_joy_left      <= S_report_decoded.lstick_left;   -- left stick move left
-      R_usb_joy_right     <= S_report_decoded.lstick_right;  -- left stick move right
+      R_usb_joy_up        <= S_report_decoded.lstick_up    or S_report_decoded.hat_up;     -- left stick move up
+      R_usb_joy_down      <= S_report_decoded.lstick_down  or S_report_decoded.hat_down;   -- left stick move down
+      R_usb_joy_left      <= S_report_decoded.lstick_left  or S_report_decoded.hat_left;   -- left stick move left
+      R_usb_joy_right     <= S_report_decoded.lstick_right or S_report_decoded.hat_right;  -- left stick move right
       R_usb_joy_fire      <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
       R_usb_joy_bomb      <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
     end if;
