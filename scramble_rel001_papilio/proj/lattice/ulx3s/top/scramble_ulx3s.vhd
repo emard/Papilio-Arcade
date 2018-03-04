@@ -173,7 +173,7 @@ begin
       if rising_edge(clk_pixel) then
         R_board_joy_reset <= '0';
 
-        R_board_joy_coin <= btn(0);
+        R_board_joy_coin <= not btn(0);
         R_board_joy_player <= btn(2 downto 1);
 
         R_board_joy_bomb <= btn(1);
