@@ -21,7 +21,7 @@ entity scramble_ulx3s is
 generic
 (
   C_usbhid_joystick: boolean := true;
-  C_onboard_buttons: boolean := false;
+  C_onboard_buttons: boolean := true;
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
 );
@@ -70,15 +70,25 @@ end;
 architecture struct of scramble_ulx3s is
   signal clk_pixel, clk_pixel_shift, clkn_pixel_shift, clk_usb: std_logic;
 
-  signal S_joy_coin: std_logic;
-  signal S_joy_player: std_logic_vector(1 downto 0);
-  signal S_joy_up, S_joy_down, S_joy_left, S_joy_right, S_joy_bomb, S_joy_fire: std_logic;
-  signal S_joy_reset: std_logic;
+  signal R_usb_joy_coin: std_logic;
+  signal R_usb_joy_player: std_logic_vector(1 downto 0);
+  signal R_usb_joy_up, R_usb_joy_down, R_usb_joy_left, R_usb_joy_right, R_usb_joy_bomb, R_usb_joy_fire: std_logic;
+  signal R_usb_joy_reset: std_logic;
+
+  signal R_board_joy_coin: std_logic;
+  signal R_board_joy_player: std_logic_vector(1 downto 0);
+  signal R_board_joy_up, R_board_joy_down, R_board_joy_left, R_board_joy_right, R_board_joy_bomb, R_board_joy_fire: std_logic;
+  signal R_board_joy_reset: std_logic;
+
+  signal R_joy_coin: std_logic;
+  signal R_joy_player: std_logic_vector(1 downto 0);
+  signal R_joy_up, R_joy_down, R_joy_left, R_joy_right, R_joy_bomb, R_joy_fire: std_logic;
+  signal R_joy_reset: std_logic;
   signal S_auto_bomb, S_auto_fire: std_logic;
   
   signal S_osd_hex: std_logic_vector(63 downto 0);
 
-  signal S_audio_enable: std_logic;
+  signal S_audio_enable: std_logic := '0';
   signal S_audio_pcm: std_logic_vector(23 downto 0) := (others => '0');
   signal S_audio_pwm_l, S_audio_pwm_r, S_spdif_out: std_logic;
   
@@ -117,7 +127,7 @@ begin
     );
   end generate;
 
-  reset <= S_joy_reset or not clock_stable;
+  reset <= R_joy_reset or not clock_stable;
 
   wifi_gpio0 <= btn(0); -- pressing BTN0 will escape to ESP32 file select menu
 
@@ -144,15 +154,15 @@ begin
   process(clk_pixel)
   begin
     if rising_edge(clk_pixel) then
-      S_joy_coin            <= S_report_decoded.btn_fps;       -- fps button: insert coin
-      S_joy_player(0)       <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
-      S_joy_player(1)       <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
-      S_joy_up              <= S_report_decoded.lstick_up;     -- left stick move up
-      S_joy_down            <= S_report_decoded.lstick_down;   -- left stick move down
-      S_joy_left            <= S_report_decoded.lstick_left;   -- left stick move left
-      S_joy_right           <= S_report_decoded.lstick_right;  -- left stick move right
-      S_joy_fire            <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
-      S_joy_bomb            <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
+      R_usb_joy_coin      <= S_report_decoded.btn_fps;       -- fps button: insert coin
+      R_usb_joy_player(0) <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
+      R_usb_joy_player(1) <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
+      R_usb_joy_up        <= S_report_decoded.lstick_up;     -- left stick move up
+      R_usb_joy_down      <= S_report_decoded.lstick_down;   -- left stick move down
+      R_usb_joy_left      <= S_report_decoded.lstick_left;   -- left stick move left
+      R_usb_joy_right     <= S_report_decoded.lstick_right;  -- left stick move right
+      R_usb_joy_fire      <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
+      R_usb_joy_bomb      <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
     end if;
   end process;
   end generate;
@@ -161,24 +171,38 @@ begin
     process(clk_pixel)
     begin
       if rising_edge(clk_pixel) then
-        S_joy_reset <= '0';
-        S_audio_enable <= '0';
+        R_board_joy_reset <= '0';
 
-        S_joy_coin <= btn(1);
-        S_joy_player <= btn(6 downto 5);
+        R_board_joy_coin <= btn(0);
+        R_board_joy_player <= btn(2 downto 1);
 
-        S_joy_bomb <= btn(1);
-        S_joy_fire <= btn(2);
-        S_joy_up <= btn(3);
-        S_joy_down <= btn(4);
-        S_joy_left <= btn(5);
-        S_joy_right <= btn(6);
+        R_board_joy_bomb <= btn(1);
+        R_board_joy_fire <= btn(2);
+        R_board_joy_up <= btn(3);
+        R_board_joy_down <= btn(4);
+        R_board_joy_left <= btn(5);
+        R_board_joy_right <= btn(6);
 
         S_osd_hex(6 downto 0) <= btn;
       end if;
     end process;
   end generate;
-  
+
+  -- mix usb and onboard buttons
+  process(clk_pixel)
+  begin
+    if rising_edge(clk_pixel) then
+      R_joy_coin      <= R_usb_joy_coin    or R_board_joy_coin;
+      R_joy_player    <= R_usb_joy_player  or R_board_joy_player;
+      R_joy_up        <= R_usb_joy_up      or R_board_joy_up;
+      R_joy_down      <= R_usb_joy_down    or R_board_joy_down;
+      R_joy_left      <= R_usb_joy_left    or R_board_joy_left;
+      R_joy_right     <= R_usb_joy_right   or R_board_joy_right;
+      R_joy_fire      <= R_usb_joy_fire    or R_board_joy_fire;
+      R_joy_bomb      <= R_usb_joy_bomb    or R_board_joy_bomb;
+    end if;
+  end process;
+
   I_autofire : entity work.autofire
   generic map
   (
@@ -187,9 +211,9 @@ begin
   port map
   (
     clk => clk_pixel,
-    btn_fire => S_joy_fire,
+    btn_fire => R_joy_fire,
     auto_fire => S_auto_fire,
-    btn_bomb => S_joy_bomb,
+    btn_bomb => R_joy_bomb,
     auto_bomb => S_auto_bomb
   );
 
@@ -209,12 +233,12 @@ begin
     reset        => reset,
     osd_hex      => S_osd_hex,
     dip_switch   => dip_switch,
-    btn_coin     => S_joy_coin,
-    btn_player_start => S_joy_player,
-    btn_up       => S_joy_up,
-    btn_down     => S_joy_down,
-    btn_left     => S_joy_left,
-    btn_right    => S_joy_right,
+    btn_coin     => R_joy_coin,
+    btn_player_start => R_joy_player,
+    btn_up       => R_joy_up,
+    btn_down     => R_joy_down,
+    btn_left     => R_joy_left,
+    btn_right    => R_joy_right,
     btn_bomb     => S_auto_bomb,
     btn_fire     => S_auto_fire,
     vga_r        => S_vga_r,
