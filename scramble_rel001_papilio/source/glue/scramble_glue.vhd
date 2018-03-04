@@ -85,13 +85,14 @@ architecture struct of scramble_glue is
   signal video_b          : std_logic_vector(3 downto 0);
   signal hsync            : std_logic;
   signal vsync            : std_logic;
-  signal blank            : std_logic;
+  --signal blank            : std_logic;
   -- scan doubler signals
   signal video_r_x2       : std_logic_vector(3 downto 0);
   signal video_g_x2       : std_logic_vector(3 downto 0);
   signal video_b_x2       : std_logic_vector(3 downto 0);
   signal hsync_x2         : std_logic;
   signal vsync_x2         : std_logic;
+  signal blank_x2         : std_logic;
   -- registered video output signals
   signal R_video_r        : std_logic_vector(3 downto 0);
   signal R_video_g        : std_logic_vector(3 downto 0);
@@ -164,7 +165,7 @@ G_vga: if C_vga generate
       O_VIDEO_B             => video_b,
       O_HSYNC               => hsync,
       O_VSYNC               => vsync,
-      O_BLANK               => blank,
+      -- O_BLANK               => blank,
       --
       -- to audio board
       --
@@ -199,12 +200,13 @@ G_vga: if C_vga generate
       I_B          => video_b,
       I_HSYNC      => hsync,
       I_VSYNC      => vsync,
-      --
+
       O_R          => video_r_x2,
       O_G          => video_g_x2,
       O_B          => video_b_x2,
       O_HSYNC      => hsync_x2,
       O_VSYNC      => vsync_x2,
+      O_BLANK      => blank_x2,
       --
       ENA_X2       => ena_12,
       ENA          => ena_6,
@@ -219,7 +221,7 @@ G_vga: if C_vga generate
       R_VIDEO_B(3 downto 0) <= video_b_x2;
       R_HSYNC   <= hsync_x2;
       R_VSYNC   <= vsync_x2;
-      R_BLANK   <= blank; -- may need fixing
+      R_BLANK   <= blank_x2; -- may need fixing
   end process;
   --
   --
@@ -401,7 +403,7 @@ G_vga: if C_vga generate
   (
     clk_pixel => clk_pixel,
     vsync => vsync_x2,
-    fetch_next => not blank, -- S_vga_fetch_next,
+    fetch_next => not blank_x2, -- S_vga_fetch_next,
     probe_in(63 downto 0) => osd_hex(63 downto 0),
     --probe_in(63+32 downto 33) => (others => '0'),
     --probe_in(32) => cpu_wram,

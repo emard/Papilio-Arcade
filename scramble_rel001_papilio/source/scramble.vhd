@@ -59,7 +59,7 @@ entity SCRAMBLE is
     O_VIDEO_B             : out   std_logic_vector(3 downto 0);
     O_HSYNC               : out   std_logic;
     O_VSYNC               : out   std_logic;
-    O_BLANK               : out   std_logic;
+    -- O_BLANK               : out   std_logic;
     -- debug CPU bus
     O_CPU_ADDR            : out   std_logic_vector(15 downto 0);
     O_CPU_DATA_IN         : out   std_logic_vector(7 downto 0); -- CPU reads
@@ -189,7 +189,7 @@ begin
       vcarry := (vcnt = "111111111");
       if do_hsync then
         if vcarry then
-          vcnt <= conv_std_logic_vector(242,9); -- 242 to get 60Hz refresh, was 248
+          vcnt <= conv_std_logic_vector(242,9); -- 242 to get 60.1Hz refresh, was 248
         else
           vcnt <= vcnt +"1";
         end if;
@@ -233,25 +233,26 @@ begin
       end if;
 
       -- *** O_BLANK for HDMI ***
+      -- this code disabled and moved to dblscan
       -- different timing than VGA and CPU blank
       -- O_BLANK is connected directly to HDMI encoder
       -- must match with dblscan output
       -- can adjust H-center of the HDMI picture
-      if vcnt = conv_std_logic_vector(495,9) then
-        R_vblank <= '1';
-      elsif vcnt = conv_std_logic_vector(271,9) then
-        R_vblank <= '0';
-      end if;
-      if hcnt = conv_std_logic_vector(221,9) then
-        if R_vblank = '0' then
-          R_blank <= '0';
-        end if;
-      elsif hcnt = conv_std_logic_vector(349,9) then
-        R_blank <= '1';
-      end if;
+      --if vcnt = conv_std_logic_vector(495,9) then
+      --  R_vblank <= '1';
+      --elsif vcnt = conv_std_logic_vector(271,9) then
+      --  R_vblank <= '0';
+      --end if;
+      --if hcnt = conv_std_logic_vector(221,9) then
+      --  if R_vblank = '0' then
+      --    R_blank <= '0';
+      --  end if;
+      --elsif hcnt = conv_std_logic_vector(349,9) then
+      --  R_blank <= '1';
+      --end if;
     end if;
   end process;
-  O_BLANK <= R_blank;
+  --O_BLANK <= R_blank;
 
   p_timing_decode : process(hsync, vsync)
   begin
