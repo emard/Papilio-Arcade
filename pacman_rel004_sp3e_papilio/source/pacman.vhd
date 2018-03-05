@@ -221,6 +221,7 @@ begin
       O_RESET    => open
   );
   clk <= osc_in;
+  clk_ref <= osc_in;
   --
   -- video timing
   --
@@ -642,7 +643,7 @@ begin
     port map (
       CLK         => clk,
       ENA         => ena_6,
-      ADDR        => cpu_addr(13 downto 0),
+      ADDR        => cpu_addr(13 downto 0), -- cpu_addr(15) & cpu_addr(13 downto 0)
       DATA        => program_rom_dinl
       );
 
@@ -670,13 +671,13 @@ begin
       CLK           => clk
       );
 
-  u_scan_doubler : entity work.SCRAMBLE_DBLSCAN
+  u_scan_doubler : entity work.scramble_dblscan
     generic map
     (
-      xsize => 280,
-      ysize => 226,
-      xcenter => 81,
-      ycenter => 22
+      xsize => 292, -- 288
+      ysize => 228, -- 224
+      xcenter => 72,
+      ycenter => 23
     )
     port map
     (
