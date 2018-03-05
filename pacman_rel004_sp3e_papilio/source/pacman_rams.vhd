@@ -72,7 +72,7 @@ architecture RTL of PACMAN_RAMS is
 begin
 	-- combined rams, simplified decoding logic
   ram_addr <= I_AB(11 downto 0);
-  we_ram <= (not I_R_W_L and not I_VRAM_L) and ENA_6;
+  we_ram <= (not I_R_W_L and not I_VRAM_L); -- and ENA_6;
   o_data <= dout_ram;
 
 	-- combined vram, cram and wram

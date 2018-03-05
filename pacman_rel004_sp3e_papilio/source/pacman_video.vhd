@@ -109,6 +109,7 @@ architecture RTL of PACMAN_VIDEO is
   signal sprite_ram_addr    : std_logic_vector(11 downto 0);
   signal sprite_ram_addr_t1 : std_logic_vector(11 downto 0);
   signal vout_obj_on_t1     : std_logic;
+  signal vout_obj_on_t1_ena_6     : std_logic;
   signal col_rom_addr       : std_logic_vector(7 downto 0);
 
   signal lut_4a             : std_logic_vector(7 downto 0);
@@ -127,7 +128,7 @@ architecture RTL of PACMAN_VIDEO is
 
 begin
 
-  -- sprite_xy_ram_wen <= not I_WR2_L;
+  sprite_xy_ram_wen <= not I_WR2_L;
 
   p_sprite_ram_comb : process(I_HBLANK, I_HCNT, I_WR2_L, sprite_xy_ram_temp)
   begin
@@ -135,11 +136,11 @@ begin
     -- 2H is low (for cpu writes)
     -- we can simplify this
 
-    if (I_WR2_L = '0') and (ENA_6 = '1') then
-      sprite_xy_ram_wen <= '1';
-    else
-      sprite_xy_ram_wen <= '0';
-    end if;
+    --if (I_WR2_L = '0') and (ENA_6 = '1') then
+    --  sprite_xy_ram_wen <= '1';
+    --else
+    --  sprite_xy_ram_wen <= '0';
+    --end if;
 
     if (I_HBLANK = '1') then
       dr <= not sprite_xy_ram_temp;
@@ -148,25 +149,6 @@ begin
     end if;
   end process;
 
-  -- NON XILINX SPRITE RAM
-  --p_ram_w : process(clk)
-  --  variable ram_addr : integer := 0;
-  --begin
-  --  wait until rising_edge(CLK);
-  --  if (sprite_xy_ram_wen = '1') then
-  --    ram_addr := to_integer(unsigned(I_AB(3 downto 0)));
-  --    sprite_ram(ram_addr) := I_DB(7 downto 0);
-  --  end if;
-  --end process;
-
-  --p_ram_r : process(CLK)
-  --  variable ram_addr : integer := 0;
-  --begin
-  --  wait until rising_edge(CLK);
-  --  ram_addr := to_integer(unsigned(I_AB(3 downto 0)));
-  --  sprite_xy_ram_temp <= sprite_ram(ram_addr);
-  --end process;
-  
   p_ram: entity work.bram_true2p_1clk
   generic map
   (
@@ -179,7 +161,7 @@ begin
   port map
   (
     clk => clk,
-    we_a => sprite_xy_ram_wen, -- and ena_6 already
+    we_a => sprite_xy_ram_wen,
     addr_a => I_AB(3 downto 0),
     data_in_a => I_DB,
     data_out_a => sprite_xy_ram_temp
@@ -313,20 +295,12 @@ begin
   col_rom_4a : entity work.PROM4_DST
     port map (
       CLK         => CLK,
-      ENA         => ENA_6,	 
+      ENA         => '1', -- ENA_6
       ADDR        => col_rom_addr,
       DATA        => lut_4a
       );
 
-  p_cntr_ld : process(I_HCNT, vout_obj_on, vout_hblank)
-    variable ena : std_ulogic;
-  begin
-    ena := '0';
-    if (I_HCNT(3 downto 0) = "0111") then
-      ena := '1';
-    end if;
-    cntr_ld <= ena and (vout_hblank or not vout_obj_on);
-  end process;
+  cntr_ld <= '1' when (I_HCNT(3 downto 0) = "0111") and (vout_hblank='1' or vout_obj_on='0') else '0';
 
   p_ra_cnt : process
   begin
@@ -342,26 +316,7 @@ begin
 
   sprite_ram_addr <= "0000" & ra;
 
-  --u_sprite_ram : RAMB16_S4_S4
-  --  port map (
-  --    -- write side, 1 clk later than original
-  --    DOA   => open,
-  --    DIA   => sprite_ram_ip,
-  --    ADDRA => sprite_ram_addr_t1,
-  --    WEA   => vout_obj_on_t1,
-  --    ENA   => ENA_6,
-  --    SSRA  => '0',
-  --    CLKA  => CLK,
-  --    -- read side
-  --    DOB   => sprite_ram_op,
-  --    DIB   => "0000",
-  --    ADDRB => sprite_ram_addr,
-  --    WEB   => '0',
-  --    ENB   => ENA_6,
-  --    SSRB  => '0',
-  --    CLKB  => CLK
-   --   );
-
+  vout_obj_on_t1_ena_6 <= vout_obj_on_t1 and ena_6;
   u_sprite_ram: entity work.bram_true2p_1clk
   generic map
   (
@@ -374,7 +329,7 @@ begin
   port map
   (
     clk => clk,
-    we_a => vout_obj_on_t1,
+    we_a => vout_obj_on_t1_ena_6,
     addr_a => sprite_ram_addr_t1,
     data_in_a => sprite_ram_ip,
     we_b => '0',
@@ -382,22 +337,8 @@ begin
     data_out_b => sprite_ram_op
   );
 
-  p_sprite_ram_op_comb : process(sprite_ram_op, vout_obj_on_t1)
-  begin
-    if vout_obj_on_t1 = '1' then
-      sprite_ram_reg <= sprite_ram_op;
-    else
-      sprite_ram_reg <= "0000";
-    end if;
-  end process;
-
-  p_video_op_sel_comb : process(sprite_ram_reg)
-  begin
-    video_op_sel <= '0'; -- no sprite
-    if not (sprite_ram_reg = "0000") then
-      video_op_sel <= '1';
-    end if;
-  end process;
+  sprite_ram_reg <= sprite_ram_op when vout_obj_on_t1 = '1' else "0000";
+  video_op_sel <= '1' when not (sprite_ram_reg = "0000") else '0';
 
   p_sprite_ram_ip_reg : process
   begin
@@ -419,7 +360,7 @@ begin
       if (video_op_sel = '1') then
         sprite_ram_ip <= sprite_ram_reg;
       else
-        sprite_ram_ip <= lut_4a_t1(3 downto 0);
+        sprite_ram_ip <= lut_4a_t1(3 downto 0); -- lut_4a_t1
       end if;
     end if;
   end process;
@@ -443,21 +384,9 @@ begin
       CLK         => CLK,
       ENA         => ENA_6,	 
       ADDR        => final_col,
-      DATA        => lut_7f
+      DATA(2 downto 0) => O_RED,
+      DATA(5 downto 3) => O_GREEN,
+      DATA(7 downto 6) => O_BLUE
       );
-
-  p_final_reg : process
-  begin
-    wait until rising_edge (CLK);
-    -- not really registered
-    if (ENA_6 = '1') then
-      video_out <= lut_7f;
-    end if;
-  end process;
-
-  --  assign outputs
-  O_BLUE (1 downto 0) <= video_out(7 downto 6);
-  O_GREEN(2 downto 0) <= video_out(5 downto 3);
-  O_RED  (2 downto 0) <= video_out(2 downto 0);
 
 end architecture RTL;
