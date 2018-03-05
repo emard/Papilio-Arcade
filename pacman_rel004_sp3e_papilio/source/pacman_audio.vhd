@@ -117,45 +117,77 @@ begin
   end process;
 
   -- Xilinx RAMs, but look in pacman_video.vhd for an example of RTL code
-  vol_ram : for i in 0 to 3 generate
+  --vol_ram : for i in 0 to 3 generate
   -- should be a latch, but we are using a clock
-  begin
-    inst: RAM16X1D
-      port map (
-        a0    => addr(0),
-        a1    => addr(1),
-        a2    => addr(2),
-        a3    => addr(3),
-        dpra0 => addr(0),
-        dpra1 => addr(1),
-        dpra2 => addr(2),
-        dpra3 => addr(3),
-        wclk  => CLK,
-        we    => vol_ram_wen,
-        d     => data(i),
-        dpo   => vol_ram_dout(i)
-        );
-  end generate;
+  --begin
+  --  inst: RAM16X1D
+  --    port map (
+  --      a0    => addr(0),
+  --      a1    => addr(1),
+  --      a2    => addr(2),
+  --      a3    => addr(3),
+  --      dpra0 => addr(0),
+  --      dpra1 => addr(1),
+  --      dpra2 => addr(2),
+  --      dpra3 => addr(3),
+  --      wclk  => CLK,
+  --      we    => vol_ram_wen,
+  --      d     => data(i),
+  --      dpo   => vol_ram_dout(i)
+  --      );
+  --end generate;
+  
+  vol_ram: entity work.bram_true2p_1clk
+  generic map
+  (
+    dual_port => false,
+    addr_width => addr'length,
+    data_width => data'length
+  )
+  port map
+  (
+    clk => clk,
+    addr_a => addr,
+    we_a => vol_ram_wen,
+    data_in_a => data,
+    data_out_a => vol_ram_dout
+  );
 
-  frq_ram : for i in 0 to 3 generate
+  --frq_ram : for i in 0 to 3 generate
   -- should be a latch, but we are using a clock
-  begin
-    inst: RAM16X1D
-      port map (
-        a0    => addr(0),
-        a1    => addr(1),
-        a2    => addr(2),
-        a3    => addr(3),
-        dpra0 => addr(0),
-        dpra1 => addr(1),
-        dpra2 => addr(2),
-        dpra3 => addr(3),
-        wclk  => CLK,
-        we    => frq_ram_wen,
-        d     => data(i),
-        dpo   => frq_ram_dout(i)
-        );
-  end generate;
+  --begin
+  --  inst: RAM16X1D
+  --    port map (
+  --      a0    => addr(0),
+  --      a1    => addr(1),
+  --      a2    => addr(2),
+  --      a3    => addr(3),
+  --      dpra0 => addr(0),
+  --      dpra1 => addr(1),
+  --      dpra2 => addr(2),
+  --      dpra3 => addr(3),
+  --      wclk  => CLK,
+  --      we    => frq_ram_wen,
+  --      d     => data(i),
+  --      dpo   => frq_ram_dout(i)
+  --      );
+  --end generate;
+
+  frq_ram: entity work.bram_true2p_1clk
+  generic map
+  (
+    dual_port => false,
+    addr_width => addr'length,
+    data_width => data'length
+  )
+  port map
+  (
+    clk => clk,
+    addr_a => addr,
+    we_a => frq_ram_wen,
+    data_in_a => data,
+    data_out_a => frq_ram_dout
+  );
 
   p_control_rom_comb : process(I_HCNT)
   begin

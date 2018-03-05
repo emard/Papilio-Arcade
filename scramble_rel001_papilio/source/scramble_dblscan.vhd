@@ -47,7 +47,19 @@ library ieee;
   use ieee.std_logic_arith.all;
 
 entity SCRAMBLE_DBLSCAN is
-  port (
+generic
+(
+  xsize: integer range 256 to 320 := 256; -- blank: HDMI picture size is 2x this value
+  ysize: integer range 224 to 240 := 226; -- blank: HDMI picture size is 2x this value
+  -- x/y center (shifts blank signal relative to rising edge of hsync/vsync signals)
+  xcenter: integer := 87; -- increase -> picture moves left
+  ycenter: integer := 29; -- increase -> picture moves up
+  -- sync pulse width
+  hsync_width: integer range 0 to 80 := 15;
+  vsync_width: integer range 0 to 25 := 14
+);
+port
+(
 	I_R               : in    std_logic_vector( 3 downto 0);
 	I_G               : in    std_logic_vector( 3 downto 0);
 	I_B               : in    std_logic_vector( 3 downto 0);
@@ -64,18 +76,10 @@ entity SCRAMBLE_DBLSCAN is
 	ENA_X2            : in    std_logic;
 	ENA               : in    std_logic;
 	CLK               : in    std_logic
-	);
+);
 end;
 
 architecture RTL of SCRAMBLE_DBLSCAN is
-  constant xsize: integer range 256 to 320 := 256; -- blank: HDMI picture size is 2x this value
-  constant ysize: integer range 224 to 240 := 226; -- blank: HDMI picture size is 2x this value
-  -- x/y center (shifts blank signal relative to rising edge of hsync/vsync signals)
-  constant xcenter: integer := 87; -- increase -> picture moves left
-  constant ycenter: integer := 29; -- increase -> picture moves up
-  -- sync pulse width
-  constant hsync_width: integer range 0 to xcenter := 15;
-  constant vsync_width: integer range 0 to ycenter := 14;
 
   signal ram_ena_x2  : std_logic;
   signal ram_ena     : std_logic;

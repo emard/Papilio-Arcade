@@ -60,6 +60,7 @@ entity PACMAN is
     O_VIDEO_B             : out   std_logic_vector(3 downto 0);
     O_HSYNC               : out   std_logic;
     O_VSYNC               : out   std_logic;
+    O_BLANK               : out   std_logic;
     --
     O_AUDIO_L             : out   std_logic;
     O_AUDIO_R             : out   std_logic;
@@ -121,7 +122,6 @@ architecture RTL of PACMAN is
     signal cpu_data_in      : std_logic_vector(7 downto 0);
 
     signal program_rom_dinl : std_logic_vector(7 downto 0);
-    signal program_rom_dinh : std_logic_vector(7 downto 0);
 --    signal program_rom_cs_l : std_logic;
     signal sync_bus_cs_l    : std_logic;
 
@@ -174,6 +174,7 @@ architecture RTL of PACMAN is
     signal video_b_x2       : std_logic_vector(1 downto 0);
     signal hsync_x2         : std_logic;
     signal vsync_x2         : std_logic;
+    signal blank_x2         : std_logic;
     --
     signal audio            : std_logic_vector(7 downto 0);
     signal audio_pwm        : std_logic;
@@ -193,18 +194,33 @@ begin
   --
   -- clocks
   --
-  u_clocks : entity work.PACMAN_CLOCKS
-    port map (
-      I_CLK_REF  => OSC_IN,
-      I_RESET_L  => I_RESET_L,
+  --u_clocks : entity work.pacman_clocks
+  -- port map (
+  --    I_CLK_REF  => OSC_IN,
+  --    I_RESET_L  => I_RESET_L,
       --
-      O_CLK_REF  => clk_ref,
+  --    O_CLK_REF  => clk_ref,
       --
-      O_ENA_12   => ena_12,
-      O_ENA_6    => ena_6,
-      O_CLK      => clk,
-      O_RESET    => reset
-      );
+  --    O_ENA_12   => ena_12,
+  --    O_ENA_6    => ena_6,
+  --    O_CLK      => clk,
+  --    O_RESET    => reset
+  --    );
+
+  u_clocks : entity work.scramble_clocks
+  port map
+  (
+      I_CLK_25   => osc_in, -- 25 MHz
+      I_RESET_L  => '1',
+      --
+      O_ENA_12   => ena_12,   -- 6.25 x 2
+      O_ENA_6B   => open,     -- 6.25 (inverted)
+      O_ENA_6    => ena_6,    -- 6.25
+      O_ENA_1_79 => open,     -- 1.786
+      O_CLK      => open,
+      O_RESET    => open
+  );
+  clk <= osc_in;
   --
   -- video timing
   --
@@ -596,10 +612,10 @@ begin
     elsif (sync_bus_wreq_l = '0') then
       cpu_data_in <= sync_bus_reg;
     else
-      if (cpu_addr(15 downto 14) = "00") then      -- ROM at 0000 - 3fff
+      if (cpu_addr(15 downto 14) = "00")    -- ROM at 0000 - 3fff
+      or (cpu_addr(15 downto 13) = "100")   -- ROM at 8000 - 9fff
+      then
         cpu_data_in <= program_rom_dinl;
-      elsif (cpu_addr(15 downto 13) = "100") then  -- ROM at 8000 - 9fff
-        cpu_data_in <= program_rom_dinh;
       else
         cpu_data_in <= rams_data_out;
         if (iodec_in0_l   = '0') then cpu_data_in <= in0_reg; end if;
@@ -622,22 +638,13 @@ begin
       );
 
   -- example of internal program rom, if you have a big enough device
-  u_program_rom : entity work.ROM_PGM_0
+  u_program_rom : entity work.rom_pgm
     port map (
       CLK         => clk,
       ENA         => ena_6,
       ADDR        => cpu_addr(13 downto 0),
       DATA        => program_rom_dinl
       );
-
---	Commented out for use on the Papilio board so ROMs can be merged into the bitstream. Not enough BRAM to include this for the Papilio One.
---  u_program_wiz : entity work.ROM_PGM_1
---    port map (
---      CLK         => clk,
---      ENA         => ena_6,
---      ADDR        => cpu_addr(12 downto 0),
---      DATA        => program_rom_dinh
---      );
 
   --
   -- video subsystem
@@ -663,28 +670,39 @@ begin
       CLK           => clk
       );
 
-  -- if PACMAN_DBLSCAN used, remember to add pacman_dblscan.vhd to the
-  -- sythesis script you are using (pacman.prg for xst / webpack)
-  --
-  u_dblscan : entity work.VGA_SCANDBL
-    port map (
-      I_R          => video_r,
-      I_G          => video_g,
-      I_B          => video_b,
+  u_scan_doubler : entity work.SCRAMBLE_DBLSCAN
+    generic map
+    (
+      xsize => 280,
+      ysize => 226,
+      xcenter => 81,
+      ycenter => 22
+    )
+    port map
+    (
+      CLK          => clk,
+      ENA_X2       => ena_12,
+      ENA          => ena_6,
+
+      I_R(3 downto 1) => video_r,
+      I_R(0 downto 0) => (others => '-'),
+      I_G(3 downto 1) => video_g,
+      I_G(0 downto 0) => (others => '-'),
+      I_B(3 downto 2) => video_b,
+      I_B(1 downto 0) => (others => '-'),
       I_HSYNC      => hsync,
       I_VSYNC      => vsync,
 
-      O_R          => video_r_x2,
-      O_G          => video_g_x2,
-      O_B          => video_b_x2,
+      O_R(3 downto 1) => video_r_x2,
+      O_G(3 downto 1) => video_g_x2,
+      O_B(3 downto 2) => video_b_x2,
       O_HSYNC      => hsync_x2,
       O_VSYNC      => vsync_x2,
-      --
-      CLK          => ena_6,
-      CLK_X2       => ena_12
+      O_BLANK      => blank_x2
     );
 
-	scan_converter_mode <= '1';
+
+  scan_converter_mode <= '1';
   p_video_ouput : process
   begin
     wait until rising_edge(clk);
@@ -702,6 +720,7 @@ begin
       O_VIDEO_B(3 downto 2) <= video_b_x2;
       O_HSYNC   <= hSync_X2;
       O_VSYNC   <= vSync_X2;
+      O_BLANK   <= blank_x2;
     else
 --      O_LED(0) <= '0';
       O_VIDEO_R(3 downto 1) <= video_r;

@@ -72,7 +72,7 @@ architecture RTL of PACMAN_RAMS is
 begin
 	-- combined rams, simplified decoding logic
   ram_addr <= I_AB(11 downto 0);
-  we_ram <= not I_R_W_L and not I_VRAM_L;
+  we_ram <= (not I_R_W_L and not I_VRAM_L) and ENA_6;
   o_data <= dout_ram;
 
 	-- combined vram, cram and wram
@@ -81,26 +81,42 @@ begin
 	--	spare 1K at I_AB(11 downto 10) = 10
 	--	wram  1K at I_AB(11 downto 10) = 11
 
-  ramhi : component RAMB16_S4
-    port map (
-      do   => dout_ram(7 downto 4),
-      addr => ram_addr,
-      clk  => CLK,
-      di   => I_DATA(7 downto 4),
-      en   => ENA_6,
-      ssr  => '0',
-      we   => we_ram
-      );
+  --ramhi : component RAMB16_S4
+  --  port map (
+  --    do   => dout_ram(7 downto 4),
+  --    addr => ram_addr,
+  --    clk  => CLK,
+  --    di   => I_DATA(7 downto 4),
+  --    en   => ENA_6,
+  --    ssr  => '0',
+  --    we   => we_ram
+  --    );
 
-  ramlo : component RAMB16_S4
-    port map (
-      do   => dout_ram(3 downto 0),
-      addr => ram_addr,
-      clk  => CLK,
-      di   => I_DATA(3 downto 0),
-      en   => ENA_6,
-      ssr  => '0',
-      we   => we_ram
-      );
+  --ramlo : component RAMB16_S4
+  --  port map (
+  --    do   => dout_ram(3 downto 0),
+  --    addr => ram_addr,
+  --    clk  => CLK,
+  --    di   => I_DATA(3 downto 0),
+  --    en   => ENA_6,
+  --    ssr  => '0',
+  --    we   => we_ram
+  --    );
+  
+  ramhl: entity work.bram_true2p_1clk
+  generic map
+  (
+    dual_port => false,
+    addr_width => ram_addr'length,
+    data_width => I_DATA'length
+  )
+  port map
+  (
+    clk => clk,
+    we_a => we_ram, -- with ena_6
+    addr_a => ram_addr,
+    data_in_a => I_DATA,
+    data_out_a => dout_ram
+  );
 
 end architecture RTL;

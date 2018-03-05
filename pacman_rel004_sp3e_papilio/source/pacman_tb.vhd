@@ -99,7 +99,7 @@ begin
       O_AUDIO_R             => open,
       --
       I_SW                  => sw,
-      I_JOYSTICK              => button,
+      I_JOYSTICK            => button,
       O_LED                 => open,
       --
       I_RESET               => reset,
