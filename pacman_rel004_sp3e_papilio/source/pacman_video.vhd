@@ -326,13 +326,15 @@ begin
       if (video_op_sel = '1') then
         sprite_ram_ip <= sprite_ram_reg;
       else
-        sprite_ram_ip <= lut_4a_t1(3 downto 0); -- lut_4a_t1
+        sprite_ram_ip <= lut_4a_t1(3 downto 0);
       end if;
     end if;
   end process;
 
-  p_video_op_comb : process(vout_hblank, I_VBLANK, video_op_sel, sprite_ram_reg, lut_4a)
+  -- p_video_op_comb : process(vout_hblank, I_VBLANK, video_op_sel, sprite_ram_reg, lut_4a)
+  p_video_op_comb : process
   begin
+    wait until rising_edge (CLK);
       -- 3b
     if (vout_hblank = '1') or (I_VBLANK = '1') then
       final_col <= (others => '0');
