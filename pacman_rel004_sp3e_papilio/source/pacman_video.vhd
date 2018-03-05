@@ -96,6 +96,7 @@ architecture RTL of PACMAN_VIDEO is
   signal shift_regu         : std_logic_vector(3 downto 0);
   signal shift_op           : std_logic_vector(1 downto 0);
   signal shift_sel          : std_logic_vector(1 downto 0);
+  signal shift_sel_data     : std_logic;
 
   signal vout_obj_on        : std_logic;
   signal vout_yflip         : std_logic;
@@ -114,6 +115,7 @@ architecture RTL of PACMAN_VIDEO is
 
   signal lut_4a             : std_logic_vector(7 downto 0);
   signal lut_4a_t1          : std_logic_vector(7 downto 0);
+  signal lut_4a_t2          : std_logic_vector(7 downto 0);
   signal vout_hblank_t1     : std_logic;
   signal sprite_ram_reg     : std_logic_vector(3 downto 0);
 
@@ -122,33 +124,9 @@ architecture RTL of PACMAN_VIDEO is
   signal final_col          : std_logic_vector(4 downto 0);
   signal lut_7f             : std_logic_vector(7 downto 0);
 
-  -- non-xilinx ram
-  --type slv_array16 is array (natural range <>) of std_logic_vector(7 downto 0);
-  --shared variable sprite_ram : slv_array16(7 downto 0) := (others => (others => '0'));
-
 begin
 
   sprite_xy_ram_wen <= not I_WR2_L;
-
-  p_sprite_ram_comb : process(I_HBLANK, I_HCNT, I_WR2_L, sprite_xy_ram_temp)
-  begin
-    -- ram enable is low when HBLANK_L is 0 (for sprite access) or
-    -- 2H is low (for cpu writes)
-    -- we can simplify this
-
-    --if (I_WR2_L = '0') and (ENA_6 = '1') then
-    --  sprite_xy_ram_wen <= '1';
-    --else
-    --  sprite_xy_ram_wen <= '0';
-    --end if;
-
-    if (I_HBLANK = '1') then
-      dr <= not sprite_xy_ram_temp;
-    else
-      dr <= "11111111"; -- pull ups on board
-    end if;
-  end process;
-
   p_ram: entity work.bram_true2p_1clk
   generic map
   (
@@ -166,6 +144,7 @@ begin
     data_in_a => I_DB,
     data_out_a => sprite_xy_ram_temp
   );
+  dr <= not sprite_xy_ram_temp when I_HBLANK = '1' else x"FF"; -- pull ups on board
 
   p_char_regs : process
     variable inc : std_logic;
@@ -191,16 +170,8 @@ begin
     end if;
   end process;
 
-  p_flip_comb : process(char_hblank_reg, I_FLIP, db_reg)
-  begin
-    if (char_hblank_reg = '0') then
-      xflip     <= I_FLIP;
-      yflip     <= I_FLIP;
-    else
-      xflip     <= db_reg(1);
-      yflip     <= db_reg(0);
-    end if;
-  end process;
+  xflip <= db_reg(1) when char_hblank_reg = '1' else I_FLIP;
+  yflip <= db_reg(0) when char_hblank_reg = '1' else I_FLIP;
 
   p_char_addr_comb : process(db_reg, I_HCNT,
                              char_match_reg, char_sum_reg, char_hblank_reg,
@@ -256,19 +227,19 @@ begin
     end if;
   end process;
 
+  shift_sel_data <= I_HCNT(0) and I_HCNT(1);
   p_char_shift_comb : process(I_HCNT, vout_yflip, shift_regu, shift_regl)
-    variable ip : std_logic;
+    -- variable ip : std_logic;
   begin
-    ip := I_HCNT(0) and I_HCNT(1);
+    -- ip := I_HCNT(0) and I_HCNT(1);
     if (vout_yflip = '0') then
-
-      shift_sel(0) <= ip;
+      shift_sel(0) <= shift_sel_data;
       shift_sel(1) <= '1';
       shift_op(0) <= shift_regl(3);
       shift_op(1) <= shift_regu(3);
     else
       shift_sel(0) <= '1';
-      shift_sel(1) <= ip;
+      shift_sel(1) <= shift_sel_data;
       shift_op(0) <= shift_regl(0);
       shift_op(1) <= shift_regu(0);
     end if;
@@ -287,21 +258,17 @@ begin
     end if;
   end process;
 
-  p_lut_4a_comb : process(vout_db, shift_op)
-  begin
-    col_rom_addr <= '0' & vout_db(4 downto 0) & shift_op(1 downto 0);
-  end process;
-
+  -- character image data
+  col_rom_addr <= '0' & vout_db(4 downto 0) & shift_op(1 downto 0);
   col_rom_4a : entity work.PROM4_DST
     port map (
       CLK         => CLK,
-      ENA         => '1', -- ENA_6
+      ENA         => ENA_6, -- ENA_6
       ADDR        => col_rom_addr,
       DATA        => lut_4a
       );
 
   cntr_ld <= '1' when (I_HCNT(3 downto 0) = "0111") and (vout_hblank='1' or vout_obj_on='0') else '0';
-
   p_ra_cnt : process
   begin
     wait until rising_edge (CLK);
@@ -313,7 +280,6 @@ begin
       end if;
     end if;
   end process;
-
   sprite_ram_addr <= "0000" & ra;
 
   vout_obj_on_t1_ena_6 <= vout_obj_on_t1 and ena_6;
@@ -343,18 +309,18 @@ begin
   p_sprite_ram_ip_reg : process
   begin
     wait until rising_edge (CLK);
-    if (ENA_6 = '1') then
-      sprite_ram_addr_t1 <= sprite_ram_addr;
-      vout_obj_on_t1 <= vout_obj_on;
-      vout_hblank_t1 <= vout_hblank;
-      lut_4a_t1 <= lut_4a;
-    end if;
+    sprite_ram_addr_t1 <= sprite_ram_addr;
+    vout_obj_on_t1 <= vout_obj_on;
+    vout_hblank_t1 <= vout_hblank;
+    lut_4a_t1 <= lut_4a;
   end process;
 
-  p_sprite_ram_ip_comb : process(vout_hblank_t1, video_op_sel, sprite_ram_reg, lut_4a_t1)
+  --p_sprite_ram_ip_comb : process(vout_hblank_t1, video_op_sel, sprite_ram_reg, lut_4a_t1)
+  p_sprite_ram_ip_comb : process
   begin
   -- 3a
-    if (vout_hblank_t1 = '0') then
+    wait until rising_edge (CLK);
+    if (vout_hblank = '0') then
       sprite_ram_ip <= (others => '0');
     else
       if (video_op_sel = '1') then
