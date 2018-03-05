@@ -75,7 +75,6 @@ end;
 architecture RTL of PACMAN_VIDEO is
 
   signal sprite_xy_ram_wen  : std_logic;
-  signal sprite_xy_ram_wen_ena_6: std_logic;
   signal sprite_xy_ram_temp : std_logic_vector(7 downto 0);
   signal dr                 : std_logic_vector(7 downto 0);
 
@@ -110,7 +109,6 @@ architecture RTL of PACMAN_VIDEO is
   signal sprite_ram_addr    : std_logic_vector(11 downto 0);
   signal sprite_ram_addr_t1 : std_logic_vector(11 downto 0);
   signal vout_obj_on_t1     : std_logic;
-  signal vout_obj_on_t1_ena_6     : std_logic;
   signal col_rom_addr       : std_logic_vector(7 downto 0);
 
   signal lut_4a             : std_logic_vector(7 downto 0);
@@ -124,10 +122,12 @@ architecture RTL of PACMAN_VIDEO is
   signal lut_7f             : std_logic_vector(7 downto 0);
 
   -- non-xilinx ram
-  type slv_array16 is array (natural range <>) of std_logic_vector(7 downto 0);
-  shared variable sprite_ram : slv_array16(7 downto 0) := (others => (others => '0'));
+  --type slv_array16 is array (natural range <>) of std_logic_vector(7 downto 0);
+  --shared variable sprite_ram : slv_array16(7 downto 0) := (others => (others => '0'));
 
 begin
+
+  -- sprite_xy_ram_wen <= not I_WR2_L;
 
   p_sprite_ram_comb : process(I_HBLANK, I_HCNT, I_WR2_L, sprite_xy_ram_temp)
   begin
@@ -135,9 +135,10 @@ begin
     -- 2H is low (for cpu writes)
     -- we can simplify this
 
-    sprite_xy_ram_wen <= '0';
     if (I_WR2_L = '0') and (ENA_6 = '1') then
       sprite_xy_ram_wen <= '1';
+    else
+      sprite_xy_ram_wen <= '0';
     end if;
 
     if (I_HBLANK = '1') then
@@ -166,21 +167,20 @@ begin
   --  sprite_xy_ram_temp <= sprite_ram(ram_addr);
   --end process;
   
-  sprite_xy_ram_wen_ena_6 <= sprite_xy_ram_wen and ena_6;
   p_ram: entity work.bram_true2p_1clk
   generic map
   (
     dual_port => false,
     pass_thru_a => false,
     pass_thru_b => false,
-    addr_width => I_AB'length,
+    addr_width => 4,
     data_width => I_DB'length
   )
   port map
   (
     clk => clk,
-    we_a => sprite_xy_ram_wen_ena_6,
-    addr_a => I_AB,
+    we_a => sprite_xy_ram_wen, -- and ena_6 already
+    addr_a => I_AB(3 downto 0),
     data_in_a => I_DB,
     data_out_a => sprite_xy_ram_temp
   );
@@ -285,7 +285,6 @@ begin
       shift_op(0) <= shift_regl(3);
       shift_op(1) <= shift_regu(3);
     else
-
       shift_sel(0) <= '1';
       shift_sel(1) <= ip;
       shift_op(0) <= shift_regl(0);
@@ -363,18 +362,19 @@ begin
   --    CLKB  => CLK
    --   );
 
-  vout_obj_on_t1_ena_6 <= vout_obj_on_t1 and ena_6;
   u_sprite_ram: entity work.bram_true2p_1clk
   generic map
   (
     dual_port => true,
+    pass_thru_a => false,
+    pass_thru_b => false,
     addr_width => sprite_ram_addr'length,
     data_width => sprite_ram_ip'length
   )
   port map
   (
     clk => clk,
-    we_a => vout_obj_on_t1_ena_6, -- and ena_6
+    we_a => vout_obj_on_t1,
     addr_a => sprite_ram_addr_t1,
     data_in_a => sprite_ram_ip,
     we_b => '0',
