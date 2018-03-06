@@ -41,6 +41,10 @@
 -- version 003 Jan 2006 release, general tidy up
 -- version 001 initial release
 --
+-- emard made generic for lattice
+-- [ ] sprite artefacts (on top when looking at normally turned pivot, or on left at h-line)
+-- [ ] first and last pixel missing on each h-line
+--
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.std_logic_unsigned.all;
@@ -52,6 +56,9 @@ library UNISIM;
 use work.pkg_pacman.all;
 
 entity PACMAN_VIDEO is
+  generic (
+    MRTNT: boolean := false  -- true to descramble Mr.TNT/Gorkans ROMs, false normal
+  );
   port (
     I_HCNT            : in    std_logic_vector(8 downto 0);
     I_VCNT            : in    std_logic_vector(8 downto 0);
@@ -90,6 +97,7 @@ architecture RTL of PACMAN_VIDEO is
   signal obj_on             : std_logic;
 
   signal ca                 : std_logic_vector(12 downto 0);
+  signal char_rom_5ef_buf   : std_logic_vector(7 downto 0);
   signal char_rom_5ef_dout  : std_logic_vector(7 downto 0);
 
   signal shift_regl         : std_logic_vector(3 downto 0);
@@ -123,7 +131,7 @@ architecture RTL of PACMAN_VIDEO is
   signal video_op_sel       : std_logic;
   signal final_col          : std_logic_vector(4 downto 0);
   signal lut_7f             : std_logic_vector(7 downto 0);
-
+  
 begin
 
   sprite_xy_ram_wen <= not I_WR2_L;
@@ -192,9 +200,15 @@ begin
     end if;
 
     ca(3) <= I_HCNT(2)       xor yflip;
-    ca(2) <= char_sum_reg(2) xor xflip;
     ca(1) <= char_sum_reg(1) xor xflip;
-    ca(0) <= char_sum_reg(0) xor xflip;
+    if not mrtnt then
+      ca(2) <= char_sum_reg(2) xor xflip;
+      ca(0) <= char_sum_reg(0) xor xflip;
+    end if;
+    if mrtnt then
+      ca(2) <= char_sum_reg(0) xor xflip;
+      ca(0) <= char_sum_reg(2) xor xflip;
+    end if;
   end process;
 
   -- char roms
@@ -203,8 +217,11 @@ begin
       CLK         => CLK,
       ENA         => ENA_6,
       ADDR        => ca,
-      DATA        => char_rom_5ef_dout
+      DATA        => char_rom_5ef_buf
       );
+  
+  -- descramble ROMs for Mr.TNT/Gorkans (swap data lines D4 and D6)
+  char_rom_5ef_dout <= char_rom_5ef_buf when not MRTNT else char_rom_5ef_buf(7) & char_rom_5ef_buf(4) & char_rom_5ef_buf(5) & char_rom_5ef_buf(6) & char_rom_5ef_buf(3 downto 0);
 
   p_char_shift : process
   begin
@@ -295,7 +312,7 @@ begin
   port map
   (
     clk => clk,
-    we_a => vout_obj_on_t1_ena_6,
+    we_a => vout_obj_on_t1_ena_6, -- ena_6 must be, otherwise sprites will not be shown
     addr_a => sprite_ram_addr_t1,
     data_in_a => sprite_ram_ip,
     we_b => '0',
@@ -331,11 +348,9 @@ begin
     end if;
   end process;
 
-  -- p_video_op_comb : process(vout_hblank, I_VBLANK, video_op_sel, sprite_ram_reg, lut_4a)
-  p_video_op_comb : process
+  p_video_op_comb : process(vout_hblank, I_VBLANK, video_op_sel, sprite_ram_reg, lut_4a)
   begin
-    wait until rising_edge (CLK);
-      -- 3b
+    -- 3b
     if (vout_hblank = '1') or (I_VBLANK = '1') then
       final_col <= (others => '0');
     else

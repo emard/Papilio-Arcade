@@ -20,7 +20,7 @@ use work.report_decoded_pack.all;
 entity pacman_ulx3s is
 generic
 (
-  C_usbhid_joystick: boolean := false;
+  C_usbhid_joystick: boolean := true;
   C_onboard_buttons: boolean := true;
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
@@ -109,6 +109,7 @@ architecture struct of pacman_ulx3s is
   signal S_hid_report: std_logic_vector(63 downto 0);
   signal S_report_decoded: T_report_decoded;
   -- end emard usb hid joystick
+  signal R_coin_play: std_logic_vector(3 downto 0);
 
   signal reset        : std_logic;
   signal clock_stable : std_logic := '1';
@@ -189,14 +190,19 @@ begin
   process(clk_pixel)
   begin
     if rising_edge(clk_pixel) then
-      R_joy_coin      <= not(R_usb_joy_coin    or R_board_joy_coin);
-      R_joy_player    <= not(R_usb_joy_player  or R_board_joy_player);
-      R_joy_up        <= not(R_usb_joy_up      or R_board_joy_up);
-      R_joy_down      <= not(R_usb_joy_down    or R_board_joy_down);
-      R_joy_left      <= not(R_usb_joy_left    or R_board_joy_left);
-      R_joy_right     <= not(R_usb_joy_right   or R_board_joy_right);
-      R_joy_fire      <= not(R_usb_joy_fire    or R_board_joy_fire);
-      R_joy_bomb      <= not(R_usb_joy_bomb    or R_board_joy_bomb);
+      R_joy_coin      <=     (R_usb_joy_coin    or R_board_joy_coin);
+      R_joy_player    <=     (R_usb_joy_player  or R_board_joy_player);
+      R_joy_up        <= not (R_usb_joy_up      or R_board_joy_up);
+      R_joy_down      <= not (R_usb_joy_down    or R_board_joy_down);
+      R_joy_left      <= not (R_usb_joy_left    or R_board_joy_left);
+      R_joy_right     <= not (R_usb_joy_right   or R_board_joy_right);
+      R_joy_fire      <=     (R_usb_joy_fire    or R_board_joy_fire);
+      R_joy_bomb      <=     (R_usb_joy_bomb    or R_board_joy_bomb);
+
+      R_coin_play(0)  <=     (R_usb_joy_player(0)  or R_board_joy_player(0));
+      R_coin_play(1)  <=     '0'; -- ?? self test
+      R_coin_play(2)  <=     (R_usb_joy_coin       or R_board_joy_coin); -- coin
+      R_coin_play(3)  <=     (R_usb_joy_player(1)  or R_board_joy_player(1));
     end if;
   end process;
 
@@ -214,48 +220,14 @@ begin
     auto_bomb => S_auto_bomb
   );
 
---  scramble : entity work.scramble_glue
---  generic map
---  (
---    C_frogger => true,
---    C_test_picture => false,
---    C_autofire => true,
---    C_audio => true,
---    C_osd => false, -- diamond will crash, debug joystick controls (green HEX on-screen display)
---    C_vga => true
---  )
---  port map
---  (
---    clk_pixel    => clk_pixel,
---    reset        => reset,
---    osd_hex      => open,
---    dip_switch   => dip_switch,
---    btn_coin     => R_joy_coin,
---    btn_player_start => R_joy_player,
---    btn_up       => R_joy_up,
---    btn_down     => R_joy_down,
---    btn_left     => R_joy_left,
---    btn_right    => R_joy_right,
---    btn_bomb     => S_auto_bomb,
---    btn_fire     => S_auto_fire,
---    vga_r        => S_vga_r,
---    vga_g        => S_vga_g,
---    vga_b        => S_vga_b,
---    vga_hsync    => S_vga_hsync,
---    vga_vsync    => S_vga_vsync,
---    vga_blank    => S_vga_blank,
---    o_audio_l    => S_audio_pwm_l,
---    o_audio_r    => S_audio_pwm_r,
---    audio_pcm    => S_audio_pcm(23 downto 12)
---  );
-  S_joystick_a <= R_joy_player(0) & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
-  S_joystick_b <= R_joy_player(1) & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
+  S_joystick_a <= R_joy_fire & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
+  S_joystick_b <= (others => '1'); -- '1' inactive (msb is selft-test switch)
   pacman: entity work.pacman
   port map
   (
     osc_in         => clk_pixel,
     i_reset        => reset,
-    i_sw           => sw,
+    i_sw           => R_coin_play,
     I_JOYSTICK_A   => S_joystick_a,
     I_JOYSTICK_B   => S_joystick_b,
     O_LED          => led(2 downto 0),

@@ -46,8 +46,9 @@
 --
 library ieee;
   use ieee.std_logic_1164.all;
+  use ieee.std_logic_arith.all;
   use ieee.std_logic_unsigned.all;
-  use ieee.numeric_std.all;
+  -- use ieee.numeric_std.all;
 
 library UNISIM;
   use UNISIM.Vcomponents.all;
@@ -65,12 +66,10 @@ entity PACMAN is
     O_AUDIO_L             : out   std_logic;
     O_AUDIO_R             : out   std_logic;
     --
-	 I_JOYSTICK_A            : in    std_logic_vector(4 downto 0);
-	 I_JOYSTICK_B            : in    std_logic_vector(4 downto 0);
-	 JOYSTICK_A_GND			 : out	 std_logic;
-	 JOYSTICK_B_GND			 : out	 std_logic;
-	 
-    I_SW                  : in    std_logic_vector(3 downto 0); -- active high
+    I_JOYSTICK_A          : in    std_logic_vector(4 downto 0); -- active low
+    I_JOYSTICK_B          : in    std_logic_vector(4 downto 0); -- active low
+
+    I_SW                  : in    std_logic_vector(3 downto 0); -- active high (coin, start)
     O_LED                 : out   std_logic_vector(2 downto 0);
     --
     I_RESET               : in    std_logic;
@@ -79,12 +78,10 @@ entity PACMAN is
 end;
 
 architecture RTL of PACMAN is
-
-
-	constant HWSEL_PACMANICMINERMAN : boolean := false ; -- p2 joystick right used for jump, collides with default config.
+    constant HWSEL_PACMANICMINERMAN : boolean := false ; -- p2 joystick right used for jump, collides with default config.
 																			
     
-	 signal I_RESET_L        : std_logic;
+    signal I_RESET_L        : std_logic;
     signal reset            : std_logic;
     signal clk_ref          : std_logic;
     signal clk              : std_logic;
@@ -162,7 +159,7 @@ architecture RTL of PACMAN is
     signal in1_reg          : std_logic_vector(7 downto 0);
     signal dipsw_reg        : std_logic_vector(7 downto 0);
     signal joystick_reg     : std_logic_vector(4 downto 0);
-	 signal joystick_reg2     : std_logic_vector(4 downto 0);
+    signal joystick_reg2    : std_logic_vector(4 downto 0);
 
     -- scan doubler signals
     signal video_r          : std_logic_vector(2 downto 0);
@@ -188,25 +185,10 @@ begin
   
   joystick_reg <= I_JOYSTICK_A;
   joystick_reg2 <=  I_JOYSTICK_B;
-  JOYSTICK_A_GND <= '0';
-  JOYSTICK_B_GND <= '0';
   
   --
   -- clocks
   --
-  --u_clocks : entity work.pacman_clocks
-  -- port map (
-  --    I_CLK_REF  => OSC_IN,
-  --    I_RESET_L  => I_RESET_L,
-      --
-  --    O_CLK_REF  => clk_ref,
-      --
-  --    O_ENA_12   => ena_12,
-  --    O_ENA_6    => ena_6,
-  --    O_CLK      => clk,
-  --    O_RESET    => reset
-  --    );
-
   u_clocks : entity work.scramble_clocks
   port map
   (
@@ -240,7 +222,7 @@ begin
       vcarry := (vcnt = "111111111");
       if do_hsync then
         if vcarry then
-          vcnt <= "011111000"; -- 0F8
+          vcnt <= conv_std_logic_vector(242,9); -- 0F8 -- adjust to get 60 Hz refresh rate, was 0F8
         else
           vcnt <= vcnt +"1";
         end if;
@@ -643,7 +625,8 @@ begin
     port map (
       CLK         => clk,
       ENA         => ena_6,
-      ADDR        => cpu_addr(13 downto 0), -- cpu_addr(15) & cpu_addr(13 downto 0)
+      ADDR        => cpu_addr(13 downto 0), -- for 16K ROM (pacman, pong_homebrew, gorkans)
+      -- ADDR        => cpu_addr(15) & cpu_addr(13 downto 0), -- for 24K ROM (lizwiz)
       DATA        => program_rom_dinl
       );
 
@@ -651,6 +634,10 @@ begin
   -- video subsystem
   --
   u_video : entity work.PACMAN_VIDEO
+    generic map
+    (
+      mrtnt => false -- false: normally (pacman, lizwiz, pong), true: gorkans or mr.tnt
+    )
     port map (
       I_HCNT        => hcnt,
       I_VCNT        => vcnt,
@@ -674,10 +661,10 @@ begin
   u_scan_doubler : entity work.scramble_dblscan
     generic map
     (
-      xsize => 292, -- 288
+      xsize => 296, -- 288
       ysize => 228, -- 224
       xcenter => 72,
-      ycenter => 23
+      ycenter => 31
     )
     port map
     (
