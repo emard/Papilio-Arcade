@@ -20,7 +20,7 @@ use work.report_decoded_pack.all;
 entity pacman_ulx3s is
 generic
 (
-  C_usbhid_joystick: boolean := true;
+  C_usbhid_joystick: boolean := false;
   C_onboard_buttons: boolean := true;
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
@@ -175,8 +175,8 @@ begin
         R_board_joy_coin <= not btn(0);
         R_board_joy_player <= btn(2 downto 1);
 
-        R_board_joy_bomb <= btn(1);
-        R_board_joy_fire <= btn(2);
+        --R_board_joy_bomb <= btn(1);
+        --R_board_joy_fire <= btn(2);
         R_board_joy_up <= btn(3);
         R_board_joy_down <= btn(4);
         R_board_joy_left <= btn(5);
@@ -187,6 +187,7 @@ begin
   end generate;
 
   -- mix usb and onboard buttons
+  x_both: if false generate
   process(clk_pixel)
   begin
     if rising_edge(clk_pixel) then
@@ -196,8 +197,8 @@ begin
       R_joy_down      <= not (R_usb_joy_down    or R_board_joy_down);
       R_joy_left      <= not (R_usb_joy_left    or R_board_joy_left);
       R_joy_right     <= not (R_usb_joy_right   or R_board_joy_right);
-      R_joy_fire      <=     (R_usb_joy_fire    or R_board_joy_fire);
-      R_joy_bomb      <=     (R_usb_joy_bomb    or R_board_joy_bomb);
+      --R_joy_fire      <= not (R_usb_joy_fire    or R_board_joy_fire);
+      --R_joy_bomb      <=     (R_usb_joy_bomb    or R_board_joy_bomb);
 
       R_coin_play(0)  <=     (R_usb_joy_player(0)  or R_board_joy_player(0));
       R_coin_play(1)  <=     '0'; -- ?? self test
@@ -205,11 +206,33 @@ begin
       R_coin_play(3)  <=     (R_usb_joy_player(1)  or R_board_joy_player(1));
     end if;
   end process;
+  end generate;
+
+  x_board: if true generate
+  process(clk_pixel)
+  begin
+    if rising_edge(clk_pixel) then
+      R_joy_coin      <=     (R_board_joy_coin);
+      R_joy_player    <=     (R_board_joy_player);
+      R_joy_up        <= not (R_board_joy_up);
+      R_joy_down      <= not (R_board_joy_down);
+      R_joy_left      <= not (R_board_joy_left);
+      R_joy_right     <= not (R_board_joy_right);
+      --R_joy_fire      <= not (R_board_joy_fire);
+      --R_joy_bomb      <=     (R_board_joy_bomb);
+
+      R_coin_play(0)  <=     (R_board_joy_player(0));
+      R_coin_play(1)  <=     '0';
+      R_coin_play(2)  <=     (R_board_joy_coin); -- coin
+      R_coin_play(3)  <=     (R_board_joy_player(1));
+    end if;
+  end process;
+  end generate;
 
   I_autofire : entity work.autofire
   generic map
   (
-    C_autofire => true
+    C_autofire => false
   )
   port map
   (
@@ -220,7 +243,7 @@ begin
     auto_bomb => S_auto_bomb
   );
 
-  S_joystick_a <= R_joy_fire & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
+  S_joystick_a <= '1' & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
   S_joystick_b <= (others => '1'); -- '1' inactive (msb is selft-test switch)
   pacman: entity work.pacman
   port map
