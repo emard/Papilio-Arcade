@@ -22,6 +22,8 @@ generic
 (
   C_usbhid_joystick: boolean := false;
   C_onboard_buttons: boolean := true;
+  C_rom_kb: integer range 16 to 24 := 16; -- match rom_pgm size: pacman: 16K, lizwiz: 24K
+  C_mrtnt: boolean := false; -- false: normal, true: gorkans/mr.tnt swap video addr lines
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
 );
@@ -246,6 +248,11 @@ begin
   S_joystick_a <= '1' & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
   S_joystick_b <= (others => '1'); -- '1' inactive (msb is selft-test switch)
   pacman: entity work.pacman
+  generic map
+  (
+    C_rom_kb => C_rom_kb,
+    C_mrtnt => C_mrtnt
+  )
   port map
   (
     osc_in         => clk_pixel,

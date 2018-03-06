@@ -55,7 +55,13 @@ library UNISIM;
 
 use work.pkg_pacman.all;
 entity PACMAN is
-  port (
+  generic
+  (
+    C_rom_kb: integer range 16 to 24 := 16; -- pacman 16K, lizwiz 24K
+    C_mrtnt: boolean := false  -- false: normal, true: gorkans/mr.tnt swap video addr lines
+  );
+  port
+  (
     O_VIDEO_R             : out   std_logic_vector(3 downto 0);
     O_VIDEO_G             : out   std_logic_vector(3 downto 0);
     O_VIDEO_B             : out   std_logic_vector(3 downto 0);
@@ -74,7 +80,7 @@ entity PACMAN is
     --
     I_RESET               : in    std_logic;
     OSC_IN                : in    std_logic
-    );
+  );
 end;
 
 architecture RTL of PACMAN is
@@ -621,14 +627,25 @@ begin
       );
 
   -- example of internal program rom, if you have a big enough device
-  u_program_rom : entity work.rom_pgm
+  G_rom_16K: if C_rom_kb <= 16 generate
+  u_program_rom_16K : entity work.rom_pgm
     port map (
       CLK         => clk,
       ENA         => ena_6,
       ADDR        => cpu_addr(13 downto 0), -- for 16K ROM (pacman, pong_homebrew, gorkans)
-      -- ADDR        => cpu_addr(15) & cpu_addr(13 downto 0), -- for 24K ROM (lizwiz)
       DATA        => program_rom_dinl
       );
+  end generate;
+
+  G_rom_24K: if C_rom_kb > 16 generate
+  u_program_rom_24K : entity work.rom_pgm
+    port map (
+      CLK         => clk,
+      ENA         => ena_6,
+      ADDR        => cpu_addr(15) & cpu_addr(13 downto 0), -- for 24K ROM (lizwiz)
+      DATA        => program_rom_dinl
+      );
+  end generate;
 
   --
   -- video subsystem
@@ -636,7 +653,7 @@ begin
   u_video : entity work.PACMAN_VIDEO
     generic map
     (
-      mrtnt => false -- false: normally (pacman, lizwiz, pong), true: gorkans or mr.tnt
+      mrtnt => C_mrtnt -- false: normally (pacman, lizwiz, pong), true: gorkans or mr.tnt
     )
     port map (
       I_HCNT        => hcnt,
