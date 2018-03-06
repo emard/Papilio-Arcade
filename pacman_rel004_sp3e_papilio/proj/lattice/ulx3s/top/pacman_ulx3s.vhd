@@ -155,15 +155,19 @@ begin
   process(clk_pixel)
   begin
     if rising_edge(clk_pixel) then
-      R_usb_joy_coin      <= S_report_decoded.btn_fps;       -- fps button: insert coin
-      R_usb_joy_player(0) <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
-      R_usb_joy_player(1) <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
-      R_usb_joy_up        <= S_report_decoded.lstick_up    or S_report_decoded.hat_up;     -- left stick move up
-      R_usb_joy_down      <= S_report_decoded.lstick_down  or S_report_decoded.hat_down;   -- left stick move down
-      R_usb_joy_left      <= S_report_decoded.lstick_left  or S_report_decoded.hat_left;   -- left stick move left
-      R_usb_joy_right     <= S_report_decoded.lstick_right or S_report_decoded.hat_right;  -- left stick move right
-      R_usb_joy_fire      <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
-      R_usb_joy_bomb      <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
+      R_joy_coin      <= S_report_decoded.btn_fps;       -- fps button: insert coin
+      R_joy_player(0) <= S_report_decoded.btn_start;     -- "start" : Start 1 Player
+      R_joy_player(1) <= S_report_decoded.btn_back;      -- "back"  : Start 2 Players
+      R_joy_up        <= S_report_decoded.lstick_up    or S_report_decoded.hat_up;     -- left stick move up
+      R_joy_down      <= S_report_decoded.lstick_down  or S_report_decoded.hat_down;   -- left stick move down
+      R_joy_left      <= S_report_decoded.lstick_left  or S_report_decoded.hat_left;   -- left stick move left
+      R_joy_right     <= S_report_decoded.lstick_right or S_report_decoded.hat_right;  -- left stick move right
+      R_joy_fire      <= S_report_decoded.btn_b or S_report_decoded.btn_rtrigger; -- btn1  : Fire
+      R_joy_bomb      <= S_report_decoded.btn_a or S_report_decoded.btn_rbumper;  -- btn2  : Protection 
+      R_coin_play(0)  <= S_report_decoded.btn_start;
+      R_coin_play(1)  <= '0';
+      R_coin_play(2)  <= S_report_decoded.btn_fps;
+      R_coin_play(3)  <= S_report_decoded.btn_back;
     end if;
   end process;
   end generate;
@@ -172,65 +176,23 @@ begin
     process(clk_pixel)
     begin
       if rising_edge(clk_pixel) then
-        R_board_joy_reset <= '0';
-
-        R_board_joy_coin <= not btn(0);
-        R_board_joy_player <= btn(2 downto 1);
-
-        --R_board_joy_bomb <= btn(1);
-        --R_board_joy_fire <= btn(2);
-        R_board_joy_up <= btn(3);
-        R_board_joy_down <= btn(4);
-        R_board_joy_left <= btn(5);
-        R_board_joy_right <= btn(6);
-
+        R_joy_coin   <= not btn(0);
+        R_joy_player <=     btn(2 downto 1);
+        R_joy_bomb   <= not btn(1);
+        R_joy_fire   <= not btn(2);
+        R_joy_up     <= not btn(3);
+        R_joy_down   <= not btn(4);
+        R_joy_left   <= not btn(5);
+        R_joy_right  <= not btn(6);
+        R_coin_play(0) <= btn(1);
+        R_coin_play(1) <= '0';
+        R_coin_play(2) <= not btn(0);
+        R_coin_play(3) <= btn(2);
       end if;
     end process;
   end generate;
 
-  -- mix usb and onboard buttons
-  x_both: if false generate
-  process(clk_pixel)
-  begin
-    if rising_edge(clk_pixel) then
-      R_joy_coin      <=     (R_usb_joy_coin    or R_board_joy_coin);
-      R_joy_player    <=     (R_usb_joy_player  or R_board_joy_player);
-      R_joy_up        <= not (R_usb_joy_up      or R_board_joy_up);
-      R_joy_down      <= not (R_usb_joy_down    or R_board_joy_down);
-      R_joy_left      <= not (R_usb_joy_left    or R_board_joy_left);
-      R_joy_right     <= not (R_usb_joy_right   or R_board_joy_right);
-      --R_joy_fire      <= not (R_usb_joy_fire    or R_board_joy_fire);
-      --R_joy_bomb      <=     (R_usb_joy_bomb    or R_board_joy_bomb);
-
-      R_coin_play(0)  <=     (R_usb_joy_player(0)  or R_board_joy_player(0));
-      R_coin_play(1)  <=     '0'; -- ?? self test
-      R_coin_play(2)  <=     (R_usb_joy_coin       or R_board_joy_coin); -- coin
-      R_coin_play(3)  <=     (R_usb_joy_player(1)  or R_board_joy_player(1));
-    end if;
-  end process;
-  end generate;
-
-  x_board: if true generate
-  process(clk_pixel)
-  begin
-    if rising_edge(clk_pixel) then
-      R_joy_coin      <=     (R_board_joy_coin);
-      R_joy_player    <=     (R_board_joy_player);
-      R_joy_up        <= not (R_board_joy_up);
-      R_joy_down      <= not (R_board_joy_down);
-      R_joy_left      <= not (R_board_joy_left);
-      R_joy_right     <= not (R_board_joy_right);
-      --R_joy_fire      <= not (R_board_joy_fire);
-      --R_joy_bomb      <=     (R_board_joy_bomb);
-
-      R_coin_play(0)  <=     (R_board_joy_player(0));
-      R_coin_play(1)  <=     '0';
-      R_coin_play(2)  <=     (R_board_joy_coin); -- coin
-      R_coin_play(3)  <=     (R_board_joy_player(1));
-    end if;
-  end process;
-  end generate;
-
+  x_no_autofire: if false generate
   I_autofire : entity work.autofire
   generic map
   (
@@ -244,8 +206,9 @@ begin
     btn_bomb => R_joy_bomb,
     auto_bomb => S_auto_bomb
   );
+  end generate;
 
-  S_joystick_a <= '1' & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
+  S_joystick_a <= R_joy_fire & R_joy_right & R_joy_left & R_joy_down & R_joy_up;
   S_joystick_b <= (others => '1'); -- '1' inactive (msb is selft-test switch)
   pacman: entity work.pacman
   generic map

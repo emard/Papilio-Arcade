@@ -20,7 +20,8 @@ use work.report_decoded_pack.all;
 entity scramble_ulx3s is
 generic
 (
-  C_usbhid_joystick: boolean := true;
+  C_frogger: boolean := false;
+  C_usbhid_joystick: boolean := false;
   C_onboard_buttons: boolean := true;
   C_hdmi_generic_serializer: boolean := false; -- serializer type: false: vendor-specific, true: generic=vendor-agnostic
   C_hdmi_audio: boolean := false -- HDMI generator type: false: video only, true: video+audio capable
@@ -70,15 +71,15 @@ end;
 architecture struct of scramble_ulx3s is
   signal clk_pixel, clk_pixel_shift, clkn_pixel_shift, clk_usb: std_logic;
 
-  signal R_usb_joy_coin: std_logic;
-  signal R_usb_joy_player: std_logic_vector(1 downto 0);
-  signal R_usb_joy_up, R_usb_joy_down, R_usb_joy_left, R_usb_joy_right, R_usb_joy_bomb, R_usb_joy_fire: std_logic;
-  signal R_usb_joy_reset: std_logic;
+  signal R_usb_joy_coin: std_logic := '0';
+  signal R_usb_joy_player: std_logic_vector(1 downto 0) := (others => '0');
+  signal R_usb_joy_up, R_usb_joy_down, R_usb_joy_left, R_usb_joy_right, R_usb_joy_bomb, R_usb_joy_fire: std_logic := '0';
+  signal R_usb_joy_reset: std_logic := '0';
 
-  signal R_board_joy_coin: std_logic;
-  signal R_board_joy_player: std_logic_vector(1 downto 0);
-  signal R_board_joy_up, R_board_joy_down, R_board_joy_left, R_board_joy_right, R_board_joy_bomb, R_board_joy_fire: std_logic;
-  signal R_board_joy_reset: std_logic;
+  signal R_board_joy_coin: std_logic := '0';
+  signal R_board_joy_player: std_logic_vector(1 downto 0) := (others => '0');
+  signal R_board_joy_up, R_board_joy_down, R_board_joy_left, R_board_joy_right, R_board_joy_bomb, R_board_joy_fire: std_logic := '0';
+  signal R_board_joy_reset: std_logic := '0';
 
   signal R_joy_coin: std_logic;
   signal R_joy_player: std_logic_vector(1 downto 0);
@@ -220,7 +221,7 @@ begin
   scramble : entity work.scramble_glue
   generic map
   (
-    C_frogger => false,
+    C_frogger => C_frogger,
     C_test_picture => false,
     C_autofire => true,
     C_audio => true,
