@@ -29,7 +29,7 @@ generic
 );
 port
 (
-  clk_25MHz: in std_logic;
+  clk_25mhz: in std_logic;
 
   -- UART1 (WiFi serial)
   wifi_rxd: out   std_logic;
@@ -60,8 +60,7 @@ port
   --hdmi_clk: out std_logic
 
   -- Digital Video (differential outputs)
-  gpdi_dp, gpdi_dn: out std_logic_vector(2 downto 0);
-  gpdi_clkp, gpdi_clkn: out std_logic;
+  gpdi_dp, gpdi_dn: out std_logic_vector(3 downto 0);
 
   -- i2c shared for digital video and RTC
   gpdi_scl, gpdi_sda: inout std_logic
@@ -98,7 +97,7 @@ architecture struct of pacman_ulx3s is
   signal tmds_d: std_logic_vector(3 downto 0);
   signal tx_in: std_logic_vector(29 downto 0);
 
-  signal ddr_d: std_logic_vector(2 downto 0);
+  signal ddr_d: std_logic_vector(3 downto 0);
   signal ddr_clk: std_logic;
 
   signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(3 downto 0);
@@ -295,15 +294,13 @@ begin
     out_red   => ddr_d(2),
     out_green => ddr_d(1),
     out_blue  => ddr_d(0),
-    out_clock => ddr_clk
+    out_clock => ddr_d(3)
   );
 
-  gpdi_data_channels: for i in 0 to 2 generate
+  gpdi_data_channels: for i in 0 to 3 generate
     gpdi_diff_data: OLVDS
     port map(A => ddr_d(i), Z => gpdi_dp(i), ZN => gpdi_dn(i));
   end generate;
-  gpdi_diff_clock: OLVDS
-  port map(A => ddr_clk, Z => gpdi_clkp, ZN => gpdi_clkn);
 
   end generate;
 
@@ -353,8 +350,7 @@ begin
         tx_syncclock => CLK_PIXEL,
         tx_out => tmds_d
       );
-      gpdi_clkp <= tmds_d(3);
-      gpdi_dp  <= tmds_d(2 downto 0);
+      gpdi_dp  <= tmds_d(3 downto 0);
     end generate;
     --G_vendor_specific_serializer: if not C_hdmi_generic_serializer generate
     --  vendor_specific_serializer_inst: entity work.serializer
