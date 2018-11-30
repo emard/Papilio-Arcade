@@ -1,0 +1,38 @@
+--- project/project_project_sram.svf.orig	2016-09-04 11:18:41.791444800 +0200
++++ project/project_project_sram.svf	2016-09-04 11:16:43.418560514 +0200
+@@ -46,7 +46,7 @@ STATE	IDLE;
+ 
+ ! Shift in IDCODE(0x16) instruction
+ SIR	8	TDI  (16);
+-SDR	32	TDI  (FFFFFFFF)
++SDR	32	TDI  (01015043)
+ 		TDO  (01015043)
+ 		MASK (FFFFFFFF);
+ 
+@@ -95457,6 +95457,13 @@ SIR	8	TDI  (17);
+ SDR	32	TDI  (FFFFFFFF)
+ 		TDO  (00000000);
+ 
++! Verify Status Register
++
++! Shift in LSCC READ STATUS(0x53) instruction
++SIR	8	TDI  (53);
++SDR	32	TDI  (FFFFFFFF)
++		TDO  (00020000)
++		MASK (00060007);
+ 
+ ! Exit the programming mode
+ 
+@@ -95466,12 +95473,3 @@ RUNTEST	IDLE	5 TCK	2,00E-01 SEC;
+ ! Shift in BYPASS(0xFF) instruction
+ SIR	8	TDI  (FF);
+ RUNTEST	IDLE	100 TCK	1,00E-03 SEC;
+-
+-
+-! Verify Status Register
+-
+-! Shift in LSCC READ STATUS(0x53) instruction
+-SIR	8	TDI  (53);
+-SDR	32	TDI  (FFFFFFFF)
+-		TDO  (00020000)
+-		MASK (00060007);
