@@ -1,0 +1,90 @@
+@N|Running in 64-bit mode
+@N|Running in 64-bit mode
+@N: CD720 :"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/std.vhd":123:18:123:21|Setting time resolution to ns
+@N:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":35:7:35:20|Top entity is set to scramble_ulx3s.
+@N: CD895 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Setting attribute syn_ramstyle to "no_rw_check" on shared variable ram
+@N|Running in 64-bit mode
+@N: CD720 :"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/std.vhd":123:18:123:21|Setting time resolution to ns
+@N:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":35:7:35:20|Top entity is set to scramble_ulx3s.
+@N: CD895 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Setting attribute syn_ramstyle to "no_rw_check" on shared variable ram
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":20:7:20:20|Synthesizing work.scramble_ulx3s.struct.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/ddr_dvid_out_se.vhd":8:7:8:21|Synthesizing work.ddr_dvid_out_se.behavioral.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/lattice/ecp5u/ddr_out.vhd":9:7:9:13|Synthesizing work.ddr_out.structure.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/vga2dvid.vhd":46:7:46:14|Synthesizing work.vga2dvid.behavioral.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/tmds_encoder.vhd":38:7:38:18|Synthesizing work.tmds_encoder.behavioral.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":8:7:8:14|Synthesizing work.spdif_tx.behavioral.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":72:2:72:3|Register bit channel_status_shift(0) is always 0.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd":11:7:11:19|Synthesizing work.scramble_glue.struct.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/vga.vhd":25:7:25:9|Synthesizing work.vga.syn.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/dac.vhd":23:7:23:9|Synthesizing work.dac.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":48:7:48:20|Synthesizing work.scramble_audio.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":63:7:63:12|Synthesizing work.ym2149.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd":49:7:49:12|Synthesizing work.i82c55.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/scramble_ram_generic.vhd":48:7:48:18|Synthesizing work.scramble_ram.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":15:7:15:22|Synthesizing work.bram_true2p_1clk.rtl.
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Found RAM ram, depth=2048, width=8
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_2.vhd":4:7:4:15|Synthesizing work.rom_snd_2.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_1.vhd":4:7:4:15|Synthesizing work.rom_snd_1.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_0.vhd":4:7:4:15|Synthesizing work.rom_snd_0.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80sed.vhd":75:7:75:12|Synthesizing work.t80sed.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd":85:7:85:9|Synthesizing work.t80.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":56:7:56:13|Synthesizing work.t80_reg.rtl.
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":80:8:80:12|Found RAM regsl, depth=8, width=8
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":79:8:79:12|Found RAM regsh, depth=8, width=8
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":80:8:80:12|Found RAM regsl, depth=8, width=8
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":79:8:79:12|Found RAM regsh, depth=8, width=8
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":80:8:80:12|Found RAM regsl, depth=8, width=8
+@N: CL134 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":79:8:79:12|Found RAM regsh, depth=8, width=8
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_ALU.vhd":72:7:72:13|Synthesizing work.t80_alu.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_MCode.vhd":80:7:80:15|Synthesizing work.t80_mcode.rtl.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(10) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(11) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(12) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(13) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(14) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":176:9:176:19|Register bit p_filter_coef.ym2149_3C_k(15) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(10) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(11) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(12) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(13) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(14) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":177:9:177:19|Register bit p_filter_coef.ym2149_3D_k(15) is always 0.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_dblscan.vhd":49:7:49:22|Synthesizing work.scramble_dblscan.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":15:7:15:22|Synthesizing work.bram_true2p_1clk.rtl.
+@N: CD711 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Allowing multiple process write for multi-port RAM ram
+@N: CL214 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":78:19:78:21|Found multi-write port RAM ram, number of write ports=2, depth=1024, width=16
+@N: CL214 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":53:19:53:21|Found multi-write port RAM ram, number of write ports=2, depth=1024, width=16
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":48:7:48:14|Synthesizing work.scramble.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_pgm.vhd":4:7:4:13|Synthesizing work.rom_pgm.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":48:7:48:20|Synthesizing work.scramble_video.rtl.
+@N: CD364 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":509:8:509:16|Removing redundant assignment.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_lut.vhd":4:7:4:13|Synthesizing work.rom_lut.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":15:7:15:22|Synthesizing work.bram_true2p_1clk.rtl.
+@N: CD711 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Allowing multiple process write for multi-port RAM ram
+@N: CL214 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":78:19:78:21|Found multi-write port RAM ram, number of write ports=2, depth=2048, width=8
+@N: CL214 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":53:19:53:21|Found multi-write port RAM ram, number of write ports=2, depth=2048, width=8
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_1.vhd":4:7:4:15|Synthesizing work.rom_obj_1.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_0.vhd":4:7:4:15|Synthesizing work.rom_obj_0.prom.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/scramble_clocks.vhd":50:7:50:21|Synthesizing work.scramble_clocks.rtl.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/autofire/autofire.vhd":9:7:9:14|Synthesizing work.autofire.struct.
+@N: CD630 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/clk_25M_125Mpn_25M_7M5.vhd":12:7:12:28|Synthesizing work.clk_25m_125mpn_25m_7m5.structure.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":66:4:66:13|Input I_VRAMRD_L is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":68:4:68:15|Input I_OBJRAMRD_L is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":79:4:79:7|Input ENAB is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":54:4:54:9|Input I_HCNT is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":55:4:55:9|Input I_VCNT is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":27:2:27:7|Input addr_b is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":29:2:29:5|Input we_b is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":31:2:31:10|Input data_in_b is unused.
+@N: CL135 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":752:4:752:5|Found seqShift ym2149_3C_audio_pipe, depth=3, width=18
+@N: CL135 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":752:4:752:5|Found seqShift ym2149_3D_audio_pipe, depth=3, width=18
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd":28:1:28:7|Input osd_hex is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd":30:1:30:10|Input dip_switch is unused.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":72:2:72:3|Register bit channel_status_shift(1) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":72:2:72:3|Register bit channel_status_shift(2) is always 0.
+@N: CL189 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":72:2:72:3|Register bit channel_status_shift(3) is always 0.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/lattice/ecp5u/ddr_out.vhd":13:4:13:8|Input iclkn is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":35:2:35:9|Input wifi_txd is unused.
+@N: CL159 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":43:2:43:3|Input sw is unused.
+@N|Running in 64-bit mode
+

@@ -1,0 +1,21 @@
+
+
+@S |Clock Optimization Summary
+
+
+#### START OF CLOCK OPTIMIZATION REPORT #####[
+
+0 non-gated/non-generated clock tree(s) driving 0 clock pin(s) of sequential element(s)
+2 gated/generated clock tree(s) driving 1657 clock pin(s) of sequential element(s)
+0 instances converted, 1657 sequential instances remain driven by gated/generated clocks
+
+=========================================================================================================================== Gated/Generated Clocks ===========================================================================================================================
+Clock Tree ID     Driving Element                       Drive Element Type     Fanout     Sample Instance                                       Explanation                                                                                                                   
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@K:CKID0001       G_ddr.clkgen_125_25_7M5.PLLInst_0     EHXPLLL                1617       R_board_joy_coin                                      Gating structure creates improper gating logic. See the Gated Clocks description in the user guide for conversion requirements
+@K:CKID0002       G_ddr.clkgen_125_25_7M5.PLLInst_0     EHXPLLL                40         G_hdmi_video_only.vga2dvi_converter.shift_blue[9]     Gating structure creates improper gating logic. See the Gated Clocks description in the user guide for conversion requirements
+==============================================================================================================================================================================================================================================================================
+
+
+##### END OF CLOCK OPTIMIZATION REPORT ######]
+

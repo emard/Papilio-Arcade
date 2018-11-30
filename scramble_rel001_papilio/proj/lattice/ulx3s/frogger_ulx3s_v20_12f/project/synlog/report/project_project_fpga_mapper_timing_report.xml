@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- *************************************************************************************
+FILE DESCRIPTION
+Max Top 5 critical clocks will be reported. For rest user needs to refer to Detailed report
+*******************************************************************************************-->
+<report_table display_priority="2" name="Timing Summary">
+<report_link name="Detailed report">
+<data>/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synlog/project_project_fpga_mapper.srr</data>
+<title>START OF TIMING REPORT</title>
+</report_link>
+<row>
+<data tcl_name="clock_name">Clock Name</data>
+<data tcl_name="req_freq">Req Freq</data>
+<data tcl_name="est_freq">Est Freq</data>
+<data tcl_name="slack">Slack</data>
+</row>
+<row>
+<data>clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock</data>
+<data>756.3 MHz</data>
+<data>642.8 MHz</data>
+<data>-0.233</data>
+</row>
+<row>
+<data>clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock</data>
+<data>118.8 MHz</data>
+<data>96.9 MHz</data>
+<data>-1.899</data>
+</row>
+<row>
+<data>System</data>
+<data>1.0 MHz</data>
+<data>1.0 MHz</data>
+<data>8.364</data>
+</row>
+</report_table>

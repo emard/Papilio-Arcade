@@ -1,0 +1,180 @@
+Synopsys Lattice Technology Pre-mapping, Version maplat, Build 1368R, Built Jan  8 2016 09:35:36
+Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+Product Version K-2015.09L-2
+
+Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 99MB peak: 99MB)
+
+@L: /home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/project_project_scck.rpt 
+Printing clock  summary report in "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/project_project_scck.rpt" file 
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled 
+
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 109MB peak: 113MB)
+
+
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 109MB peak: 113MB)
+
+
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 119MB peak: 120MB)
+
+
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 119MB peak: 122MB)
+
+@A: FX681 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":95:11:95:14|Initial value on register G_not_external_video_timing\.p_hvcnt\.vcnt[8:0] is non-zero which can prevent the register from being packed into a block RAM or DSP.
+@A: FX681 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":94:11:94:14|Initial value on register G_not_external_video_timing\.p_hvcnt\.hcnt[8:0] is non-zero which can prevent the register from being packed into a block RAM or DSP.
+@W: FX474 |User-specified initial value defined for some sequential elements which can prevent optimum synthesis results from being achieved. 
+@W: FX469 :|Found undriven nets audio_v[3] to be optimized by the mapper. 
+@W: FX469 :|Found undriven nets audio_v[2] to be optimized by the mapper. 
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_7 because it is equivalent to instance scramble.G_vga.u_audio.G_50. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_44 because it is equivalent to instance scramble.G_vga.u_audio.G_1. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_47 because it is equivalent to instance scramble.G_vga.u_audio.G_4. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_45 because it is equivalent to instance scramble.G_vga.u_audio.G_2. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_46 because it is equivalent to instance scramble.G_vga.u_audio.G_3. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_5 because it is equivalent to instance scramble.G_vga.u_audio.G_48. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :|Removing sequential instance scramble.G_vga.u_audio.G_49 because it is equivalent to instance scramble.G_vga.u_audio.G_6. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":78:40:78:42|Removing sequential instance R_board_joy_player[0] because it is equivalent to instance R_board_joy_bomb. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":78:40:78:42|Removing sequential instance R_board_joy_player[1] because it is equivalent to instance R_board_joy_fire. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":49:1:49:2|Removing sequential instance data_out_a[7:0] (in view: work.bram_true2p_1clk_true_true_true_8_11(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80sed.vhd":139:2:139:3|Removing sequential instance IORQ_n (in view: work.T80sed_0(rtl)) of type view:PrimLib.dffse(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":49:1:49:2|Removing sequential instance data_out_a[15:0] (in view: work.bram_true2p_1clk_true_true_true_16_10(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":89:9:89:17|Removing sequential instance S_osd_hex[6:0] (in view: work.scramble_ulx3s(struct)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN115 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd":263:17:263:24|Removing instance G_vga\.u_dac (in view: work.scramble_glue_false_true_true_true_14_false_true(struct)) of type view:work.dac_9(rtl) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd":194:4:194:5|Removing sequential instance r_porta[7:0] (in view: work.I82C55_0(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd":194:4:194:5|Removing sequential instance r_portb[7:0] (in view: work.I82C55_0(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/dac.vhd":43:2:43:3|Removing sequential instance dac_o (in view: work.dac_9(rtl)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/scramble_clocks.vhd":109:4:109:5|Removing sequential instance ena_6b (in view: work.SCRAMBLE_CLOCKS(rtl)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Removing sequential instance ram[7:0] (in view: work.bram_true2p_1clk_true_true_true_8_11(rtl)) of type view:PrimLib.nram(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":43:17:43:19|Removing sequential instance ram[15:0] (in view: work.bram_true2p_1clk_true_true_true_16_10(rtl)) of type view:PrimLib.nram(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":72:2:72:3|Removing sequential instance address_out (in view: work.spdif_tx_25000000_48000(behavioral)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd":194:4:194:5|Removing sequential instance r_portc[7:0] (in view: work.I82C55_0(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd":974:2:974:3|Removing sequential instance M1_n (in view: work.T80_work_scramble_ulx3s_struct_0layer0_0(rtl)) of type view:PrimLib.dffse(prim) because it does not drive other instances.
+ICG Latch Removal Summary:
+Number of ICG latches removed:	0
+Number of ICG latches not removed:	0
+syn_allowed_resources : blockrams=56  set on top level netlist scramble_ulx3s
+
+Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 151MB peak: 153MB)
+
+
+
+Clock Summary
+*****************
+
+Start                                            Requested     Requested     Clock        Clock                
+Clock                                            Frequency     Period        Type         Group                
+---------------------------------------------------------------------------------------------------------------
+System                                           1.0 MHz       1000.000      system       system_clkgroup      
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      994.4 MHz     1.006         inferred     Autoconstr_clkgroup_1
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     107.3 MHz     9.317         inferred     Autoconstr_clkgroup_0
+===============================================================================================================
+
+@W: MT529 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/autofire/autofire.vhd":48:6:48:7|Found inferred clock clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock which controls 2054 sequential elements including I_autofire.R_autobomb[23:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/vga2dvid.vhd":130:2:130:3|Found inferred clock clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock which controls 40 sequential elements including G_hdmi_video_only\.vga2dvi_converter.shift_red[0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+
+Finished Pre Mapping Phase.
+
+Starting constraint checker (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 151MB peak: 153MB)
+
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri63 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri63 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri62 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri62 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri61 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri61 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri60 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri60 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri59 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri59 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri58 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri58 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri57 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri57 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri56 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri56 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri55 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri55 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@N: MO111 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":80:129:80:131|Tristate driver S_osd_hex_tri54 (in view: work.scramble_ulx3s(struct)) on net S_osd_hex_tri54 (in view: work.scramble_ulx3s(struct)) has its enable tied to GND.
+@W: MO160 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd":948:2:948:3|Register bit NMI_s is always 0, optimizing ...
+
+Available hyper_sources - for debug and ip models
+	None Found
+
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd":948:2:948:3|Removing sequential instance oldnmi_n (in view: work.T80_work_scramble_ulx3s_struct_0layer0_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":196:4:196:5|Removing sequential instance p_wdata\.reg_14[7:0] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":196:4:196:5|Removing sequential instance p_wdata\.reg_15[7:0] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":113:9:113:17|Removing sequential instance p_io_ports_inreg\.ioa_inreg[7:0] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":114:9:114:17|Removing sequential instance p_io_ports_inreg\.iob_inreg[7:0] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":169:9:169:17|Removing sequential instance p_video_out_reg\.shell_reg (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":184:9:184:17|Removing sequential instance p_video_out_reg\.pout1_reg (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":176:9:176:21|Removing sequential instance star_shift_t1[13:8] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":183:4:183:5|Removing sequential instance addr[7:0] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":178:9:178:20|Removing sequential instance p_video_out_reg\.star_out_reg (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":196:4:196:5|Removing sequential instance p_wdata\.reg_7[7] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":196:4:196:5|Removing sequential instance p_wdata\.reg_7[6] (in view: work.YM2149_1(rtl)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_ram.data_out_b[15] (in view: work.SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_ram.data_out_b[14] (in view: work.SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_ram.data_out_b[13] (in view: work.SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_ram.data_out_b[12] (in view: work.SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":145:11:145:21|Removing sequential instance control_reg[7] (in view: work.SCRAMBLE_false(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":145:11:145:21|Removing sequential instance control_reg[6] (in view: work.SCRAMBLE_false(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_sprite_ram.data_out_b[7] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_sprite_ram.data_out_b[6] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":74:1:74:2|Removing sequential instance u_sprite_ram.data_out_b[5] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[16] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[15] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[14] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[13] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[12] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[11] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[10] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[9] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[8] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[7] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[6] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[5] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[4] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[3] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[2] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[1] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":175:9:175:18|Removing sequential instance p_stars\.star_shift[0] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":174:9:174:16|Removing sequential instance p_stars_timer\.star_cnt[1] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":174:9:174:16|Removing sequential instance p_stars_timer\.star_cnt[0] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[7] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[6] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[5] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[4] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[3] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[2] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[1] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":166:9:166:17|Removing sequential instance p_shell_reg\.shell_cnt[0] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[22] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[21] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[20] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[19] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[18] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[17] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[16] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[15] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[14] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[13] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[12] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[11] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[10] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[9] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[8] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[7] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[6] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[5] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[4] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[3] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[2] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[1] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":173:9:173:20|Removing sequential instance p_stars_timer\.star_cnt_div[0] (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":118:9:118:21|Removing sequential instance p_objdata_regs\.missile_reg_l (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":167:9:167:17|Removing sequential instance p_shell_reg\.shell_ena (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.dffe(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":172:9:172:18|Removing sequential instance p_stars\.star_reg_2 (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":171:9:171:18|Removing sequential instance p_stars\.star_reg_1 (in view: work.SCRAMBLE_VIDEO(rtl)) of type view:PrimLib.sdffrse(prim) because it does not drive other instances.
+None
+None
+
+Finished constraint checker (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 153MB peak: 155MB)
+
+Pre-mapping successful!
+
+At Mapper Exit (Real Time elapsed 0h:00m:02s; CPU Time elapsed 0h:00m:01s; Memory used current: 89MB peak: 155MB)
+
+Process took 0h:00m:02s realtime, 0h:00m:01s cputime
+# Fri Nov 30 15:28:10 2018
+
+###########################################################]

@@ -1,0 +1,305 @@
+#defaultlanguage:vhdl
+#OPTIONS:"|-mixedhdl|-top|scramble_ulx3s|-layerid|0|-orig_srs|/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synwork/project_project_comp.srs|-prodtype|synplify_pro|-dspmac|-fixsmult|-infer_seqShift|-nram|-sdff_counter|-divnmod|-nostructver|-encrypt|-pro|-lite|-ui|-fid2|-ram|-sharing|on|-ll|2000|-autosm|-ignore_undefined_lib|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work"
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/linux_a_64/c_vhdl":1449681914
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/location.map":1449867759
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/std.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/snps_haps_pkg.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/std1164.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/numeric.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/umr_capim.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/arith.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/unsigned.vhd":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/hyperents.vhd":1449680656
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/clk_25M_125Mpn_25M_7M5.vhd":1543586686
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/lucent/ecp5u.vhd":1449680868
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/scramble_clocks.vhd":1543586686
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/gen_ram.vhd":1479060706
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd":1479237292
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_debounce.vhd":1479064004
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/dac.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_ALU.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Pack.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd":1479067708
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/vga.vhd":1479055778
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vhd/math_real.vhd":1449681956
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/tmds_encoder.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi_out.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/lattice/ecp5u/ddr_out.vhd":1516231377
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/encoder.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/hdmidelay.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/serializer_generic.vhd":1479237292
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/osd/char_rom.vhd":1479054706
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/autofire/autofire.vhd":1479594454
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usb_req_gen_func_pack.vhd":1520118047
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/report_decoded_pack_saitek.vhd":1520118047
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd":1516312768
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_pgm.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_0.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_1.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_lut.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_0.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_1.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_2.vhd":1516317421
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/scramble_ram_generic.vhd":1479237292
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd":1479517653
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_MCode.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80sed.vhd":1479049501
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd":1520185611
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_dblscan.vhd":1520255233
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd":1479064728
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/osd/osd.vhd":1516235511
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd":1520185611
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/vga2dvid.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/ddr_dvid_out_se.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/av_hdmi.vhd":1479054693
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usb_enum_saitek_minimal_pack.vhd":1520118047
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usbhid_host.vhd":1520118047
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usbhid_report_decoder_saitek.vhd":1520118047
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd":1543586686
+0 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/clk_25M_125Mpn_25M_7M5.vhd" vhdl
+1 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/clocks/scramble_clocks.vhd" vhdl
+2 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/gen_ram.vhd" vhdl
+3 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/bram_true2p_1clk.vhd" vhdl
+4 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_debounce.vhd" vhdl
+5 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/YM2149_linmix_sep.vhd" vhdl
+6 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/dac.vhd" vhdl
+7 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/i82c55.vhd" vhdl
+8 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_ALU.vhd" vhdl
+9 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Pack.vhd" vhdl
+10 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_Reg.vhd" vhdl
+11 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/vga.vhd" vhdl
+12 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/tmds_encoder.vhd" vhdl
+13 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi_out.vhd" vhdl
+14 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/lattice/ecp5u/ddr_out.vhd" vhdl
+15 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/encoder.vhd" vhdl
+16 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/hdmidelay.vhd" vhdl
+17 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/serializer_generic.vhd" vhdl
+18 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/osd/char_rom.vhd" vhdl
+19 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/autofire/autofire.vhd" vhdl
+20 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usb_req_gen_func_pack.vhd" vhdl
+21 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/report_decoded_pack_saitek.vhd" vhdl
+22 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/spdif/spdif_tx.vhd" vhdl
+23 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_pgm.vhd" vhdl
+24 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_0.vhd" vhdl
+25 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_obj_1.vhd" vhdl
+26 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_lut.vhd" vhdl
+27 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_0.vhd" vhdl
+28 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_1.vhd" vhdl
+29 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/roms/sega_frogger_real/rom_snd_2.vhd" vhdl
+30 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/ram/scramble_ram_generic.vhd" vhdl
+31 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_video.vhd" vhdl
+32 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80_MCode.vhd" vhdl
+33 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80.vhd" vhdl
+34 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/T80/T80sed.vhd" vhdl
+35 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble.vhd" vhdl
+36 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_dblscan.vhd" vhdl
+37 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/scramble_audio.vhd" vhdl
+38 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/osd/osd.vhd" vhdl
+39 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/glue/scramble_glue.vhd" vhdl
+40 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/vga2dvid.vhd" vhdl
+41 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi/ddr_dvid_out_se.vhd" vhdl
+42 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/vga/hdmi-audio/av_hdmi.vhd" vhdl
+43 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usb_enum_saitek_minimal_pack.vhd" vhdl
+44 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usbhid_host.vhd" vhdl
+45 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/source/usbhid/usbhid_report_decoder_saitek.vhd" vhdl
+46 "/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/top/scramble_ulx3s.vhd" vhdl
+
+# Dependency Lists (Uses list)
+0 -1
+1 -1
+2 -1
+3 -1
+4 -1
+5 -1
+6 -1
+7 -1
+8 -1
+9 -1
+10 -1
+11 -1
+12 -1
+13 -1
+14 -1
+15 -1
+16 -1
+17 -1
+18 -1
+19 -1
+20 -1
+21 -1
+22 -1
+23 -1
+24 -1
+25 -1
+26 -1
+27 -1
+28 -1
+29 -1
+30 3 
+31 30 24 25 3 26 
+32 9 
+33 32 8 10 9 
+34 33 9 
+35 31 34 23 30 
+36 3 
+37 34 27 28 29 30 7 5 
+38 18 
+39 1 35 36 37 6 11 38 
+40 12 
+41 14 
+42 16 15 
+43 20 
+44 20 43 
+45 21 
+46 0 19 39 22 40 41 44 45 42 17 21 
+
+# Dependency Lists (Users Of)
+0 46 
+1 39 
+2 -1
+3 30 36 31 
+4 -1
+5 37 
+6 39 
+7 37 
+8 33 
+9 34 33 32 
+10 33 
+11 39 
+12 40 
+13 -1
+14 41 
+15 42 
+16 42 
+17 46 
+18 38 
+19 46 
+20 44 43 
+21 46 45 
+22 46 
+23 35 
+24 31 
+25 31 
+26 31 
+27 37 
+28 37 
+29 37 
+30 37 35 31 
+31 35 
+32 33 
+33 34 
+34 37 35 
+35 39 
+36 39 
+37 39 
+38 39 
+39 46 
+40 46 
+41 46 
+42 46 
+43 44 
+44 46 
+45 46 
+46 -1
+
+# Design Unit to File Association
+arch work clk_25m_125mpn_25m_7m5 structure 0
+module work clk_25m_125mpn_25m_7m5 0
+arch work scramble_clocks rtl 1
+module work scramble_clocks 1
+arch work gen_ram rtl 2
+module work gen_ram 2
+arch work bram_true2p_1clk rtl 3
+module work bram_true2p_1clk 3
+arch work scramble_debounce rtl 4
+module work scramble_debounce 4
+arch work ym2149 rtl 5
+module work ym2149 5
+arch work dac rtl 6
+module work dac 6
+arch work i82c55 rtl 7
+module work i82c55 7
+arch work t80_alu rtl 8
+module work t80_alu 8
+arch work t80_reg rtl 10
+module work t80_reg 10
+arch work vga syn 11
+module work vga 11
+arch work tmds_encoder behavioral 12
+module work tmds_encoder 12
+arch work hdmi_out behavioral 13
+module work hdmi_out 13
+arch work ddr_out structure 14
+module work ddr_out 14
+arch work encoder rtl 15
+module work encoder 15
+arch work hdmi_delay_line rtl 16
+module work hdmi_delay_line 16
+arch work serializer_generic syn 17
+module work serializer_generic 17
+arch work char_rom behavioral 18
+module work char_rom 18
+arch work autofire struct 19
+module work autofire 19
+arch work spdif_tx behavioral 22
+module work spdif_tx 22
+arch work rom_pgm prom 23
+module work rom_pgm 23
+arch work rom_obj_0 prom 24
+module work rom_obj_0 24
+arch work rom_obj_1 prom 25
+module work rom_obj_1 25
+arch work rom_lut prom 26
+module work rom_lut 26
+arch work rom_snd_0 prom 27
+module work rom_snd_0 27
+arch work rom_snd_1 prom 28
+module work rom_snd_1 28
+arch work rom_snd_2 prom 29
+module work rom_snd_2 29
+arch work scramble_ram rtl 30
+module work scramble_ram 30
+arch work scramble_video rtl 31
+module work scramble_video 31
+arch work t80_mcode rtl 32
+module work t80_mcode 32
+arch work t80 rtl 33
+module work t80 33
+arch work t80sed rtl 34
+module work t80sed 34
+arch work scramble rtl 35
+module work scramble 35
+arch work scramble_dblscan rtl 36
+module work scramble_dblscan 36
+arch work scramble_audio rtl 37
+module work scramble_audio 37
+arch work osd behavioral 38
+module work osd 38
+arch work scramble_glue struct 39
+module work scramble_glue 39
+arch work vga2dvid behavioral 40
+module work vga2dvid 40
+arch work ddr_dvid_out_se behavioral 41
+module work ddr_dvid_out_se 41
+arch work av_hdmi rtl 42
+module work av_hdmi 42
+arch work usbhid_host behavioral 44
+module work usbhid_host 44
+arch work usbhid_report_decoder rtl 45
+module work usbhid_report_decoder 45
+arch work scramble_ulx3s struct 46
+module work scramble_ulx3s 46
+
+# Unbound Instances to File Association
+inst work clk_25m_125mpn_25m_7m5 ehxplll 0
+inst work clk_25m_125mpn_25m_7m5 vlo 0
+inst work clk_25m_125mpn_25m_7m5 vhi 0
+inst work ddr_out oddrx1f 14
+inst work av_hdmi hdmidataencoder 42
+inst work scramble_ulx3s olvds 46
+
+
+# Configuration files used

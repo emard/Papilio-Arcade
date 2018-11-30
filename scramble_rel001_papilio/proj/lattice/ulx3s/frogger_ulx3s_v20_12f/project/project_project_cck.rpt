@@ -1,0 +1,178 @@
+# Synopsys Constraint Checker, version maplat, Build 1368R, built Jan  8 2016
+# Copyright (C) 1994-2016 Synopsys, Inc. All rights reserved. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+# Written on Fri Nov 30 15:28:10 2018
+
+
+##### DESIGN INFO #######################################################
+
+Top View:                "scramble_ulx3s"
+Constraint File(s):      (none)
+
+
+
+
+##### SUMMARY ############################################################
+
+Found 0 issues in 0 out of 0 constraints
+
+
+##### DETAILS ############################################################
+
+
+
+Clock Relationships
+*******************
+
+Starting                                         Ending                                           |     rise to rise     |     fall to fall     |     rise to fall     |     fall to rise                     
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     |     9.317            |     No paths         |     No paths         |     No paths                         
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      |     Diff grp         |     No paths         |     No paths         |     No paths                         
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      System                                           |     1.006            |     No paths         |     No paths         |     No paths                         
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      |     1.006            |     No paths         |     No paths         |     No paths                         
+=============================================================================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+Unconstrained Start/End Points
+******************************
+
+p:audio_l[0]
+p:audio_l[1]
+p:audio_l[2]
+p:audio_l[3]
+p:audio_r[0]
+p:audio_r[1]
+p:audio_r[2]
+p:audio_r[3]
+p:audio_v[0]
+p:audio_v[1]
+p:audio_v[2]
+p:audio_v[3]
+p:btn[0]
+p:btn[1]
+p:btn[2]
+p:btn[3]
+p:btn[4]
+p:btn[5]
+p:btn[6]
+p:clk_25mhz
+p:gn[0]
+p:gn[1]
+p:gn[2]
+p:gn[3]
+p:gn[4]
+p:gn[5]
+p:gn[6]
+p:gn[7]
+p:gn[8]
+p:gn[9]
+p:gn[10]
+p:gn[11]
+p:gn[12]
+p:gn[13]
+p:gn[14]
+p:gn[15]
+p:gn[16]
+p:gn[17]
+p:gn[18]
+p:gn[19]
+p:gn[20]
+p:gn[21]
+p:gn[22]
+p:gn[23]
+p:gn[24]
+p:gn[25]
+p:gn[26]
+p:gn[27]
+p:gp[0]
+p:gp[1]
+p:gp[2]
+p:gp[3]
+p:gp[4]
+p:gp[5]
+p:gp[6]
+p:gp[7]
+p:gp[8]
+p:gp[9]
+p:gp[10]
+p:gp[11]
+p:gp[12]
+p:gp[13]
+p:gp[14]
+p:gp[15]
+p:gp[16]
+p:gp[17]
+p:gp[18]
+p:gp[19]
+p:gp[20]
+p:gp[21]
+p:gp[22]
+p:gp[23]
+p:gp[24]
+p:gp[25]
+p:gp[26]
+p:gp[27]
+p:gpdi_dn[0]
+p:gpdi_dn[1]
+p:gpdi_dn[2]
+p:gpdi_dn[3]
+p:gpdi_dp[0]
+p:gpdi_dp[1]
+p:gpdi_dp[2]
+p:gpdi_dp[3]
+p:gpdi_scl
+p:gpdi_sda
+p:led[0]
+p:led[1]
+p:led[2]
+p:led[3]
+p:led[4]
+p:led[5]
+p:led[6]
+p:led[7]
+p:oled_clk
+p:oled_csn
+p:oled_dc
+p:oled_mosi
+p:oled_resn
+p:shutdown
+p:sw[0]
+p:sw[1]
+p:sw[2]
+p:sw[3]
+p:usb_fpga_dn
+p:usb_fpga_dp
+p:wifi_en
+p:wifi_gpio0
+p:wifi_gpio2
+p:wifi_gpio16
+p:wifi_gpio17
+p:wifi_rxd
+p:wifi_txd
+
+
+Inapplicable constraints
+************************
+
+(none)
+
+
+Applicable constraints with issues
+**********************************
+
+(none)
+
+
+Constraints with matching wildcard expressions
+**********************************************
+
+(none)
+
+
+Library Report
+**************
+
+
+# End of Constraint Checker Report

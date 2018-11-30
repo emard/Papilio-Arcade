@@ -1,0 +1,24 @@
+#
+# Logical Preferences generated for Lattice by Synplify maplat, Build 1368R.
+#
+
+# Period Constraints 
+#FREQUENCY NET "G_ddr.clkgen_125_25_7M5/clk_pixel_shift" 756.3 MHz;
+#FREQUENCY NET "G_ddr.clkgen_125_25_7M5/clk_pixel" 118.8 MHz;
+
+
+# Output Constraints 
+
+# Input Constraints 
+
+# Point-to-point Delay Constraints 
+
+
+
+# Block Path Constraints 
+#BLOCK PATH FROM CLKNET "G_ddr.clkgen_125_25_7M5/clk_pixel" TO CLKNET "G_ddr.clkgen_125_25_7M5/clk_pixel_shift";
+#BLOCK PATH FROM CLKNET "G_ddr.clkgen_125_25_7M5/clk_pixel_shift" TO CLKNET "G_ddr.clkgen_125_25_7M5/clk_pixel";
+
+BLOCK ASYNCPATHS;
+
+# End of generated Logical Preferences.

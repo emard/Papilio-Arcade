@@ -1,0 +1,2 @@
+CKID0001:@|S:G_ddr.clkgen_125_25_7M5.PLLInst_0@|E:R_board_joy_coin@|F:@syn_sample_clock_path==CKID0001@|M:ClockId0001 
+CKID0002:@|S:G_ddr.clkgen_125_25_7M5.PLLInst_0@|E:G_hdmi_video_only.vga2dvi_converter.shift_blue[9]@|F:@syn_sample_clock_path1==CKID0002@|M:ClockId0002 

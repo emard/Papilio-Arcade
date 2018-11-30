@@ -5,6 +5,6 @@ BOARD_VERSION = v20
 FPGA_SIZE = 85
 
 # bitstream file prefix
-BITSTREAM_PREFIX = pong_$(BOARD)_$(BOARD_VERSION)_$(FPGA_SIZE)k
+BITSTREAM_PREFIX = scramble_$(BOARD)_$(BOARD_VERSION)_$(FPGA_SIZE)k
 
 include ../../include/ulx3s.mk

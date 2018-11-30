@@ -28,7 +28,7 @@ generic
 );
 port
 (
-  clk_25MHz: in std_logic;
+  clk_25mhz: in std_logic;
 
   -- UART1 (WiFi serial)
   wifi_rxd: out   std_logic;
@@ -97,8 +97,7 @@ architecture struct of scramble_ulx3s is
   signal tmds_d: std_logic_vector(3 downto 0);
   signal tx_in: std_logic_vector(29 downto 0);
 
-  signal ddr_d: std_logic_vector(2 downto 0);
-  signal ddr_clk: std_logic;
+  signal ddr_d: std_logic_vector(3 downto 0);
 
   signal S_vga_r, S_vga_g, S_vga_b: std_logic_vector(3 downto 0);
   signal S_vga_r8, S_vga_g8, S_vga_b8: std_logic_vector(7 downto 0);

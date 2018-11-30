@@ -126,25 +126,25 @@
         <Source name="../../../../source/spdif/spdif_tx.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_pgm.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_pgm.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_obj_0.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_obj_0.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_obj_1.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_obj_1.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_lut.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_lut.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_snd_0.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_snd_0.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_snd_1.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_snd_1.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
-        <Source name="../../../../roms/stern_scramble/rom_snd_2.vhd" type="VHDL" type_short="VHDL">
+        <Source name="../../../../roms/stern_scramble_real/rom_snd_2.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
         <Source name="ulx3s_v20.lpf" type="Logic Preference" type_short="LPF">

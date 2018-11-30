@@ -1,0 +1,482 @@
+
+
+##### START OF TIMING REPORT #####[
+# Timing Report written on Fri Nov 30 15:30:17 2018
+#
+
+
+Top view:               scramble_ulx3s
+Requested Frequency:    118.8 MHz
+Wire load mode:         top
+Paths requested:        5
+Constraint File(s):    
+@N: MT320 |Timing report estimates place and route data. Please look at the place and route timing report for final timing.
+
+@N: MT322 |Clock constraints cover only FF-to-FF paths associated with the clock.
+
+
+
+Performance Summary
+*******************
+
+
+Worst slack in design: -0.624
+
+@N: MT286 |System clock period 0.000 stretches to negative invalid value -- ignoring stretching.
+                                                 Requested     Estimated     Requested     Estimated                Clock        Clock                
+Starting Clock                                   Frequency     Frequency     Period        Period        Slack      Type         Group                
+------------------------------------------------------------------------------------------------------------------------------------------------------
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock      756.3 MHz     642.8 MHz     1.322         1.556         -0.233     inferred     Autoconstr_clkgroup_1
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     118.8 MHz     96.9 MHz      8.418         10.318        -1.899     inferred     Autoconstr_clkgroup_0
+System                                           1.0 MHz       1.0 MHz       1000.000      1000.038      -0.038     system       system_clkgroup      
+======================================================================================================================================================
+
+
+
+Clock Relationships
+*******************
+
+Clocks                                                                                      |    rise  to  rise    |    fall  to  fall   |    rise  to  fall   |    fall  to  rise 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Starting                                      Ending                                        |  constraint  slack   |  constraint  slack  |  constraint  slack  |  constraint  slack
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+System                                        System                                        |  0.000       0.000   |  No paths    -      |  No paths    -      |  No paths    -    
+System                                        clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock  |  0.000       -0.038  |  No paths    -      |  No paths    -      |  No paths    -    
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock  System                                        |  0.000       0.597   |  No paths    -      |  No paths    -      |  No paths    -    
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock  clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock  |  0.000       -0.624  |  No paths    -      |  No paths    -      |  No paths    -    
+clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock  clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock   |  Diff grp    -       |  No paths    -      |  No paths    -      |  No paths    -    
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock   System                                        |  0.000       0.597   |  No paths    -      |  No paths    -      |  No paths    -    
+clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock   clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock   |  0.000       0.559   |  No paths    -      |  No paths    -      |  No paths    -    
+===================================================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+
+Interface Information 
+*********************
+
+No IO constraint found
+
+
+
+====================================
+Detailed Report for Clock: clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                                        Starting                                                                               Arrival          
+Instance                                                Reference                                       Type        Pin     Net                Time        Slack
+                                                        Clock                                                                                                   
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[2]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     Q       shift_clock[2]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[3]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     Q       shift_clock[3]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[6]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       shift_clock[6]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[7]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       shift_clock[7]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[8]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       shift_clock[8]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[9]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       shift_clock[9]     0.597       0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_blue[0]      clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       dvid_blue[0]       0.597       0.597
+G_hdmi_video_only\.vga2dvi_converter.shift_blue[1]      clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     Q       dvid_blue[1]       0.597       0.597
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[0]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     Q       dvid_clock[0]      0.635       0.597
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[1]     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     Q       dvid_clock[1]      0.635       0.597
+================================================================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                                                 Starting                                                                               Required          
+Instance                                                         Reference                                       Type        Pin     Net                Time         Slack
+                                                                 Clock                                                                                                    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[0]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     D       shift_clock[2]     0.038        0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[1]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     D       shift_clock[3]     0.038        0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[4]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AY     D       shift_clock[6]     0.038        0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[5]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     D       shift_clock[7]     0.038        0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[6]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     D       shift_clock[8]     0.038        0.559
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[7]              clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     FD1S3AX     D       shift_clock[9]     0.038        0.559
+G_hdmi_video_only\.G_vgatext_ddrout.ddr_out_green.ddr_module     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     ODDRX1F     D0      dvid_green[0]      0.000        0.597
+G_hdmi_video_only\.G_vgatext_ddrout.ddr_out_blue.ddr_module      clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     ODDRX1F     D0      dvid_blue[0]       0.000        0.597
+G_hdmi_video_only\.G_vgatext_ddrout.ddr_out_red.ddr_module       clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     ODDRX1F     D0      dvid_red[0]        0.000        0.597
+G_hdmi_video_only\.G_vgatext_ddrout.ddr_out_green.ddr_module     clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock     ODDRX1F     D1      dvid_green[1]      0.000        0.597
+==========================================================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+    Propagation time:                        0.597
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 0.559
+
+    Number of logic level(s):                0
+    Starting point:                          G_hdmi_video_only\.vga2dvi_converter.shift_clock[2] / Q
+    Ending point:                            G_hdmi_video_only\.vga2dvi_converter.shift_clock[0] / D
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOP_inferred_clock [rising] on pin CK
+
+Instance / Net                                                      Pin      Pin               Arrival     No. of    
+Name                                                    Type        Name     Dir     Delay     Time        Fan Out(s)
+---------------------------------------------------------------------------------------------------------------------
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[2]     FD1S3AY     Q        Out     0.597     0.597       -         
+shift_clock[2]                                          Net         -        -       -         -           1         
+G_hdmi_video_only\.vga2dvi_converter.shift_clock[0]     FD1S3AY     D        In      0.000     0.597       -         
+=====================================================================================================================
+
+
+
+
+====================================
+Detailed Report for Clock: clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                                                           Starting                                                                                     Arrival           
+Instance                                                                   Reference                                        Type        Pin     Net                     Time        Slack 
+                                                                           Clock                                                                                                          
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scan_doubler.p_input_timing\.bank_i                      clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       bank_i                  0.635       -0.624
+scramble.G_vga\.u_scan_doubler.p_output_timing\.bank_o                     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       bank_o                  0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[0]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[0]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[1]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[1]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[2]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[2]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[3]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[3]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[4]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[4]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[5]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[5]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[6]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[6]     0.635       -0.624
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[7]     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     FD1S3AX     Q       sprite_ram_waddr[7]     0.635       -0.624
+==========================================================================================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                                                    Starting                                                                                        Required           
+Instance                                                            Reference                                        Type         Pin       Net                     Time         Slack 
+                                                                    Clock                                                                                                              
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0                clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     DP16KD       ADA13     bank_o                  1.259        -0.624
+scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0                clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     DP16KD       ADB13     bank_i                  1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW0      sprite_ram_waddr[0]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW1      sprite_ram_waddr[1]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW2      sprite_ram_waddr[2]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW3      sprite_ram_waddr[3]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW4      sprite_ram_waddr[4]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW5      sprite_ram_waddr[5]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW6      sprite_ram_waddr[6]     1.259        -0.624
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0     clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock     PDPW16KD     ADW7      sprite_ram_waddr[7]     1.259        -0.624
+=======================================================================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+    Propagation time:                        0.635
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             1.259
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (critical) :                     -0.624
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_scan_doubler.p_input_timing\.bank_i / Q
+    Ending point:                            scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0 / ADB13
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CLKB
+
+Instance / Net                                                        Pin       Pin               Arrival     No. of    
+Name                                                      Type        Name      Dir     Delay     Time        Fan Out(s)
+------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scan_doubler.p_input_timing\.bank_i     FD1S3AX     Q         Out     0.635     0.635       -         
+bank_i                                                    Net         -         -       -         -           2         
+scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0      DP16KD      ADB13     In      0.000     0.635       -         
+========================================================================================================================
+
+
+Path information for path number 2: 
+    Propagation time:                        0.635
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             1.259
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (critical) :                     -0.624
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_scan_doubler.p_output_timing\.bank_o / Q
+    Ending point:                            scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0 / ADA13
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CLKA
+
+Instance / Net                                                         Pin       Pin               Arrival     No. of    
+Name                                                       Type        Name      Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scan_doubler.p_output_timing\.bank_o     FD1S3AX     Q         Out     0.635     0.635       -         
+bank_o                                                     Net         -         -       -         -           2         
+scramble.G_vga\.u_scan_doubler.u_ram.ram_1_ram_1_0_0       DP16KD      ADA13     In      0.000     0.635       -         
+=========================================================================================================================
+
+
+Path information for path number 3: 
+    Propagation time:                        0.635
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             1.259
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (critical) :                     -0.624
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[0] / Q
+    Ending point:                            scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0 / ADW0
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CLKR
+
+Instance / Net                                                                          Pin      Pin               Arrival     No. of    
+Name                                                                       Type         Name     Dir     Delay     Time        Fan Out(s)
+-----------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[0]     FD1S3AX      Q        Out     0.635     0.635       -         
+sprite_ram_waddr[0]                                                        Net          -        -       -         -           2         
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0            PDPW16KD     ADW0     In      0.000     0.635       -         
+=========================================================================================================================================
+
+
+Path information for path number 4: 
+    Propagation time:                        0.635
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             1.259
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (critical) :                     -0.624
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[1] / Q
+    Ending point:                            scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0 / ADW1
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CLKR
+
+Instance / Net                                                                          Pin      Pin               Arrival     No. of    
+Name                                                                       Type         Name     Dir     Delay     Time        Fan Out(s)
+-----------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[1]     FD1S3AX      Q        Out     0.635     0.635       -         
+sprite_ram_waddr[1]                                                        Net          -        -       -         -           2         
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0            PDPW16KD     ADW1     In      0.000     0.635       -         
+=========================================================================================================================================
+
+
+Path information for path number 5: 
+    Propagation time:                        0.635
+    + Clock delay at starting point:         0.000 (ideal)
+    - Requested Period:                      0.000
+    - Hold time:                             1.259
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (critical) :                     -0.624
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[2] / Q
+    Ending point:                            scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0 / ADW2
+    The start point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CLKR
+
+Instance / Net                                                                          Pin      Pin               Arrival     No. of    
+Name                                                                       Type         Name     Dir     Delay     Time        Fan Out(s)
+-----------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_scramble.u_video.p_sprite_write\.sprite_ram_waddr[2]     FD1S3AX      Q        Out     0.635     0.635       -         
+sprite_ram_waddr[2]                                                        Net          -        -       -         -           2         
+scramble.G_vga\.u_scramble.u_video.u_sprite_ram.ram_1_ram_1_0_0            PDPW16KD     ADW2     In      0.000     0.635       -         
+=========================================================================================================================================
+
+
+
+
+====================================
+Detailed Report for Clock: System
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                                Starting                                                   Arrival           
+Instance                                        Reference     Type           Pin     Net                   Time        Slack 
+                                                Clock                                                                        
+-----------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P16     audio_mult_3C[16]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P17     audio_mult_3C[17]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P18     audio_mult_3C[18]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P19     audio_mult_3C[19]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P20     audio_mult_3C[20]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P21     audio_mult_3C[21]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P22     audio_mult_3C[22]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P23     audio_mult_3C[23]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P24     audio_mult_3C[24]     0.000       -0.038
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]     System        MULT18X18D     P25     audio_mult_3C[25]     0.000       -0.038
+=============================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                                                        Starting                                                Required           
+Instance                                                                Reference     Type        Pin     Net                   Time         Slack 
+                                                                        Clock                                                                      
+---------------------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe\.ym2149_3C_audio_pipe_0     System        FD1P3DX     D       audio_mult_3C[16]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe\.ym2149_3D_audio_pipe_0     System        FD1P3DX     D       audio_mult_3D[16]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_1                           System        FD1P3DX     D       audio_mult_3D[17]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_2                           System        FD1P3DX     D       audio_mult_3D[18]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_3                           System        FD1P3DX     D       audio_mult_3D[19]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_4                           System        FD1P3DX     D       audio_mult_3D[20]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_5                           System        FD1P3DX     D       audio_mult_3D[21]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_6                           System        FD1P3DX     D       audio_mult_3D[22]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_7                           System        FD1P3DX     D       audio_mult_3D[23]     0.038        -0.038
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_8                           System        FD1P3DX     D       audio_mult_3D[24]     0.038        -0.038
+===================================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+    Propagation time:                        0.000
+    + Clock delay at starting point:         0.000 (ideal)
+-0.000
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 -0.038
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_audio.audio_mult_3C[33:0] / P16
+    Ending point:                            scramble.G_vga\.u_audio.p_ym2149_audio_pipe\.ym2149_3C_audio_pipe_0 / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+
+Instance / Net                                                                         Pin      Pin               Arrival     No. of    
+Name                                                                    Type           Name     Dir     Delay     Time        Fan Out(s)
+----------------------------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]                             MULT18X18D     P16      Out     0.000     0.000       -         
+audio_mult_3C[16]                                                       Net            -        -       -         -           1         
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe\.ym2149_3C_audio_pipe_0     FD1P3DX        D        In      0.000     0.000       -         
+========================================================================================================================================
+
+
+Path information for path number 2: 
+    Propagation time:                        0.000
+    + Clock delay at starting point:         0.000 (ideal)
+-0.000
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 -0.038
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_audio.audio_mult_3C[33:0] / P17
+    Ending point:                            scramble.G_vga\.u_audio.p_ym2149_audio_pipe_36 / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+
+Instance / Net                                                    Pin      Pin               Arrival     No. of    
+Name                                               Type           Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]        MULT18X18D     P17      Out     0.000     0.000       -         
+audio_mult_3C[17]                                  Net            -        -       -         -           1         
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_36     FD1P3DX        D        In      0.000     0.000       -         
+===================================================================================================================
+
+
+Path information for path number 3: 
+    Propagation time:                        0.000
+    + Clock delay at starting point:         0.000 (ideal)
+-0.000
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 -0.038
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_audio.audio_mult_3C[33:0] / P18
+    Ending point:                            scramble.G_vga\.u_audio.p_ym2149_audio_pipe_37 / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+
+Instance / Net                                                    Pin      Pin               Arrival     No. of    
+Name                                               Type           Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]        MULT18X18D     P18      Out     0.000     0.000       -         
+audio_mult_3C[18]                                  Net            -        -       -         -           1         
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_37     FD1P3DX        D        In      0.000     0.000       -         
+===================================================================================================================
+
+
+Path information for path number 4: 
+    Propagation time:                        0.000
+    + Clock delay at starting point:         0.000 (ideal)
+-0.000
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 -0.038
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_audio.audio_mult_3C[33:0] / P19
+    Ending point:                            scramble.G_vga\.u_audio.p_ym2149_audio_pipe_38 / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+
+Instance / Net                                                    Pin      Pin               Arrival     No. of    
+Name                                               Type           Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]        MULT18X18D     P19      Out     0.000     0.000       -         
+audio_mult_3C[19]                                  Net            -        -       -         -           1         
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_38     FD1P3DX        D        In      0.000     0.000       -         
+===================================================================================================================
+
+
+Path information for path number 5: 
+    Propagation time:                        0.000
+    + Clock delay at starting point:         0.000 (ideal)
+-0.000
+    - Requested Period:                      0.000
+    - Hold time:                             0.038
+    - Clock delay at ending point:           0.000 (ideal)
+    = Slack (non-critical) :                 -0.038
+
+    Number of logic level(s):                0
+    Starting point:                          scramble.G_vga\.u_audio.audio_mult_3C[33:0] / P20
+    Ending point:                            scramble.G_vga\.u_audio.p_ym2149_audio_pipe_39 / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            clk_25M_125Mpn_25M_7M5|CLKOS2_inferred_clock [rising] on pin CK
+
+Instance / Net                                                    Pin      Pin               Arrival     No. of    
+Name                                               Type           Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------
+scramble.G_vga\.u_audio.audio_mult_3C[33:0]        MULT18X18D     P20      Out     0.000     0.000       -         
+audio_mult_3C[20]                                  Net            -        -       -         -           1         
+scramble.G_vga\.u_audio.p_ym2149_audio_pipe_39     FD1P3DX        D        In      0.000     0.000       -         
+===================================================================================================================
+
+
+
+##### END OF TIMING REPORT #####]
+
+Constraints that could not be applied
+None

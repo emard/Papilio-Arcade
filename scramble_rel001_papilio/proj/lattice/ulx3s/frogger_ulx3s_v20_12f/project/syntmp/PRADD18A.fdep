@@ -1,0 +1,37 @@
+#OPTIONS:"|-top|PRADD18A|-I|/mt/lattice/diamond/3.7_x64/synpbase/lib|-devicelib|/mt/lattice/diamond/3.7_x64/synpbase/lib/xilinx/unisim.v|-encrypt|-pro|-sysv|-dw|-primux|-ram|-fixsmult|-tri_compatible|-autosm|-fid2|-sharing|on|-ll|2000|-params|/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/syntmp/PRADD18A.param"
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/linux_a_64/c_ver":1449681922
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/syntmp/PRADD18A.param":1543588214
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vlog/hypermods.v":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vlog/umr_capim.v":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vlog/scemi_objects.v":1449680656
+#CUR:"/mt/lattice/diamond/3.7_x64/synpbase/lib/vlog/scemi_pipes.svh":1449680656
+#CUR:"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/syntmp/PRADD18A.v":1543588214
+#numinternalfiles:4
+#defaultlanguage:verilog
+0			"/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/syntmp/PRADD18A.v" verilog
+#Dependency Lists(Uses List)
+0 -1
+#Dependency Lists(Users Of)
+0 -1
+#Design Unit to File Association
+module work PUR 0
+module work GSR 0
+module work MULT2 0
+module work MULT9X9ADDSUBB 0
+module work MULT9X9ADDSUBSUMB 0
+module work MULT9X9B 0
+module work MULT18X18ADDSUBB 0
+module work MULT18X18ADDSUBSUMB 0
+module work MULT18X18B 0
+module work MULT18X18MACB 0
+module work MULT36X36B 0
+module work MULT9X9C 0
+module work MULT9X9D 0
+module work MULT18X18C 0
+module work MULT18X18D 0
+module work ALU54A 0
+module work ALU54B 0
+module work ALU24A 0
+module work ALU24B 0
+module work PRADD18A 0
+module work PRADD9A 0

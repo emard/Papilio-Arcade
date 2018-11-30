@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- *************************************************************************************
+FILE DESCRIPTION
+The file contains the job information from mapper to be displayed as part of the summary report.
+*******************************************************************************************-->
+<job_run_status name="Mapper">
+<report_link name="Detailed report">
+<data>/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synlog/project_project_fpga_mapper.srr</data>
+<title>Synopsys Lattice Technology Mapper</title>
+</report_link>
+<job_status>
+<data>Completed</data>
+</job_status>
+<job_info>
+<info name="Notes">
+<data>371</data>
+<report_link name="more">
+<data>/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synlog/report/project_project_fpga_mapper_notes.txt</data>
+</report_link>
+</info>
+<info name="Warnings">
+<data>36</data>
+<report_link name="more">
+<data>/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synlog/report/project_project_fpga_mapper_warnings.txt</data>
+</report_link>
+</info>
+<info name="Errors">
+<data>0</data>
+<report_link name="more">
+<data>/home/guest/src/fpga/arcade/Papilio-Arcade/scramble_rel001_papilio/proj/lattice/ulx3s/frogger_ulx3s_v20_12f/project/synlog/report/project_project_fpga_mapper_errors.txt</data>
+</report_link>
+</info>
+<info name="CPU Time">
+<data>0h:01m:53s</data>
+</info>
+<info name="Real Time">
+<data>0h:02m:07s</data>
+</info>
+<info name="Peak Memory">
+<data>280MB</data>
+</info>
+<info name="Date &amp; Time">
+<data type="timestamp">1543588218</data>
+</info>
+</job_info>
+</job_run_status>

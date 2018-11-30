@@ -1,0 +1,468 @@
+---------------------------------------------------
+Report for cell scramble_ulx3s
+   Instance path: scramble_ulx3s
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    3134.00        100.0
+                                 IOLGC	       6.00        100.0
+                                  LUT4	    4320.00        100.0
+                               DISTRAM	      99.00        100.0
+                                 IOREG	          6        100.0
+                                 IOBUF	         40        100.0
+                                PFUREG	       1597        100.0
+                                RIPPLE	        362        100.0
+                                   EBR	         19        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                       vga2dvid_true_4	          1         4.0
+               spdif_tx_25000000_48000	          1         1.8
+scramble_glue_false_true_true_true_14_false_true	          1        93.0
+                       ddr_dvid_out_se	          1         0.1
+                clk_25M_125Mpn_25M_7M5	          1         0.0
+                   autofire_23_24_true	          1         0.9
+---------------------------------------------------
+Report for cell ddr_dvid_out_se
+   Instance path: scramble_ulx3s/G_hdmi_video_only.G_vgatext_ddrout
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.00         0.1
+                                  LUT4	       4.00         0.1
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                             ddr_out_1	          1         0.0
+                             ddr_out_2	          1         0.0
+                               ddr_out	          1         0.0
+                             ddr_out_0	          1         0.0
+---------------------------------------------------
+Report for cell ddr_out_2
+   Instance path: scramble_ulx3s/G_hdmi_video_only.G_vgatext_ddrout/ddr_out_clock
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0
+---------------------------------------------------
+Report for cell ddr_out_1
+   Instance path: scramble_ulx3s/G_hdmi_video_only.G_vgatext_ddrout/ddr_out_blue
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0
+---------------------------------------------------
+Report for cell ddr_out_0
+   Instance path: scramble_ulx3s/G_hdmi_video_only.G_vgatext_ddrout/ddr_out_green
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0
+---------------------------------------------------
+Report for cell ddr_out
+   Instance path: scramble_ulx3s/G_hdmi_video_only.G_vgatext_ddrout/ddr_out_red
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0
+---------------------------------------------------
+Report for cell vga2dvid_true_4
+   Instance path: scramble_ulx3s/G_hdmi_video_only.vga2dvi_converter
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     124.50         4.0
+                                  LUT4	     141.00         3.3
+                                PFUREG	        136         8.5
+                                RIPPLE	         18         5.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                        TMDS_encoder_1	          1         1.0
+                        TMDS_encoder_2	          1         1.0
+                          TMDS_encoder	          1         1.0
+---------------------------------------------------
+Report for cell TMDS_encoder_2
+   Instance path: scramble_ulx3s/G_hdmi_video_only.vga2dvi_converter/u23
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      30.00         1.0
+                                  LUT4	      39.00         0.9
+                                PFUREG	         24         1.5
+                                RIPPLE	          6         1.7
+---------------------------------------------------
+Report for cell TMDS_encoder_1
+   Instance path: scramble_ulx3s/G_hdmi_video_only.vga2dvi_converter/u22
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      30.00         1.0
+                                  LUT4	      35.00         0.8
+                                PFUREG	         24         1.5
+                                RIPPLE	          6         1.7
+---------------------------------------------------
+Report for cell TMDS_encoder
+   Instance path: scramble_ulx3s/G_hdmi_video_only.vga2dvi_converter/u21
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      32.50         1.0
+                                  LUT4	      37.00         0.9
+                                PFUREG	         24         1.5
+                                RIPPLE	          6         1.7
+---------------------------------------------------
+Report for cell spdif_tx_25000000_48000
+   Instance path: scramble_ulx3s/G_spdif_out
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      56.00         1.8
+                                  LUT4	      39.00         0.9
+                                PFUREG	         74         4.6
+                                RIPPLE	         19         5.2
+---------------------------------------------------
+Report for cell scramble_glue_false_true_true_true_14_false_true
+   Instance path: scramble_ulx3s/scramble
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    2914.17        93.0
+                                  LUT4	    4126.00        95.5
+                               DISTRAM	      99.00        100.0
+                                PFUREG	       1332        83.4
+                                RIPPLE	        300        82.9
+                                   EBR	         19        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                        SCRAMBLE_false	          1        38.3
+SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0	          1         1.7
+                        SCRAMBLE_AUDIO	          1        52.5
+                       SCRAMBLE_CLOCKS	          1         0.3
+---------------------------------------------------
+Report for cell SCRAMBLE_AUDIO
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    1644.50        52.5
+                                  LUT4	    2217.00        51.3
+                               DISTRAM	      63.00        63.6
+                                PFUREG	        838        52.5
+                                RIPPLE	        200        55.2
+                                   EBR	          4        21.1
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                             rom_snd_0	          1         0.0
+                              YM2149_0	          1        10.3
+                              YM2149_1	          1         0.1
+                              T80sed_1	          1        31.6
+                        SCRAMBLE_RAM_4	          1         0.0
+                              I82C55_1	          1         2.4
+                              I82C55_0	          1         1.7
+---------------------------------------------------
+Report for cell YM2149_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_ym2149_3D
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     324.33        10.3
+                                  LUT4	     280.00         6.5
+                                PFUREG	        239        15.0
+                                RIPPLE	         97        26.8
+---------------------------------------------------
+Report for cell YM2149_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_ym2149_3C
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.00         0.1
+                                  LUT4	       2.00         0.0
+                                PFUREG	          6         0.4
+---------------------------------------------------
+Report for cell I82C55_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_i8255_1E
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      54.83         1.7
+                                  LUT4	      94.00         2.2
+                                PFUREG	         35         2.2
+---------------------------------------------------
+Report for cell I82C55_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_i8255_1D
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      76.33         2.4
+                                  LUT4	     136.00         3.1
+                                PFUREG	         49         3.1
+---------------------------------------------------
+Report for cell SCRAMBLE_RAM_4
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_ram_6c_6d
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       0.50         0.0
+                                  LUT4	       1.00         0.0
+                                   EBR	          1         5.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+bram_true2p_1clk_false_true_true_8_11_4	          1         0.0
+---------------------------------------------------
+Report for cell bram_true2p_1clk_false_true_true_8_11_4
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_ram_6c_6d/vram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell rom_snd_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_rom_5c
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          3        15.8
+---------------------------------------------------
+Report for cell T80sed_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_cpu
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     991.00        31.6
+                                  LUT4	    1583.00        36.6
+                               DISTRAM	      36.00        36.4
+                                PFUREG	        267        16.7
+                                RIPPLE	         60        16.6
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+T80_work_scramble_ulx3s_struct_0layer0_1	          1        31.4
+---------------------------------------------------
+Report for cell T80_work_scramble_ulx3s_struct_0layer0_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_cpu/u0
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     982.67        31.4
+                                  LUT4	    1571.50        36.4
+                               DISTRAM	      36.00        36.4
+                                PFUREG	        255        16.0
+                                RIPPLE	         60        16.6
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                             T80_Reg_0	          1         1.0
+           T80_MCode_0_0_1_4_5_6_7_1_0	          1        11.5
+             T80_ALU_0_0_1_3_4_5_6_7_0	          1        13.7
+---------------------------------------------------
+Report for cell T80_Reg_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_cpu/u0/Regs
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      32.17         1.0
+                                  LUT4	       3.00         0.1
+                               DISTRAM	      36.00        36.4
+---------------------------------------------------
+Report for cell T80_ALU_0_0_1_3_4_5_6_7_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_cpu/u0/alu
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     428.00        13.7
+                                  LUT4	     821.00        19.0
+                                RIPPLE	         21         5.8
+---------------------------------------------------
+Report for cell T80_MCode_0_0_1_4_5_6_7_1_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_audio/u_cpu/u0/mcode
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     360.50        11.5
+                                  LUT4	     648.00        15.0
+---------------------------------------------------
+Report for cell SCRAMBLE_DBLSCAN_work_scramble_ulx3s_struct_0layer0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scan_doubler
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      52.17         1.7
+                                  LUT4	      45.00         1.0
+                                PFUREG	         49         3.1
+                                RIPPLE	         19         5.2
+                                   EBR	          1         5.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+ bram_true2p_1clk_true_true_true_16_10	          1         0.0
+---------------------------------------------------
+Report for cell bram_true2p_1clk_true_true_true_16_10
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scan_doubler/u_ram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell SCRAMBLE_false
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    1200.42        38.3
+                                  LUT4	    1850.00        42.8
+                               DISTRAM	      36.00        36.4
+                                PFUREG	        416        26.0
+                                RIPPLE	         81        22.4
+                                   EBR	         14        73.7
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                               rom_pgm	          1         0.0
+                              T80sed_0	          1        32.2
+                        SCRAMBLE_VIDEO	          1         4.2
+                        SCRAMBLE_RAM_3	          1         0.0
+---------------------------------------------------
+Report for cell SCRAMBLE_RAM_3
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu_ram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       0.50         0.0
+                                  LUT4	       1.00         0.0
+                                   EBR	          1         5.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+bram_true2p_1clk_false_true_true_8_11_3	          1         0.0
+---------------------------------------------------
+Report for cell bram_true2p_1clk_false_true_true_8_11_3
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu_ram/vram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell rom_pgm
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/pgm_rom
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          8        42.1
+---------------------------------------------------
+Report for cell T80sed_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    1010.67        32.2
+                                  LUT4	    1613.00        37.3
+                               DISTRAM	      36.00        36.4
+                                PFUREG	        286        17.9
+                                RIPPLE	         61        16.9
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+T80_work_scramble_ulx3s_struct_0layer0_0	          1        32.0
+---------------------------------------------------
+Report for cell T80_work_scramble_ulx3s_struct_0layer0_0
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu/u0
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	    1002.67        32.0
+                                  LUT4	    1601.50        37.1
+                               DISTRAM	      36.00        36.4
+                                PFUREG	        275        17.2
+                                RIPPLE	         61        16.9
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                               T80_Reg	          1         1.1
+           T80_MCode_0_0_1_3_4_5_6_7_1	          1        11.7
+             T80_ALU_0_0_1_2_3_4_5_6_7	          1        13.3
+---------------------------------------------------
+Report for cell T80_Reg
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu/u0/Regs
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      33.67         1.1
+                                  LUT4	       6.00         0.1
+                               DISTRAM	      36.00        36.4
+---------------------------------------------------
+Report for cell T80_ALU_0_0_1_2_3_4_5_6_7
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu/u0/alu
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     417.50        13.3
+                                  LUT4	     798.00        18.5
+                                RIPPLE	         21         5.8
+---------------------------------------------------
+Report for cell T80_MCode_0_0_1_3_4_5_6_7_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_cpu/u0/mcode
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     365.33        11.7
+                                  LUT4	     655.00        15.2
+---------------------------------------------------
+Report for cell SCRAMBLE_VIDEO
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	     131.33         4.2
+                                  LUT4	     152.50         3.5
+                                PFUREG	        103         6.4
+                                RIPPLE	         10         2.8
+                                   EBR	          5        26.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                               rom_lut	          1         0.3
+                             rom_obj_1	          1         0.0
+  bram_true2p_1clk_true_true_true_8_11	          1         0.0
+                        SCRAMBLE_RAM_2	          1         0.1
+                          SCRAMBLE_RAM	          1         0.2
+---------------------------------------------------
+Report for cell rom_lut
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/col_rom
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       9.00         0.3
+                                  LUT4	      17.00         0.4
+                                PFUREG	          7         0.4
+---------------------------------------------------
+Report for cell bram_true2p_1clk_true_true_true_8_11
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/u_sprite_ram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell rom_obj_1
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/obj_rom1
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                   EBR	          2        10.5
+---------------------------------------------------
+Report for cell SCRAMBLE_RAM_2
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/u_object_ram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       3.00         0.1
+                                  LUT4	       4.00         0.1
+                                   EBR	          1         5.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+bram_true2p_1clk_false_true_true_8_11_2	          1         0.1
+---------------------------------------------------
+Report for cell bram_true2p_1clk_false_true_true_8_11_2
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/u_object_ram/vram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       2.00         0.1
+                                  LUT4	       3.00         0.1
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell SCRAMBLE_RAM
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/u_vram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       6.00         0.2
+                                  LUT4	       7.00         0.2
+                                   EBR	          1         5.3
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+ bram_true2p_1clk_false_true_true_8_11	          1         0.2
+---------------------------------------------------
+Report for cell bram_true2p_1clk_false_true_true_8_11
+   Instance path: scramble_ulx3s/scramble/G_vga.u_scramble/u_video/u_vram/vram
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       5.50         0.2
+                                  LUT4	       6.00         0.1
+                                   EBR	          1         5.3
+---------------------------------------------------
+Report for cell SCRAMBLE_CLOCKS
+   Instance path: scramble_ulx3s/scramble/G_vga.u_clocks
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       8.58         0.3
+                                  LUT4	      14.00         0.3
+                                PFUREG	         14         0.9
+---------------------------------------------------
+Report for cell autofire_23_24_true
+   Instance path: scramble_ulx3s/I_autofire
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      27.50         0.9
+                                  LUT4	       4.00         0.1
+                                PFUREG	         47         2.9
+                                RIPPLE	         25         6.9
+---------------------------------------------------
+Report for cell clk_25M_125Mpn_25M_7M5
+   Instance path: scramble_ulx3s/G_ddr.clkgen_125_25_7M5
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.00         0.0
+                                  LUT4	       1.00         0.0

@@ -1,0 +1,51 @@
+NOTE Copyright (C), 1992-2010, Lattice Semiconductor Corporation *
+NOTE All Rights Reserved *
+NOTE DATE CREATED: Fri Nov 30 15:32:22 2018 *
+NOTE DESIGN NAME: scramble_ulx3s *
+NOTE DEVICE NAME: LFE5U-12F-6CABGA381 *
+NOTE PIN ASSIGNMENTS *
+NOTE PINS audio_v[2] : F5 : out *
+NOTE PINS wifi_rxd : K3 : out *
+NOTE PINS clk_25mhz : G2 : in *
+NOTE PINS gpdi_dp[0] : A16 : out *
+NOTE PINS audio_v[3] : E5 : out *
+NOTE PINS audio_v[1] : F2 : out *
+NOTE PINS audio_v[0] : H5 : out *
+NOTE PINS audio_r[3] : C5 : out *
+NOTE PINS audio_r[2] : D5 : out *
+NOTE PINS audio_r[1] : B5 : out *
+NOTE PINS audio_r[0] : A3 : out *
+NOTE PINS audio_l[3] : B3 : out *
+NOTE PINS audio_l[2] : C3 : out *
+NOTE PINS audio_l[1] : D3 : out *
+NOTE PINS audio_l[0] : E4 : out *
+NOTE PINS shutdown : G16 : out *
+NOTE PINS oled_resn : P2 : out *
+NOTE PINS oled_dc : P1 : out *
+NOTE PINS oled_mosi : P3 : out *
+NOTE PINS oled_clk : P4 : out *
+NOTE PINS oled_csn : N2 : out *
+NOTE PINS btn[6] : H16 : in *
+NOTE PINS btn[5] : U1 : in *
+NOTE PINS btn[4] : V1 : in *
+NOTE PINS btn[3] : R18 : in *
+NOTE PINS btn[2] : T1 : in *
+NOTE PINS btn[1] : R1 : in *
+NOTE PINS btn[0] : D6 : in *
+NOTE PINS led[7] : H3 : out *
+NOTE PINS led[6] : E1 : out *
+NOTE PINS led[5] : E2 : out *
+NOTE PINS led[4] : D1 : out *
+NOTE PINS led[3] : D2 : out *
+NOTE PINS led[2] : C1 : out *
+NOTE PINS led[1] : C2 : out *
+NOTE PINS led[0] : B2 : out *
+NOTE PINS wifi_gpio0 : L2 : out *
+NOTE PINS gpdi_dp[3] : A17 : out *
+NOTE PINS gpdi_dp[2] : A12 : out *
+NOTE PINS gpdi_dp[1] : A14 : out *
+NOTE PINS SYSCONFIG_PIN_D1 : V2 : inout *
+NOTE PINS SYSCONFIG_PIN_D0 : W2 : inout *
+NOTE PINS SYSCONFIG_PIN_HOLDN : R2 : inout *
+NOTE CONFIGURATION MODE: JTAG *
+NOTE COMPRESSION: on *
